@@ -20,8 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.frame = UIScreen.mainScreen().bounds
         
-        var tabbar = UITabBarController()
+        var tabbar = WeiboTabBarViewController()
         self.window?.rootViewController = tabbar
+        
+        
+
         
         window?.makeKeyAndVisible()
         return true
