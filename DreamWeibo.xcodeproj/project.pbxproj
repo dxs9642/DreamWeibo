@@ -16,6 +16,7 @@
 		D231300E1A673E8900B83A3A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231300D1A673E8900B83A3A /* Images.xcassets */; };
 		D231301D1A673E8900B83A3A /* DreamWeiboTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231301C1A673E8900B83A3A /* DreamWeiboTests.swift */; };
 		D2FB935C1A67D4E300DB5535 /* DreamNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */; };
+		D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		D231301B1A673E8900B83A3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D231301C1A673E8900B83A3A /* DreamWeiboTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamWeiboTests.swift; sourceTree = "<group>"; };
 		D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamNavigationViewController.swift; sourceTree = "<group>"; };
+		D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 		D2154BDB1A67C72C0043CD8A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D23130061A673E8900B83A3A /* AppDelegate.swift */,
 				D2154BDE1A67C7410043CD8A /* Model */,
 				D2154BDD1A67C73B0043CD8A /* ViewController */,
 				D2154BDC1A67C7320043CD8A /* View */,
@@ -225,10 +228,10 @@
 		D2154BDF1A67C7600043CD8A /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				D2FB935D1A67F16400DB5535 /* Category */,
 				D2FB935A1A67D4C800DB5535 /* Model */,
 				D2FB93591A67D4C000DB5535 /* ViewController */,
 				D2FB93581A67D4B500DB5535 /* View */,
-				D23130061A673E8900B83A3A /* AppDelegate.swift */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -311,6 +314,14 @@
 			children = (
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		D2FB935D1A67F16400DB5535 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */,
+			);
+			name = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */,
 				D2154BC71A67C4560043CD8A /* ProfileViewController.swift in Sources */,
 				D2154BC31A67C4260043CD8A /* HomeViewController.swift in Sources */,
 				D2154BC91A67C4840043CD8A /* DiscoverViewController.swift in Sources */,

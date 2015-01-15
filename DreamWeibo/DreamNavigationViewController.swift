@@ -24,23 +24,26 @@ class DreamNavigationViewController: UINavigationController {
 
     override func pushViewController(viewController: UIViewController, animated: Bool) {
         
+
+        
         if self.viewControllers.count>0 {
             viewController.hidesBottomBarWhenPushed = true
+            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.initBarButtonItem("navigationbar_back", imageHighlight: "navigationbar_back_highlighted", target: self, action: "back")
+            
+            viewController.navigationItem.rightBarButtonItem = UIBarButtonItem.initBarButtonItem("navigationbar_more", imageHighlight: "navigationbar_pop_highlighted", target: self, action: "more")
         }
         
         super.pushViewController(viewController, animated: animated)
-
-
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func back(){
+        self.popViewControllerAnimated(true)
     }
-    */
-
+    
+    func more(){
+        self.popToRootViewControllerAnimated(true)
+    }
+    
+    
+ 
 }
