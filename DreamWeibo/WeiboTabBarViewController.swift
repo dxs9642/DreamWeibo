@@ -37,14 +37,17 @@ class WeiboTabBarViewController: UITabBarController {
     
     
     func addChildVC(vc:UIViewController,title:NSString,image:NSString,select_image:NSString){
-        vc.view.backgroundColor = UIColor.whiteColor()
-        vc.tabBarItem.title = title
+        vc.view.backgroundColor = UIColor.purpleColor()
+        vc.title = title
         vc.tabBarItem.image = UIImage(named: image)
         var selectImage = UIImage(named: select_image)
         selectImage = selectImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         
         vc.tabBarItem.selectedImage = selectImage
-            self.addChildViewController(vc)
+        
+        var nav = DreamNavigationViewController(rootViewController: vc)
+        
+        self.addChildViewController(nav)
     }
 
     /*
