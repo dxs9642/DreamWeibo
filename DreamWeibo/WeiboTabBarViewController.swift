@@ -13,18 +13,18 @@ class WeiboTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var home = UIViewController()
+        var home = HomeViewController()
         self.addChildVC(home, title: "首页", image: "tabbar_home_os7", select_image: "tabbar_home_selected_os7")
         
         
-        var message = UITableViewController()
+        var message = MessageViewController()
         self.addChildVC(message, title: "消息", image: "tabbar_message_center_os7", select_image: "tabbar_message_center_selected_os7")
 
         
-        var discover = UIViewController()
+        var discover = ProfileViewController()
         self.addChildVC(discover, title: "发现", image: "tabbar_discover_os7", select_image: "tabbar_discover_selected_os7")
         
-        var profile = UIViewController()
+        var profile = DiscoverViewController()
         self.addChildVC(profile, title: "我", image: "tabbar_profile_os7", select_image: "tabbar_profile_selected_os7")
         
         // Do any additional setup after loading the view.
