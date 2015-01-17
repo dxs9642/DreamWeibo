@@ -25,6 +25,10 @@
 		D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */; };
 		D2FB935C1A67D4E300DB5535 /* DreamNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */; };
 		D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */; };
+		D2FE74601A6A7DD600A13FFF /* OauthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE745F1A6A7DD600A13FFF /* OauthViewController.swift */; };
+		D2FE74681A6A881700A13FFF /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2FE74631A6A881700A13FFF /* MBProgressHUD.bundle */; };
+		D2FE74691A6A881700A13FFF /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FE74651A6A881700A13FFF /* MBProgressHUD.m */; };
+		D2FE746A1A6A881700A13FFF /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FE74671A6A881700A13FFF /* MBProgressHUD+MJ.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +64,13 @@
 		D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTabBar.swift; sourceTree = "<group>"; };
 		D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamNavigationViewController.swift; sourceTree = "<group>"; };
 		D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
+		D2FE745F1A6A7DD600A13FFF /* OauthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthViewController.swift; sourceTree = "<group>"; };
+		D2FE74621A6A881600A13FFF /* DreamWeibo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DreamWeibo-Bridging-Header.h"; sourceTree = "<group>"; };
+		D2FE74631A6A881700A13FFF /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		D2FE74641A6A881700A13FFF /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		D2FE74651A6A881700A13FFF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		D2FE74661A6A881700A13FFF /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
+		D2FE74671A6A881700A13FFF /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,7 +225,7 @@
 		D2154BDB1A67C72C0043CD8A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D23130061A673E8900B83A3A /* AppDelegate.swift */,
+				D2FE74611A6A880800A13FFF /* Lib */,
 				D2154BDE1A67C7410043CD8A /* Model */,
 				D2154BDD1A67C73B0043CD8A /* ViewController */,
 				D2154BDC1A67C7320043CD8A /* View */,
@@ -248,6 +259,7 @@
 		D2154BDF1A67C7600043CD8A /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				D23130061A673E8900B83A3A /* AppDelegate.swift */,
 				D2FB935D1A67F16400DB5535 /* Category */,
 				D2FB935A1A67D4C800DB5535 /* Model */,
 				D2FB93591A67D4C000DB5535 /* ViewController */,
@@ -277,6 +289,7 @@
 		D23130031A673E8900B83A3A /* DreamWeibo */ = {
 			isa = PBXGroup;
 			children = (
+				D2FE745B1A6A7DA100A13FFF /* Oauth */,
 				D29436731A6A0355001CE8BE /* NewFeature */,
 				D294366A1A69F856001CE8BE /* Compose */,
 				D2154BDF1A67C7600043CD8A /* Application */,
@@ -396,6 +409,51 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		D2FE745B1A6A7DA100A13FFF /* Oauth */ = {
+			isa = PBXGroup;
+			children = (
+				D2FE745E1A6A7DBC00A13FFF /* Model */,
+				D2FE745D1A6A7DAC00A13FFF /* ViewController */,
+				D2FE745C1A6A7DA800A13FFF /* View */,
+			);
+			name = Oauth;
+			sourceTree = "<group>";
+		};
+		D2FE745C1A6A7DA800A13FFF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D2FE745D1A6A7DAC00A13FFF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D2FE745F1A6A7DD600A13FFF /* OauthViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		D2FE745E1A6A7DBC00A13FFF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D2FE74611A6A880800A13FFF /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				D2FE74631A6A881700A13FFF /* MBProgressHUD.bundle */,
+				D2FE74641A6A881700A13FFF /* MBProgressHUD.h */,
+				D2FE74651A6A881700A13FFF /* MBProgressHUD.m */,
+				D2FE74661A6A881700A13FFF /* MBProgressHUD+MJ.h */,
+				D2FE74671A6A881700A13FFF /* MBProgressHUD+MJ.m */,
+				D2FE74621A6A881600A13FFF /* DreamWeibo-Bridging-Header.h */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -477,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D231300E1A673E8900B83A3A /* Images.xcassets in Resources */,
+				D2FE74681A6A881700A13FFF /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29436711A69F8CE001CE8BE /* ComposeViewController.swift in Sources */,
+				D2FE746A1A6A881700A13FFF /* MBProgressHUD+MJ.m in Sources */,
 				D20BA51C1A690F0200EFBE4A /* DreamTitleButton.swift in Sources */,
 				D20BA51E1A69334A00EFBE4A /* DreamPopMenu.swift in Sources */,
 				D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */,
@@ -505,7 +565,9 @@
 				D2154BC11A67A8440043CD8A /* WeiboTabBarViewController.swift in Sources */,
 				D23130071A673E8900B83A3A /* AppDelegate.swift in Sources */,
 				D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */,
+				D2FE74601A6A7DD600A13FFF /* OauthViewController.swift in Sources */,
 				D2FB935C1A67D4E300DB5535 /* DreamNavigationViewController.swift in Sources */,
+				D2FE74691A6A881700A13FFF /* MBProgressHUD.m in Sources */,
 				D20BA51A1A68FF6400EFBE4A /* DreamSearchBar.swift in Sources */,
 				D20BA5181A68EDBF00EFBE4A /* UIView+Extension.swift in Sources */,
 				D29436761A6A03AD001CE8BE /* NewFeatureViewController.swift in Sources */,
@@ -614,9 +676,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DreamWeibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DreamWeibo/DreamWeibo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -625,9 +690,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DreamWeibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DreamWeibo/DreamWeibo-Bridging-Header.h";
 			};
 			name = Release;
 		};
