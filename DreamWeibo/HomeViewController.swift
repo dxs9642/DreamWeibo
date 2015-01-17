@@ -8,8 +8,10 @@
 
 import UIKit
 
-class HomeViewController: UITableViewController {
+class HomeViewController: UITableViewController,DreamMenuProtocol{
 
+    var titleButton:UIButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,8 +20,38 @@ class HomeViewController: UITableViewController {
                 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.initBarButtonItem("navigationbar_pop", imageHighlight: "navigationbar_pop_highlighted", target:self ,action: "pop")
         
+        var titleButton = DreamTitleButton()
+        self.titleButton = titleButton
+        titleButton.setTitle("清梦的未来", forState: UIControlState.Normal)
+        titleButton.setImage(UIImage(named: "navigationbar_arrow_down"), forState: UIControlState.Normal)
+        titleButton.tag = 100
+        titleButton.addTarget(self, action: "titleClick:", forControlEvents: UIControlEvents.TouchUpInside)
+//        titleButton.setBackgroundImage(UIImage(named: "navigationbar_background"), forState: UIControlState.Selected)  这句话没效果。。。。
+        titleButton.setHeight(30)
+        let str = titleButton.titleLabel?.text
+        let length = countElements(str!)*20 + 30
+        titleButton.setWidth(CGFloat(Float(length)))
+        self.navigationItem.titleView = titleButton
+
     }
     
+    
+    func titleClick(sender:UIButton){
+        if sender.tag == 100 {
+            sender.tag = 101
+            sender.setImage(UIImage(named: "navigationbar_arrow_up"), forState: UIControlState.Normal)
+        }else{
+            sender.tag = 100
+            sender.setImage(UIImage(named: "navigationbar_arrow_down"), forState: UIControlState.Normal)
+        }
+        var button = UIButton()
+        button.backgroundColor = UIColor.redColor()
+        var menu = DreamPopMenu().initPopMenu(button)
+        menu.delegate = self
+        menu.showInRect(CGRectMake(100, 100, 100, 100))
+        menu.setDimBackground(true)
+        menu.setArrowPosition(DreamMenuArrorPosition.HMPopMenuArrowPositionCenter )
+    }
     
 
     
@@ -64,6 +96,16 @@ class HomeViewController: UITableViewController {
         newView.view.backgroundColor = UIColor.purpleColor()
         newView.title = "微博正文"
         self.navigationController?.pushViewController(newView, animated: true)
+    }
+    
+    func popMenuDidDismissed(popMenu:DreamPopMenu){
+        if self.titleButton!.tag == 100 {
+            self.titleButton!.tag = 101
+            self.titleButton!.setImage(UIImage(named: "navigationbar_arrow_up"), forState: UIControlState.Normal)
+        }else{
+            self.titleButton!.tag = 100
+            self.titleButton!.setImage(UIImage(named: "navigationbar_arrow_down"), forState: UIControlState.Normal)
+        }
     }
     
 

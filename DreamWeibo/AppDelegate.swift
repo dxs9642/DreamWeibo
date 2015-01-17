@@ -17,19 +17,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+
+        
         window = UIWindow()
         window?.frame = UIScreen.mainScreen().bounds
         
         var tabbar = WeiboTabBarViewController()
         self.window?.rootViewController = tabbar
         
-        
 
+        setupNavigationBarAppearance()
+        setupBarButtonItemAppearance()
         
         window?.makeKeyAndVisible()
+        
+        
         return true
+        
+
+    }
+    
+    func setupNavigationBarAppearance(){
+        var apperance = UINavigationBar.appearance()
+        var textAttrs = NSMutableDictionary()
+        textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(20)
+//        textAttrs[NSShadowAttributeName] = NSValue(UIOffset: UIOffsetZero)
+//          这个方法不能在这里设置，设置程序崩溃，不知道为啥，不管了
+        apperance.titleTextAttributes = textAttrs
+
     }
 
+
+    func setupBarButtonItemAppearance(){
+        var apperance = UIBarButtonItem.appearance()
+        var textAttrs = NSMutableDictionary()
+        textAttrs[NSForegroundColorAttributeName] = UIColor.orangeColor()
+        textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
+        apperance.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
+        
+        
+        var disableTextAttrs = NSMutableDictionary()
+        disableTextAttrs[NSForegroundColorAttributeName] = UIColor.lightGrayColor()
+        disableTextAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
+        apperance.setTitleTextAttributes(disableTextAttrs, forState: UIControlState.Disabled)
+    }
+    
+    
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
