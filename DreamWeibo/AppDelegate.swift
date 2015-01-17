@@ -22,8 +22,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.frame = UIScreen.mainScreen().bounds
         
-        var tabbar = WeiboTabBarViewController()
-        self.window?.rootViewController = tabbar
+        var defaults = NSUserDefaults()
+        let lastVersion = defaults.objectForKey("last_version") as NSString?
+        let dictionary =  NSBundle.mainBundle().infoDictionary! as NSDictionary
+        let currentVersion = dictionary["CFBundleVersion"] as NSString
+        
+        
+        if currentVersion == lastVersion{
+            self.window?.rootViewController = WeiboTabBarViewController()
+        }else{
+            defaults.setValue(currentVersion, forKey: "last_version")
+            defaults.synchronize()
+            self.window?.rootViewController = NewFeatureViewController()
+        }
         
 
         setupNavigationBarAppearance()

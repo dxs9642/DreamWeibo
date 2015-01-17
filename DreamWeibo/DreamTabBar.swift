@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol PlusButtonProtocol{
+    func plusButtonClick()
+}
 
 class DreamTabBar: UITabBar {
     
     var plusButton:UIButton?
+    var plusDelegate:PlusButtonProtocol?
     
     override init() {
         super.init()
@@ -31,7 +35,7 @@ class DreamTabBar: UITabBar {
     }
     
     func plusClick(){
-        
+        plusDelegate?.plusButtonClick()
     }
     
     override init(frame: CGRect) {

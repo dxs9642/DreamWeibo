@@ -48,7 +48,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         button.backgroundColor = UIColor.redColor()
         var menu = DreamPopMenu().initPopMenu(button)
         menu.delegate = self
-        menu.showInRect(CGRectMake(100, 100, 100, 100))
+        menu.showInRect(CGRectMake(100, 100, 200, 100))
         menu.setDimBackground(true)
         menu.setArrowPosition(DreamMenuArrorPosition.HMPopMenuArrowPositionCenter )
     }
@@ -85,9 +85,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
-
+    
         // Configure the cell...
 
+        
         return cell
     }
 
