@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var defaults = NSUserDefaults()
         let lastVersion = defaults.objectForKey("last_version") as NSString?
         let dictionary =  NSBundle.mainBundle().infoDictionary! as NSDictionary
-        let currentVersion = dictionary["CFBundleVersion"] as NSString
+        let currentVersion = dictionary[String(kCFBundleVersionKey)] as NSString
         
         
         if currentVersion == lastVersion{
@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.synchronize()
             self.window?.rootViewController = NewFeatureViewController()
         }
-        
+    
 
         setupNavigationBarAppearance()
         setupBarButtonItemAppearance()
