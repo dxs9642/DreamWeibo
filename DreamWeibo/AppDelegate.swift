@@ -48,7 +48,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.makeKeyAndVisible()
         
-        
+        var mgr = AFNetworkReachabilityManager.sharedManager()
+        mgr.setReachabilityStatusChangeBlock { (status:AFNetworkReachabilityStatus) -> Void in
+            switch (status) {
+            case AFNetworkReachabilityStatus.Unknown: // 未知网络
+                break
+            case AFNetworkReachabilityStatus.NotReachable: // 没有网络(断网)
+                MBProgressHUD.showError("网络异常，请检查网络设置")
+            case AFNetworkReachabilityStatus.ReachableViaWWAN: // 手机自带网络
+               MBProgressHUD.showMessage("当前状态下使用流量")
+               let delayInSeconds:Int64 =  1000000000  * 1
+               var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
+               dispatch_after(popTime, dispatch_get_main_queue(), {
+                MBProgressHUD.hideHUD()
+               })
+            case AFNetworkReachabilityStatus.ReachableViaWiFi: // WIFI
+                MBProgressHUD.showMessage("已切换到WiFi状态")
+                let delayInSeconds:Int64 =  1000000000  * 1
+                var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
+                 dispatch_after(popTime, dispatch_get_main_queue(), {
+                    MBProgressHUD.hideHUD()
+                 })
+            }
+        }
+        mgr.startMonitoring()
         return true
         
 

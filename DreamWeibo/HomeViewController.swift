@@ -11,13 +11,26 @@ import UIKit
 class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     var titleButton:UIButton?
-    var statuses:NSArray?
+    var statuses:NSMutableArray = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        loadNewStatus()
+//        loadNewStatus()
+        setupRefresh()
         
+        
+    }
+    
+    func setupRefresh(){
+        var refreshControl = UIRefreshControl()
+        self.refreshControl = refreshControl
+        self.tableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func refreshData(){
+        loadNewStatus()
     }
     
     func loadNewStatus(){
@@ -31,8 +44,13 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
-        //我哩个去，就错了一个地方。。。。。http://www.dream.net多加了最后的反斜线就错了
         
+        var firstStatus = self.statuses.firstObject as DreamStatus?
+        
+        if firstStatus != nil {
+            params["since_id"] = firstStatus!.idstr
+        }
+ 
         mgr.GET("https://api.weibo.com/2/statuses/home_timeline.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
             
             let result = obj as NSDictionary
@@ -40,17 +58,56 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
             let statusDictArray = result["statuses"] as NSArray
             
-            self.statuses = DreamStatus.objectArrayWithKeyValuesArray(statusDictArray)
             
-            self.tableView.reloadData()
+            let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
             
+            if newStatus.count != 0 {
+                let range = NSMakeRange(0, newStatus.count)
+                self.statuses.insertObjects(newStatus, atIndexes:NSIndexSet(indexesInRange:range))
+                self.tableView.reloadData()
+            }
+            self.showStatusCount(newStatus.count)
+            self.refreshControl?.endRefreshing()
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                 
                 print("failed")
         }
+    }
     
-    
+    func showStatusCount(count:Int){
+        var label = UILabel()
+        if count == 0 {
+            label.text = "没有新的微博信息偶"
+        }else{
+            label.text = "收到新的微博信息\(count)条"
+        }
+        label.backgroundColor = UIColor(patternImage: UIImage(named: "timeline_new_status_background")!)
+        label.textAlignment = NSTextAlignment.Center
+        label.textColor = UIColor.whiteColor()
+        label.setHeight(30)
+        label.frame = CGRectMake(0, 63-label.height(), self.view.width(), 30)
+        self.navigationController?.view.insertSubview(label, belowSubview: self.navigationController!.navigationBar)
+        
+        let duration:NSTimeInterval = 1.0
+        
+ 
+        
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            label.transform = CGAffineTransformMakeTranslation(0, label.height())
+            label.alpha = 1.0
+        }) { (isFinish:Bool) -> Void in
+            let delay:NSTimeInterval = 1.0
+            
+            UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                label.transform = CGAffineTransformIdentity
+                label.alpha = 0.0
+                }, completion: { (isFinished:Bool) -> Void in
+                    label.removeFromSuperview()
+            })
 
+        }
+        
+        
     }
 
 
@@ -120,19 +177,15 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
-        if statuses==nil{
-            return 0
-        }
-        else{
-            return self.statuses!.count
-        }
+
+        return self.statuses.count
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
-        if statuses != nil {
-            let status = statuses![indexPath.row] as DreamStatus
+        if statuses.count != 0 {
+            let status = statuses[indexPath.row] as DreamStatus
             cell.textLabel?.text = status.text
             
             let user = status.user
