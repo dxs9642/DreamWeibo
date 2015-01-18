@@ -20,6 +20,8 @@
 		D23130071A673E8900B83A3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23130061A673E8900B83A3A /* AppDelegate.swift */; };
 		D231300E1A673E8900B83A3A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231300D1A673E8900B83A3A /* Images.xcassets */; };
 		D231301D1A673E8900B83A3A /* DreamWeiboTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231301C1A673E8900B83A3A /* DreamWeiboTests.swift */; };
+		D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */; };
+		D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */; };
 		D29436711A69F8CE001CE8BE /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29436701A69F8CE001CE8BE /* ComposeViewController.swift */; };
 		D29436761A6A03AD001CE8BE /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29436751A6A03AD001CE8BE /* NewFeatureViewController.swift */; };
 		D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */; };
@@ -98,6 +100,8 @@
 		D23130161A673E8900B83A3A /* DreamWeiboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DreamWeiboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D231301B1A673E8900B83A3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D231301C1A673E8900B83A3A /* DreamWeiboTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamWeiboTests.swift; sourceTree = "<group>"; };
+		D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLoadMoreFooter.swift; sourceTree = "<group>"; };
+		D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamLoadMoreFooter.xib; sourceTree = "<group>"; };
 		D29436701A69F8CE001CE8BE /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		D29436751A6A03AD001CE8BE /* NewFeatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureViewController.swift; sourceTree = "<group>"; };
 		D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTabBar.swift; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 			children = (
 				D20BA51B1A690F0200EFBE4A /* DreamTitleButton.swift */,
 				D20BA51D1A69334A00EFBE4A /* DreamPopMenu.swift */,
+				D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */,
+				D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -764,6 +770,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D231300E1A673E8900B83A3A /* Images.xcassets in Resources */,
+				D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */,
 				D2FE74681A6A881700A13FFF /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -837,6 +844,7 @@
 				D2FE75461A6B8C1400A13FFF /* NSData+ImageContentType.m in Sources */,
 				D20BA5181A68EDBF00EFBE4A /* UIView+Extension.swift in Sources */,
 				D29436761A6A03AD001CE8BE /* NewFeatureViewController.swift in Sources */,
+				D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */,
 				D2FE754E1A6B8C1400A13FFF /* UIButton+WebCache.m in Sources */,
 				D2154BC51A67C43C0043CD8A /* MessageViewController.swift in Sources */,
 				D2FE75BA1A6BD10600A13FFF /* AFHTTPSessionManager.m in Sources */,

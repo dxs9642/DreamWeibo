@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.frame = UIScreen.mainScreen().bounds
         
+        
         var defaults = NSUserDefaults()
         let lastVersion = defaults.objectForKey("last_version") as NSString?
         let dictionary =  NSBundle.mainBundle().infoDictionary! as NSDictionary

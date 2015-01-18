@@ -117,10 +117,8 @@ class DreamPopMenu: UIView {
         self.contentView?.frame = CGRectMake(leftMargin, topMargin, self.container!.width() - leftMargin - rightMargin, container!.height() - topMargin - bottomMargin)
         
         self.container?.addSubview(self.contentView!)
-        
-
-        
     }
+    
     
     
     

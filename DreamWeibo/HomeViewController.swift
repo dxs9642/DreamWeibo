@@ -12,12 +12,17 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     var titleButton:UIButton?
     var statuses:NSMutableArray = NSMutableArray()
+    var footer:DreamLoadMoreFooter?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-//        loadNewStatus()
         setupRefresh()
+        self.refreshControl?.beginRefreshing()
+        loadNewStatus()
+
         
         
     }
@@ -27,6 +32,11 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         self.refreshControl = refreshControl
         self.tableView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        
+        self.footer = DreamLoadMoreFooter.footer()
+        
+        self.tableView.tableFooterView = self.footer
+        
     }
     
     func refreshData(){
@@ -61,6 +71,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             
             let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
             
+            
             if newStatus.count != 0 {
                 let range = NSMakeRange(0, newStatus.count)
                 self.statuses.insertObjects(newStatus, atIndexes:NSIndexSet(indexesInRange:range))
@@ -73,6 +84,54 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
                 print("failed")
         }
     }
+    
+    
+    func loadMoreStatus(){
+        let account = Account.getAccount()
+        if account == nil {
+            Account.expiredAndReAuth()
+        }
+        
+        var mgr = AFHTTPRequestOperationManager()
+        
+        var params = NSMutableDictionary()
+        params["access_token"] = account!.access_token
+        
+        var lastStatus = self.statuses.lastObject as DreamStatus?
+        
+        
+
+        
+        
+        if lastStatus != nil {
+            params["max_id"] = lastStatus!.idstr.toInt()! - 1
+        }
+        
+        mgr.GET("https://api.weibo.com/2/statuses/home_timeline.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+            
+            let result = obj as NSDictionary
+            
+            
+            let statusDictArray = result["statuses"] as NSArray
+            
+            
+            let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
+            
+            
+            if newStatus.count != 0 {
+                self.statuses.addObjectsFromArray(newStatus)
+                self.tableView.reloadData()
+            }
+            
+            self.footer?.endRefreshing()
+            
+            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                
+                print("failed")
+        }
+
+    }
+    
     
     func showStatusCount(count:Int){
         var label = UILabel()
@@ -176,8 +235,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        
 
+        tableView.tableFooterView?.hidden = (statuses.count==0) ? true : false
         return self.statuses.count
     }
 
@@ -213,5 +272,24 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
     
 
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        if self.statuses.count==0 || self.footer!.refreshing {
+            return
+        }
+        
+        var delta = scrollView.contentSize.height - scrollView.contentOffset.y
+        
+        var sawFooterH = self.view.height() - self.tabBarController!.tabBar.height()
+        
+        if delta <= sawFooterH {
+            self.footer?.beginRefreshing()
+            self.loadMoreStatus()
+        }
+        
+        
+        
+        
+    }
 
 }
