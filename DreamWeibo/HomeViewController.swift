@@ -14,10 +14,45 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
+        loadNewStatus()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.initBarButtonItem("navigationbar_friendsearch", imageHighlight: "navigationbar_friendsearch_highlighted", target:self,action: "friendSearch")
-
+    }
+    
+    func loadNewStatus(){
+        
+        let account = Account.getAccount()
+        if account == nil {
+            Account.expiredAndReAuth()
+        }
+        
+        var mgr = AFHTTPRequestOperationManager()
+        
+        var params = NSMutableDictionary()
+        params["access_token"] = account!.access_token
+        params["count"] = "5"
+        //我哩个去，就错了一个地方。。。。。http://www.dream.net多加了最后的反斜线就错了
+        
+        mgr.GET("https://api.weibo.com/2/statuses/home_timeline.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+            
+            let result = obj as NSDictionary
+            print(result)
+            
+            
+            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                 
+                print("failed")
+        }
+    
+    
+
+    }
+
+
+    func setupNavigationBar(){
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.initBarButtonItem("navigationbar_friendsearch", imageHighlight: "navigationbar_friendsearch_highlighted", target:self,action: "friendSearch")
+        
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.initBarButtonItem("navigationbar_pop", imageHighlight: "navigationbar_pop_highlighted", target:self ,action: "pop")
         
         var titleButton = DreamTitleButton()
@@ -26,7 +61,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         titleButton.setImage(UIImage(named: "navigationbar_arrow_down"), forState: UIControlState.Normal)
         titleButton.tag = 100
         titleButton.addTarget(self, action: "titleClick:", forControlEvents: UIControlEvents.TouchUpInside)
-//        titleButton.setBackgroundImage(UIImage(named: "navigationbar_background"), forState: UIControlState.Selected)  这句话没效果。。。。
+        //        titleButton.setBackgroundImage(UIImage(named: "navigationbar_background"), forState: UIControlState.Selected)  这句话没效果。。。。
         titleButton.setHeight(30)
         let str = titleButton.titleLabel?.text
         let length = countElements(str!)*20 + 30
@@ -56,10 +91,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     
     func friendSearch(){
-        print("123")
+        
     }
+
     func pop(){
-        print("123")
 
     }
 

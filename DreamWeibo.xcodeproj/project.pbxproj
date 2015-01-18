@@ -39,6 +39,7 @@
 		D2FE74C31A6B2C0100A13FFF /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FE74B91A6B2C0100A13FFF /* AFURLResponseSerialization.m */; };
 		D2FE74C41A6B2C0100A13FFF /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FE74BB1A6B2C0100A13FFF /* AFURLSessionManager.m */; };
 		D2FE74C61A6B36A800A13FFF /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE74C51A6B36A700A13FFF /* AppInfo.swift */; };
+		D2FE74C81A6B3DA900A13FFF /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE74C71A6B3DA900A13FFF /* Account.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		D2FE74BA1A6B2C0100A13FFF /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		D2FE74BB1A6B2C0100A13FFF /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		D2FE74C51A6B36A700A13FFF /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		D2FE74C71A6B3DA900A13FFF /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				D2FE74C51A6B36A700A13FFF /* AppInfo.swift */,
+				D2FE74C71A6B3DA900A13FFF /* Account.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				D29436711A69F8CE001CE8BE /* ComposeViewController.swift in Sources */,
 				D2FE746A1A6A881700A13FFF /* MBProgressHUD+MJ.m in Sources */,
 				D2FE74C41A6B2C0100A13FFF /* AFURLSessionManager.m in Sources */,
+				D2FE74C81A6B3DA900A13FFF /* Account.swift in Sources */,
 				D20BA51C1A690F0200EFBE4A /* DreamTitleButton.swift in Sources */,
 				D20BA51E1A69334A00EFBE4A /* DreamPopMenu.swift in Sources */,
 				D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */,

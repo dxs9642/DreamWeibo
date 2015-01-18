@@ -71,11 +71,16 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
             
             
             let result = obj as NSDictionary
-            let accessToken = result["access_token"] as NSString
             
+            let account = Account()
+            account.setWithDictionary(result)
+            
+            Account.save(account)
+                        
             MBProgressHUD.hideHUD()
+            
             var defaults = NSUserDefaults()
-            defaults.setValue(accessToken, forKey: "accessToken")
+            defaults.setValue("true", forKey: "accessToken")
             defaults.synchronize()
             
             var window = UIApplication.sharedApplication().keyWindow
@@ -85,10 +90,6 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                 
                 MBProgressHUD.hideHUD()
-
-
-
-            
         }
         
     }
