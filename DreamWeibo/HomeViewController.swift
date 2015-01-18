@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     var titleButton:UIButton?
+    var statuses:NSArray?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,14 +31,18 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
-        params["count"] = "5"
         //我哩个去，就错了一个地方。。。。。http://www.dream.net多加了最后的反斜线就错了
         
         mgr.GET("https://api.weibo.com/2/statuses/home_timeline.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
             
             let result = obj as NSDictionary
-            print(result)
             
+
+            let statusDictArray = result["statuses"] as NSArray
+            
+            self.statuses = DreamStatus.objectArrayWithKeyValuesArray(statusDictArray)
+            
+            self.tableView.reloadData()
             
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                 
@@ -114,16 +119,26 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 10
+        
+        if statuses==nil{
+            return 0
+        }
+        else{
+            return self.statuses!.count
+        }
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
-    
-        // Configure the cell...
-
-        
+        if statuses != nil {
+            let status = statuses![indexPath.row] as DreamStatus
+            cell.textLabel?.text = status.text
+            
+            let user = status.user
+            let imageUrlStr = user?.profile_image_url
+            cell.imageView?.setImageWithURL(NSURL(string: imageUrlStr!), placeholderImage: UIImage(named: "avatar_default_small"))
+        }
         return cell
     }
 
