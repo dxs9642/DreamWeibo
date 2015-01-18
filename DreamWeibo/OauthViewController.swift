@@ -11,12 +11,12 @@ import UIKit
 class OauthViewController: UIViewController,UIWebViewDelegate {
 
     override func viewDidLoad() {
+        let appInfo = AppInfo()
         super.viewDidLoad()
-        
         var webView = UIWebView()
         self.view.addSubview(webView)
         webView.frame = self.view.bounds
-        let url = NSURL(string: "https://api.weibo.com/oauth2/authorize?client_id=65654089&redirect_uri=http://www.dream.net")
+        let url = NSURL(string: "https://api.weibo.com/oauth2/authorize?client_id=\(appInfo.appKey)&redirect_uri=\(appInfo.redirectUrl)")
         var request = NSURLRequest(URL: url!)
         webView.loadRequest(request)
         webView.delegate = self
@@ -29,7 +29,6 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
         
         
         let range = url.rangeOfString("http://www.dream.net/?code=")
-        print(url)
         if range.length != 0 {
             let start = range.length
             let code = url.substringFromIndex(start)
@@ -56,8 +55,41 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
     
     func accessTokenWithCode(code:NSString){
         
+        let appInfo = AppInfo()
         
+        var mgr = AFHTTPRequestOperationManager()
         
+        var params = NSMutableDictionary()
+        params["client_id"] = appInfo.appKey
+        params["client_secret"] = appInfo.appSecret
+        params["grant_type"] = "authorization_code"
+        params["code"] = code
+        params["redirect_uri"] = appInfo.redirectUrl
+        //我哩个去，就错了一个地方。。。。。http://www.dream.net多加了最后的反斜线就错了
+        
+        mgr.POST("https://api.weibo.com/oauth2/access_token", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+            
+            
+            let result = obj as NSDictionary
+            let accessToken = result["access_token"] as NSString
+            
+            MBProgressHUD.hideHUD()
+            var defaults = NSUserDefaults()
+            defaults.setValue(accessToken, forKey: "accessToken")
+            defaults.synchronize()
+            
+            var window = UIApplication.sharedApplication().keyWindow
+            window?.rootViewController = WeiboTabBarViewController()
+            
+            
+            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                
+                MBProgressHUD.hideHUD()
+
+
+
+            
+        }
         
     }
     

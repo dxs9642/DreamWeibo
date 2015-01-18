@@ -104,9 +104,15 @@ class NewFeatureViewController: UIViewController,UIScrollViewDelegate{
     }
     
     func startClick(){
-        
+        var defaults = NSUserDefaults()
+
+        let accessToken = defaults.objectForKey("accessToken") as NSString?
         var window = UIApplication.sharedApplication().keyWindow
-        window?.rootViewController = WeiboTabBarViewController()
+        if accessToken != nil {
+            window?.rootViewController = WeiboTabBarViewController()
+        }else{
+            window?.rootViewController = OauthViewController()
+        }
         
     }
     

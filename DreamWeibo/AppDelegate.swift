@@ -22,25 +22,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.frame = UIScreen.mainScreen().bounds
         
-//        var defaults = NSUserDefaults()
-//        let lastVersion = defaults.objectForKey("last_version") as NSString?
-//        let dictionary =  NSBundle.mainBundle().infoDictionary! as NSDictionary
-//        let currentVersion = dictionary[String(kCFBundleVersionKey)] as NSString
-//        
-//        
-//        if currentVersion == lastVersion{
-//            self.window?.rootViewController = WeiboTabBarViewController()
-//        }else{
-//            defaults.setValue(currentVersion, forKey: "last_version")
-//            defaults.synchronize()
-//            self.window?.rootViewController = NewFeatureViewController()
-//        }
-//    
-//
-//        setupNavigationBarAppearance()
-//        setupBarButtonItemAppearance()
+        var defaults = NSUserDefaults()
+        let lastVersion = defaults.objectForKey("last_version") as NSString?
+        let dictionary =  NSBundle.mainBundle().infoDictionary! as NSDictionary
+        let currentVersion = dictionary[String(kCFBundleVersionKey)] as NSString
+        let accessToken = defaults.objectForKey("accessToken") as NSString?
         
-        window?.rootViewController = OauthViewController()
+        
+        
+        if currentVersion == lastVersion{
+            if accessToken != nil {
+                self.window?.rootViewController = WeiboTabBarViewController()
+            }else{
+                self.window?.rootViewController = OauthViewController()
+            }
+        }else{
+            defaults.setValue(currentVersion, forKey: "last_version")
+            defaults.synchronize()
+            self.window?.rootViewController = NewFeatureViewController()
+        }
+    
+
+        setupNavigationBarAppearance()
+        setupBarButtonItemAppearance()
         
         window?.makeKeyAndVisible()
         

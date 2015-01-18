@@ -15,10 +15,12 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "发微博"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: nil, action:"cancel")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Done, target: self, action:"cancel")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发送", style: UIBarButtonItemStyle.Done, target: nil, action: "send")
+
         self.navigationItem.rightBarButtonItem?.enabled = false
-        
+        //先写这里，右后用到
+
     }
     
     func cancel(){
