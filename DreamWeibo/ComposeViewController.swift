@@ -8,24 +8,43 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToolbarButtonProtocol {
+class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToolbarButtonProtocol,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
     
     var textView:DreamTextView?
+    var toolbar:DreamComposeToolbar?
+    var photosView:DreamComposePhotosView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTitle()
         setupTextView()
         setupToolbar()
+        setupPhotosView()
+
+        
+    }
+    
+    func setupPhotosView(){
+        var photosView = DreamComposePhotosView()
+        self.photosView = photosView
+
+        photosView.frame = CGRectMake(0, 100, self.view.width(), self.view.height())
+        
+        self.textView?.addSubview(photosView)
+        
+        
     }
     
     func setupToolbar(){
         var toolbar = DreamComposeToolbar()
+        self.toolbar = toolbar
         toolbar.delegate = self
         toolbar.setWidth(self.view.width())
         toolbar.setHeight(44)
-        self.textView?.inputAccessoryView = toolbar
+//        self.textView?.inputAccessoryView = toolbar
+        toolbar.frame.origin.y = self.view.height() - toolbar.height()
+        self.view.addSubview(toolbar)
+        
         
     }
     
@@ -33,13 +52,13 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         let type = DreamComposeToolbarButtonType()
         switch(tag){
         case type.Camera:
-            print("Camera")
+            openCamera()
         case type.Emotion:
-            print("Emotion")
+            openEmotion()
         case type.Mention:
             print("Mention")
         case type.Picture:
-            print("Picture")
+            openPicture()
         case type.Trend:
             print("Trend")
         default:
@@ -48,7 +67,34 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     }
     
     
+    func openCamera(){
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)==false{
+            return
+        }
+        
+        var ipc = UIImagePickerController()
+        ipc.sourceType = UIImagePickerControllerSourceType.Camera
+        ipc.delegate = self
+        self.presentViewController(ipc, animated: true, completion: nil)
+        
+    }
     
+    func openEmotion(){
+        
+    }
+    
+    func openPicture(){
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)==false{
+            return
+        }
+        
+        var ipc = UIImagePickerController()
+        ipc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        ipc.delegate = self
+        self.presentViewController(ipc, animated: true, completion: nil)
+    }
+
     
     func setupTitle(){
         self.title = "发微博"
@@ -76,7 +122,40 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         self.view.addSubview(textView)
         textView.becomeFirstResponder()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyBoardWillShow:", name: "UIKeyboardWillShowNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: "UIKeyboardWillHideNotification", object: nil)
     }
+    
+    func keyBoardWillShow(note:NSNotification){
+
+        
+        let dic = note.userInfo!
+
+        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as Double
+        
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+
+            let keyboardF = (dic[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+            let keyboardH = keyboardF.size.height
+            
+            self.toolbar?.transform = CGAffineTransformMakeTranslation(0, -keyboardH)
+            
+            
+        })        
+        
+    }
+    
+    func keyboardWillHide(note:NSNotification){
+        
+        let dic = note.userInfo!
+        
+        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as Double
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            self.toolbar!.transform = CGAffineTransformIdentity;
+            
+        })
+    }
+    
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.view.endEditing(true)
@@ -111,6 +190,14 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
             self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
             self.navigationItem.rightBarButtonItem?.enabled = false
         }
+        
+    }
+    
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        self.photosView?.addImage(image)
         
     }
     

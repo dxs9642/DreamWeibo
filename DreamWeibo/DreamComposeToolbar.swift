@@ -35,11 +35,13 @@ class DreamComposeToolbar: UIView {
         super.layoutSubviews()
         
         self.backgroundColor = UIColor(patternImage: UIImage(named: "compose_toolbar_background_os7")!)
-        self.addButtonWithIcon("compose_trendbutton_background_os7", highIcon: "compose_trendbutton_background_highlighted_os7",tag:type.Trend)
+
         self.addButtonWithIcon("compose_camerabutton_background_os7", highIcon: "compose_camerabutton_background_highlighted_os7", tag:type.Camera)
         self.addButtonWithIcon("compose_toolbar_picture_os7", highIcon: "compose_toolbar_picture_highlighted_os7", tag:type.Picture)
-        self.addButtonWithIcon("compose_emoticonbutton_background_os7", highIcon: "compose_emoticonbutton_background_highlighted_os7", tag:type.Emotion)
         self.addButtonWithIcon("compose_mentionbutton_background_os7", highIcon: "compose_mentionbutton_background_highlighted_os7", tag: type.Mention)
+        self.addButtonWithIcon("compose_trendbutton_background_os7", highIcon: "compose_trendbutton_background_highlighted_os7",tag:type.Trend)
+        self.addButtonWithIcon("compose_emoticonbutton_background_os7", highIcon: "compose_emoticonbutton_background_highlighted_os7", tag:type.Emotion)
+
         
         let count = 5
         
