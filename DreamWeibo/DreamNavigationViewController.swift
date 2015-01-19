@@ -10,18 +10,10 @@ import UIKit
 
 class DreamNavigationViewController: UINavigationController {
 
-    
-    
-    private var once = dispatch_once_t()
-    
-
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
