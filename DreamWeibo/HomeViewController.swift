@@ -22,8 +22,55 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         setupRefresh()
         self.refreshControl?.beginRefreshing()
         loadNewStatus()
-
+        setupUserInfo()
         
+        
+    }
+    
+    func setupUserInfo(){
+        
+
+            
+        
+            let account = Account.getAccount()
+            if account == nil {
+                Account.expiredAndReAuth()
+            }
+            
+            var mgr = AFHTTPRequestOperationManager()
+            
+            var params = NSMutableDictionary()
+            params["access_token"] = account!.access_token
+            
+            params["uid"] = account!.uid
+            
+            mgr.GET("https://api.weibo.com/2/users/show.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+                
+                
+                
+                let result = obj as NSDictionary
+                
+                
+                let userInfo = DreamUser(keyValues: result)
+                
+                Account.setName(userInfo.name)
+                
+                self.titleButton?.setTitle(userInfo.name , forState: UIControlState.Normal)
+                
+                let length = countElements(userInfo.name)*20 + 30
+                self.titleButton?.setWidth(CGFloat(Float(length)))
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+                
+                }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                    MBProgressHUD.showError("网络未知错误")
+                    self.titleButton?.setTitle(Account.getName()!, forState: UIControlState.Normal)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+            }
+
+            
+
         
     }
     
@@ -178,7 +225,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         var titleButton = DreamTitleButton()
         self.titleButton = titleButton
-        titleButton.setTitle("清梦的未来", forState: UIControlState.Normal)
+        titleButton.setTitle("首页", forState: UIControlState.Normal)
         titleButton.setImage(UIImage(named: "navigationbar_arrow_down"), forState: UIControlState.Normal)
         titleButton.tag = 100
         titleButton.addTarget(self, action: "titleClick:", forControlEvents: UIControlEvents.TouchUpInside)

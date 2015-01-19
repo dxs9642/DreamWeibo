@@ -26,6 +26,8 @@ class Account: NSObject , NSCoding {
     }
 
     
+    
+    
     func setWithDictionary(dic:NSDictionary){
         let nf = NSNumberFormatter()
         access_token = dic["access_token"] as NSString?
@@ -40,6 +42,22 @@ class Account: NSObject , NSCoding {
         self.expires_in = aDecoder.decodeObjectForKey("expires_in") as NSString?
         self.uid = aDecoder.decodeObjectForKey("uid") as NSString?
         
+
+    }
+    
+    class func setName(name:NSString){
+        
+        var defaults = NSUserDefaults()
+        defaults.setValue(name, forKey: "userInfo")
+        defaults.synchronize()
+
+
+    }
+    
+    class func getName() -> String?{
+        
+        var defaults = NSUserDefaults()
+        return defaults.valueForKey("userInfo") as String?
 
     }
     
@@ -58,6 +76,8 @@ class Account: NSObject , NSCoding {
         NSKeyedArchiver.archiveRootObject(account, toFile:path )
         
     }
+    
+    
     
     class func getAccount() -> Account?{
         let account = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as Account
