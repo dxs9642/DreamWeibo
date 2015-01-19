@@ -41,11 +41,18 @@ class DreamComposePhotosView: UIView {
             
             imageView.frame = CGRectMake(margin+(imageViewW+margin)*col, (imageViewW+margin)*row, imageViewW, imageViewH)
             
-            
         }
         
     }
     
+    func images() -> NSArray {
+        let arr = NSMutableArray()
+        for img in self.subviews {
+            let imageView = img as UIImageView
+            arr.addObject(imageView.image!)
+        }
+        return NSArray(array: arr)
+    }
     
 
 }

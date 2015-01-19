@@ -167,7 +167,130 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     
     func send(){
         
+        let imgs = photosView?.images()
+        
+        if  imgs?.count == 0 {
+            sendStatusWithoutImage()
+        }else{
+            sendStatusWithImage(imgs!)
+        }
+        
+
     }
+    
+    
+    func sendStatusWithoutImage(){
+        
+        let account = Account.getAccount()
+        if account == nil {
+            Account.expiredAndReAuth()
+        }
+        
+        var mgr = AFHTTPRequestOperationManager()
+        
+        var params = NSMutableDictionary()
+        params["access_token"] = account!.access_token
+        
+        params["status"] = textView!.text
+        
+        mgr.POST("https://api.weibo.com/2/statuses/update.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+            
+            
+            MBProgressHUD.showSuccess("发送成功")
+            
+//            let result = obj as NSDictionary
+//            
+//            
+//            let statusDictArray = result["statuses"] as NSArray
+//            
+//            
+//            let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
+//            
+//            
+//            if newStatus.count != 0 {
+//                let range = NSMakeRange(0, newStatus.count)
+//                self.statuses.insertObjects(newStatus, atIndexes:NSIndexSet(indexesInRange:range))
+//                self.tableView.reloadData()
+//            }
+//            self.showStatusCount(newStatus.count)
+//            self.refreshControl?.endRefreshing()
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+
+            
+            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                MBProgressHUD.showSuccess("发送失败")
+                self.dismissViewControllerAnimated(true, completion: nil)
+
+
+        }
+        
+        
+    }
+    
+    func sendStatusWithImage(images:NSArray){
+        
+        let account = Account.getAccount()
+        if account == nil {
+            Account.expiredAndReAuth()
+        }
+        
+        var mgr = AFHTTPRequestOperationManager()
+        
+        var params = NSMutableDictionary()
+        
+        params["access_token"] = account!.access_token
+        
+        params["status"] = textView!.text
+        
+        mgr.POST("https://api.weibo.com/2/statuses/upload.json", parameters: params, constructingBodyWithBlock: { (formData:AFMultipartFormData!) -> Void in
+            
+
+            
+            let image = images.lastObject as UIImage
+            
+            let data = UIImageJPEGRepresentation(image, 1.0)
+            
+            
+            formData.appendPartWithFileData(data, name: "pic", fileName: "status.jpg", mimeType: "image/jpeg")
+            
+            
+            
+            }, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+                
+                
+                MBProgressHUD.showSuccess("发送成功")
+                self.dismissViewControllerAnimated(true, completion: nil)
+
+                
+                //            let result = obj as NSDictionary
+                //
+                //
+                //            let statusDictArray = result["statuses"] as NSArray
+                //
+                //
+                //            let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
+                //
+                //
+                //            if newStatus.count != 0 {
+                //                let range = NSMakeRange(0, newStatus.count)
+                //                self.statuses.insertObjects(newStatus, atIndexes:NSIndexSet(indexesInRange:range))
+                //                self.tableView.reloadData()
+                //            }
+                //            self.showStatusCount(newStatus.count)
+                //            self.refreshControl?.endRefreshing()
+                
+                
+                
+            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                MBProgressHUD.showSuccess("发送失败")
+                self.dismissViewControllerAnimated(true, completion: nil)
+
+                
+        }
+        
+        
+}
     
     
     func textViewDidChange(textView: UITextView) {
