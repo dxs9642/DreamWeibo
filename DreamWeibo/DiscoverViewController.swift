@@ -13,11 +13,11 @@ class DiscoverViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//        var searchBar = UISearchBar()
+//        self.navigationItem.titleView = searchBar
+        var searchBar = DreamSearchBar.buildSearchBar()
+        self.navigationItem.titleView = searchBar
+        
     }
 
     override func didReceiveMemoryWarning() {
