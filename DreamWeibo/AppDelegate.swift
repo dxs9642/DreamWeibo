@@ -90,17 +90,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func setupBarButtonItemAppearance(){
+        
         var apperance = UIBarButtonItem.appearance()
-        var textAttrs = NSMutableDictionary()
-        textAttrs[NSForegroundColorAttributeName] = UIColor.orangeColor()
-        textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
-        apperance.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
-        
-        
         var disableTextAttrs = NSMutableDictionary()
         disableTextAttrs[NSForegroundColorAttributeName] = UIColor.lightGrayColor()
         disableTextAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
         apperance.setTitleTextAttributes(disableTextAttrs, forState: UIControlState.Disabled)
+        
+        var helightTextAttrs = NSMutableDictionary()
+        helightTextAttrs[NSForegroundColorAttributeName] = UIColor.blackColor()
+        helightTextAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
+        apperance.setTitleTextAttributes(helightTextAttrs, forState: UIControlState.Highlighted)
+        
+        
+        var textAttrs = NSMutableDictionary()
+//        textAttrs[NSForegroundColorAttributeName] = UIColor.orangeColor()
+        textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
+        apperance.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
+        
+        
+
     }
     
     
