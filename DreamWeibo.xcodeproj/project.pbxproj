@@ -28,6 +28,7 @@
 		D2BAFE391A6CE7520081C4D5 /* DreamComposeToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BAFE371A6CE7520081C4D5 /* DreamComposeToolbar.swift */; };
 		D2BAFE3B1A6CE9660081C4D5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BAFE3A1A6CE9660081C4D5 /* LaunchScreen.xib */; };
 		D2BAFE3D1A6CFC3E0081C4D5 /* DreamComposePhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BAFE3C1A6CFC3E0081C4D5 /* DreamComposePhotosView.swift */; };
+		D2DF93141A6D49AA00C024BC /* DreamHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */; };
 		D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */; };
 		D2FB935C1A67D4E300DB5535 /* DreamNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */; };
 		D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */; };
@@ -112,6 +113,7 @@
 		D2BAFE371A6CE7520081C4D5 /* DreamComposeToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamComposeToolbar.swift; sourceTree = "<group>"; };
 		D2BAFE3A1A6CE9660081C4D5 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		D2BAFE3C1A6CFC3E0081C4D5 /* DreamComposePhotosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamComposePhotosView.swift; sourceTree = "<group>"; };
+		D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamHttpTool.swift; sourceTree = "<group>"; };
 		D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTabBar.swift; sourceTree = "<group>"; };
 		D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamNavigationViewController.swift; sourceTree = "<group>"; };
 		D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 		D2154BDF1A67C7600043CD8A /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				D2DF93121A6D498400C024BC /* Tool */,
 				D23130061A673E8900B83A3A /* AppDelegate.swift */,
 				D2FB935D1A67F16400DB5535 /* Category */,
 				D2FB935A1A67D4C800DB5535 /* Model */,
@@ -517,6 +520,14 @@
 				D29436751A6A03AD001CE8BE /* NewFeatureViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		D2DF93121A6D498400C024BC /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */,
+			);
+			name = Tool;
 			sourceTree = "<group>";
 		};
 		D2FB93581A67D4B500DB5535 /* View */ = {
@@ -841,6 +852,7 @@
 				D2FE74C61A6B36A800A13FFF /* AppInfo.swift in Sources */,
 				D2BAFE381A6CE7520081C4D5 /* DreamTextView.swift in Sources */,
 				D2FE759F1A6B9DA200A13FFF /* DreamStatus.m in Sources */,
+				D2DF93141A6D49AA00C024BC /* DreamHttpTool.swift in Sources */,
 				D2FE75B91A6BD10600A13FFF /* AFHTTPRequestOperationManager.m in Sources */,
 				D2154BC11A67A8440043CD8A /* WeiboTabBarViewController.swift in Sources */,
 				D23130071A673E8900B83A3A /* AppDelegate.swift in Sources */,

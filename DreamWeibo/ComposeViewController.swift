@@ -24,6 +24,10 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         
     }
     
+    
+
+
+    
     func setupPhotosView(){
         var photosView = DreamComposePhotosView()
         self.photosView = photosView
@@ -96,12 +100,13 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     }
 
     
+    
     func setupTitle(){
         self.title = "发微博"
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Bordered, target: self, action:"cancel")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发送", style: UIBarButtonItemStyle.Bordered
-            , target: nil, action: "send")
+            , target: self, action: "send")
         var textAttrs = NSMutableDictionary()
         textAttrs[NSForegroundColorAttributeName] = UIColor.orangeColor()
         textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
@@ -109,7 +114,13 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         
         textAttrs[NSForegroundColorAttributeName] = UIColor.lightGrayColor()
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs, forState: UIControlState.Disabled)
-        self.navigationItem.rightBarButtonItem?.enabled = false
+
+        if(textView != nil && !textView!.text.isEmpty ){
+            self.navigationItem.rightBarButtonItem?.enabled = true
+
+        }else{
+            self.navigationItem.rightBarButtonItem?.enabled = false
+        }
         //先写这里，右后用到
     }
     
@@ -174,7 +185,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         }else{
             sendStatusWithImage(imgs!)
         }
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
 
     }
     
@@ -186,46 +197,39 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
             Account.expiredAndReAuth()
         }
         
-        var mgr = AFHTTPRequestOperationManager()
         
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
         
         params["status"] = textView!.text
         
-        mgr.POST("https://api.weibo.com/2/statuses/update.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
-            
-            
+        DreamHttpTool.post("https://api.weibo.com/2/statuses/update.json", params: params, success: { (obj:AnyObject!) -> Void in
             MBProgressHUD.showSuccess("发送成功")
             
-//            let result = obj as NSDictionary
-//            
-//            
-//            let statusDictArray = result["statuses"] as NSArray
-//            
-//            
-//            let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
-//            
-//            
-//            if newStatus.count != 0 {
-//                let range = NSMakeRange(0, newStatus.count)
-//                self.statuses.insertObjects(newStatus, atIndexes:NSIndexSet(indexesInRange:range))
-//                self.tableView.reloadData()
-//            }
-//            self.showStatusCount(newStatus.count)
-//            self.refreshControl?.endRefreshing()
+            //            let result = obj as NSDictionary
+            //
+            //
+            //            let statusDictArray = result["statuses"] as NSArray
+            //
+            //
+            //            let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
+            //
+            //
+            //            if newStatus.count != 0 {
+            //                let range = NSMakeRange(0, newStatus.count)
+            //                self.statuses.insertObjects(newStatus, atIndexes:NSIndexSet(indexesInRange:range))
+            //                self.tableView.reloadData()
+            //            }
+            //            self.showStatusCount(newStatus.count)
+            //            self.refreshControl?.endRefreshing()
             
-            self.dismissViewControllerAnimated(true, completion: nil)
 
-            
-            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                MBProgressHUD.showSuccess("发送失败")
-                self.dismissViewControllerAnimated(true, completion: nil)
-
+        }) { () -> Void in
+            MBProgressHUD.showSuccess("发送失败")
 
         }
         
-        
+     
     }
     
     func sendStatusWithImage(images:NSArray){
@@ -321,7 +325,6 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.photosView?.addImage(image)
-        
     }
     
     

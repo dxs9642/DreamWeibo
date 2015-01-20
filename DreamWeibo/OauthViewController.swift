@@ -57,8 +57,6 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
         
         let appInfo = AppInfo()
         
-        var mgr = AFHTTPRequestOperationManager()
-        
         var params = NSMutableDictionary()
         params["client_id"] = appInfo.appKey
         params["client_secret"] = appInfo.appSecret
@@ -67,16 +65,15 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
         params["redirect_uri"] = appInfo.redirectUrl
         //我哩个去，就错了一个地方。。。。。http://www.dream.net多加了最后的反斜线就错了
         
-        mgr.POST("https://api.weibo.com/oauth2/access_token", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
-            
-            
+        
+        DreamHttpTool.post("https://api.weibo.com/oauth2/access_token", params: params, success: { (obj:AnyObject!) -> Void in
             let result = obj as NSDictionary
             
             let account = Account()
             account.setWithDictionary(result)
             
             Account.save(account)
-                        
+            
             MBProgressHUD.hideHUD()
             
             var defaults = NSUserDefaults()
@@ -85,13 +82,12 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
             
             var window = UIApplication.sharedApplication().keyWindow
             window?.rootViewController = WeiboTabBarViewController()
-            
-            
-            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                
-                MBProgressHUD.hideHUD()
+        }) { () -> Void in
+            MBProgressHUD.hideHUD()
+
         }
         
+           
     }
     
     

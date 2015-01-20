@@ -37,16 +37,13 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
                 Account.expiredAndReAuth()
             }
             
-            var mgr = AFHTTPRequestOperationManager()
-            
+        
             var params = NSMutableDictionary()
             params["access_token"] = account!.access_token
             
             params["uid"] = account!.uid
-            
-            mgr.GET("https://api.weibo.com/2/users/show.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
-                
-                
+        
+            DreamHttpTool.get("https://api.weibo.com/2/users/show.json", params: params, success: { (obj:AnyObject!) -> Void in
                 
                 let result = obj as NSDictionary
                 
@@ -61,15 +58,15 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
                 self.titleButton?.setWidth(CGFloat(Float(length)))
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
-                
-                
-                }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    MBProgressHUD.showError("网络未知错误")
-                    self.titleButton?.setTitle(Account.getName()!, forState: UIControlState.Normal)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-            }
 
-            
+            }) { () -> Void in
+                MBProgressHUD.showError("网络未知错误")
+                self.titleButton?.setTitle(Account.getName()!, forState: UIControlState.Normal)
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+            }
+        
+    
 
         
     }
@@ -97,7 +94,6 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             Account.expiredAndReAuth()
         }
         
-        var mgr = AFHTTPRequestOperationManager()
         
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
@@ -108,11 +104,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             params["since_id"] = firstStatus!.idstr
         }
  
-        mgr.GET("https://api.weibo.com/2/statuses/home_timeline.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
-            
+        DreamHttpTool.get("https://api.weibo.com/2/statuses/home_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
             let result = obj as NSDictionary
             
-
+            
             let statusDictArray = result["statuses"] as NSArray
             
             
@@ -126,10 +121,11 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             }
             self.showStatusCount(newStatus.count)
             self.refreshControl?.endRefreshing()
-            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                
-                print("failed")
+
+        }) { () -> Void in
+            
         }
+        
     }
     
     
@@ -139,22 +135,17 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             Account.expiredAndReAuth()
         }
         
-        var mgr = AFHTTPRequestOperationManager()
         
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
         
         var lastStatus = self.statuses.lastObject as DreamStatus?
         
-        
-
-        
-        
         if lastStatus != nil {
             params["max_id"] = lastStatus!.idstr.toInt()! - 1
         }
         
-        mgr.GET("https://api.weibo.com/2/statuses/home_timeline.json", parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+        DreamHttpTool.get("https://api.weibo.com/2/statuses/home_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
             
             let result = obj as NSDictionary
             
@@ -171,11 +162,13 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             }
             
             self.footer?.endRefreshing()
+
             
-            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                
-                print("failed")
+        }) { () -> Void in
+            
         }
+        
+
 
     }
     
@@ -225,7 +218,11 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         var titleButton = DreamTitleButton()
         self.titleButton = titleButton
-        titleButton.setTitle("首页", forState: UIControlState.Normal)
+        if Account.getName() != nil {
+            titleButton.setTitle(Account.getName()!, forState: UIControlState.Normal)
+        }else{
+            titleButton.setTitle("首页", forState: UIControlState.Normal)
+        }
         titleButton.setImage(UIImage(named: "navigationbar_arrow_down"), forState: UIControlState.Normal)
         titleButton.tag = 100
         titleButton.addTarget(self, action: "titleClick:", forControlEvents: UIControlEvents.TouchUpInside)
