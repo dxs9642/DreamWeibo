@@ -10,3 +10,4 @@
 #import "DreamUser.h"
 #import "DreamStatus.h"
 #import "DreamPhoto.h"
+#import "DreamUnreadCountResult.h"

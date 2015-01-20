@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        
+
         
         window = UIWindow()
         window?.frame = UIScreen.mainScreen().bounds
@@ -51,7 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupNetwokMonitor()
         
+        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
         return true
+        
     }
     
     
@@ -126,6 +130,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        //这个过期的时间是不稳定的，也就是谁然在后台运行，但是系统运行这个程序一段时间就停止，这也是为什么pp助手使用音乐播放功能无线延长后台运行时间
+       
     }
     
     func applicationWillEnterForeground(application: UIApplication) {

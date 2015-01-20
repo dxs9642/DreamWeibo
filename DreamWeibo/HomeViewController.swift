@@ -89,6 +89,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     
     func loadNewStatus(){
         
+        
+        
         let account = Account.getAccount()
         if account == nil {
             Account.expiredAndReAuth()

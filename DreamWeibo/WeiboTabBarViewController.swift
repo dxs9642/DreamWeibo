@@ -10,6 +10,11 @@ import UIKit
 
 class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol{
 
+    
+    var home:HomeViewController?
+    var message:MessageViewController?
+    var profile:ProfileViewController?
+
 
     
     override func viewDidLoad() {
@@ -17,9 +22,46 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol{
         
         addAllChildVCs()
         addCustomTabBar()
+        setUnreadCount()
 
+
+        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "setUnreadCount", userInfo: nil, repeats: true)
         
         // Do any additional setup after loading the view.
+    }
+
+    
+    func setUnreadCount(){
+        let account = Account.getAccount()
+        if account == nil {
+            Account.expiredAndReAuth()
+        }
+        
+        
+        var params = NSMutableDictionary()
+        params["access_token"] = account!.access_token
+        params["uid"] = account!.uid
+        
+        DreamHttpTool.get("https://rm.api.weibo.com/2/remind/unread_count.json", params: params, success: { (obj:AnyObject!) -> Void in
+            
+                let result = obj as NSDictionary
+            
+                let counts = DreamUnreadCountResult(keyValues: result) as DreamUnreadCountResult
+            
+                self.home?.tabBarItem.badgeValue = counts.status==0 ? nil: "\(counts.status)"
+                self.message?.tabBarItem.badgeValue = counts.messageCount()==0 ? nil: "\(counts.messageCount())"
+                self.profile?.tabBarItem.badgeValue = counts.follower==0 ? nil: "\(counts.follower)"
+            
+
+            
+            
+                UIApplication.sharedApplication().applicationIconBadgeNumber = Int(counts.totalCount())
+            
+            }) { () -> Void in
+                
+        }
+        
+
     }
     
     func addCustomTabBar(){
@@ -41,17 +83,18 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol{
     func addAllChildVCs(){
         var home = HomeViewController()
         self.addChildVC(home, title: "首页", image: "tabbar_home_os7", select_image: "tabbar_home_selected_os7")
-        
+        self.home = home
         
         var message = MessageViewController()
         self.addChildVC(message, title: "消息", image: "tabbar_message_center_os7", select_image: "tabbar_message_center_selected_os7")
-        
+        self.message = message
         
         var discover = DiscoverViewController()
         self.addChildVC(discover, title: "发现", image: "tabbar_discover_os7", select_image: "tabbar_discover_selected_os7")
-        
+
         var profile = ProfileViewController()
         self.addChildVC(profile, title: "我", image: "tabbar_profile_os7", select_image: "tabbar_profile_selected_os7")
+        self.profile = profile
     }
     
     func addChildVC(vc:UIViewController,title:NSString,image:NSString,select_image:NSString){
