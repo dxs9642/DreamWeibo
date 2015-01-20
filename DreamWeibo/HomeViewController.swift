@@ -85,6 +85,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     
     func refreshData(){
         loadNewStatus()
+        
     }
     
     func loadNewStatus(){
@@ -121,9 +122,16 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
                 self.statuses.insertObjects(newStatus, atIndexes:NSIndexSet(indexesInRange:range))
                 self.tableView.reloadData()
             }
+            if self.tabBarItem.badgeValue != nil{
+                UIApplication.sharedApplication().applicationIconBadgeNumber -= self.tabBarItem!.badgeValue!.toInt()!
+            }
+            self.tabBarItem.badgeValue = nil
             self.showStatusCount(newStatus.count)
             self.refreshControl?.endRefreshing()
 
+            let firstRow = NSIndexPath(forRow: 0, inSection: 0)
+            self.tableView.scrollToRowAtIndexPath(firstRow, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            
         }) { () -> Void in
             
         }

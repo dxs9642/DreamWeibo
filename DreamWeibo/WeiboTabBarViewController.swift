@@ -8,26 +8,43 @@
 
 import UIKit
 
-class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol{
+class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBarControllerDelegate{
 
     
     var home:HomeViewController?
     var message:MessageViewController?
     var profile:ProfileViewController?
-
+    var changeFlag = false
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.delegate = self
         addAllChildVCs()
         addCustomTabBar()
         setUnreadCount()
 
 
-        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "setUnreadCount", userInfo: nil, repeats: true)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "setUnreadCount", userInfo: nil, repeats: true)
+        
+        NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
         
         // Do any additional setup after loading the view.
+    }
+
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        let vc = ((viewController as UINavigationController).viewControllers as NSArray).firstObject as UIViewController
+        if vc.isKindOfClass(HomeViewController) {
+            if changeFlag {
+                changeFlag = false
+                return
+            }
+            self.home?.refreshControl?.beginRefreshing()
+            self.home?.refreshData()
+
+        }else{
+            changeFlag = true
+        }
     }
 
     
