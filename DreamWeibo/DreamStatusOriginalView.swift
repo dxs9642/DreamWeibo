@@ -114,10 +114,24 @@ class DreamStatusOriginalView: UIView {
         self.textLabel?.frame = originalFrame.textFrame
         self.textLabel?.text = status.text
         
-        self.sourceLabel?.frame = originalFrame.sourceFrame
-        self.sourceLabel?.text = status.source
         
-        self.timeLabel?.frame = originalFrame.timeFrame
-        self.timeLabel?.text = status.created_at
+        let time = status.created_at as NSString
+        let timeX = CGRectGetMinX(self.nameLabel!.frame)
+        let timeY = CGRectGetMaxY(self.nameLabel!.frame) + 5
+        var dic = NSMutableDictionary()
+        let font = DreamFont()
+        dic[NSFontAttributeName] = font.DreamStatusOrginalTimeFont
+        let timeSize = time.sizeWithAttributes(dic)
+        self.timeLabel?.frame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height)
+        self.timeLabel?.text = time
+        
+        let source = status.source
+        let sourceX = CGRectGetMaxX(self.timeLabel!.frame) + 10
+        let sourceY = timeY
+        dic[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
+        let sourceSize = source.sizeWithAttributes(dic)
+        self.sourceLabel?.frame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height)
+        self.sourceLabel?.text = source
+        
     }
 }

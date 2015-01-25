@@ -37,17 +37,7 @@
         self.vipFrame = CGRectMake(vipX, vipY, vipW, vipH);
     }
     
-    // 3.时间
-    CGFloat timeX = nameX;
-    CGFloat timeY = CGRectGetMaxY(self.nameFrame) + DreamStatusCellInset*0.5;
-    CGSize timeSize = [status.created_at sizeWithFont:DreamStatusOrginalTimeFont];
-    self.timeFrame = (CGRect){{timeX, timeY}, timeSize};
-    
-    // 4.来源
-    CGFloat sourceX = CGRectGetMaxX(self.timeFrame) + DreamStatusCellInset;
-    CGFloat sourceY = timeY;
-    CGSize sourceSize = [status.source sizeWithFont:DreamStatusOrginalSourceFont];
-    self.sourceFrame = (CGRect){{sourceX, sourceY}, sourceSize};
+
     
     // 5.正文
     CGFloat textX = iconX;
