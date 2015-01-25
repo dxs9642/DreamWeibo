@@ -42,7 +42,7 @@
     
     // 自己的frame
     CGFloat x = 0;
-    CGFloat y = 0;
+    CGFloat y = 10;
     CGFloat w = [UIScreen mainScreen].bounds.size.width;
     self.frame = CGRectMake(x, y, w, h);
 }

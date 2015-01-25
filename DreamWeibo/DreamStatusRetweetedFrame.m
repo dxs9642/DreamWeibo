@@ -21,12 +21,13 @@
     // 1.昵称
     CGFloat nameX = DreamStatusCellInset;
     CGFloat nameY = DreamStatusCellInset;
-    CGSize nameSize = [retweetedStatus.user.name sizeWithFont:DreamStatusRetweetedNameFont];
+    NSString *name = [NSString stringWithFormat:@"@%@",retweetedStatus.user.name];
+    CGSize nameSize = [name sizeWithFont:DreamStatusRetweetedNameFont];
     self.nameFrame = (CGRect){{nameX, nameY}, nameSize};
     
     // 2.正文
     CGFloat textX = nameX;
-    CGFloat textY = CGRectGetMaxY(self.nameFrame) + DreamStatusCellInset;
+    CGFloat textY = CGRectGetMaxY(self.nameFrame) + DreamStatusCellInset*0.3;
     CGFloat maxW = DreamScreenW - 2 * textX;
     CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);
     CGSize textSize = [retweetedStatus.text sizeWithFont:DreamStatusRetweetedTextFont constrainedToSize:maxSize];

@@ -33,7 +33,7 @@ class DreamStatusCell: UITableViewCell {
         setupStatusDetailView()
         setupToolBar()
         
-
+        self.backgroundColor = UIColor.clearColor()
     }
 
     required init(coder aDecoder: NSCoder) {

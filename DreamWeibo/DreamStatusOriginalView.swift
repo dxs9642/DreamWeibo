@@ -23,6 +23,7 @@ class DreamStatusOriginalView: UIView {
     var textLabel:UILabel?
     var sourceLabel:UILabel?
     var timeLabel:UILabel?
+    var vipView:UIImageView?
     var originalFrame:DreamStatusOriginalFrame?
     
     override init(){
@@ -47,7 +48,7 @@ class DreamStatusOriginalView: UIView {
         
         sourceLabel = UILabel()
         sourceLabel?.font = font.DreamStatusOrginalSourceFont
-        
+        sourceLabel?.textColor = UIColor.lightGrayColor()
         
         
         self.addSubview(sourceLabel!)
@@ -56,7 +57,7 @@ class DreamStatusOriginalView: UIView {
         
         timeLabel = UILabel()
         timeLabel?.font = font.DreamStatusOrginalTimeFont
-        
+        timeLabel?.textColor = UIColor.orangeColor()
         
         
         
@@ -69,6 +70,9 @@ class DreamStatusOriginalView: UIView {
         
         self.addSubview(iconView!)
         
+        vipView = UIImageView()
+        vipView?.contentMode = UIViewContentMode.Center
+        self.addSubview(vipView!)
         
         
     }
@@ -97,6 +101,15 @@ class DreamStatusOriginalView: UIView {
         
         self.nameLabel?.frame = originalFrame.nameFrame
         self.nameLabel?.text = user.name
+        if user.vip==true {
+            self.nameLabel?.textColor = UIColor.orangeColor()
+            self.vipView?.hidden = false
+            self.vipView?.frame = originalFrame.vipFrame
+            self.vipView?.image = UIImage(named: "common_icon_membership_level\(user.mbrank)")
+        }else{
+            self.vipView?.hidden = true
+        }
+        
         
         self.textLabel?.frame = originalFrame.textFrame
         self.textLabel?.text = status.text

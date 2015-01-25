@@ -18,6 +18,9 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.backgroundColor = UIColor(red: 211/255, green: 211/255, blue: 211/255, alpha: 1.0)
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         setupNavigationBar()
         setupRefresh()
         self.refreshControl?.beginRefreshing()

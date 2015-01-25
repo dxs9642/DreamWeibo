@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DreamStatusDetailView: UIView {
+class DreamStatusDetailView: UIImageView {
 
     
     var detailFrame:DreamStatusDetailFrame?
@@ -26,6 +26,8 @@ class DreamStatusDetailView: UIView {
     override init(){
         super.init()
         
+        self.image = UIImage.resizeImage("timeline_card_top_background")
+        self.highlightedImage = UIImage.resizeImage("timeline_card_top_background_highlighted")
         
         setupOriginalView()
         setupRetweetView()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DreamStatusRetweetView: UIView {
+class DreamStatusRetweetView: UIImageView {
 
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -26,6 +26,11 @@ class DreamStatusRetweetView: UIView {
     
     override init(){
         super.init()
+        
+        self.image = UIImage.resizeImage("timeline_retweet_background")
+        self.highlightedImage = UIImage.resizeImage("timeline_retweet_background_highlighted")
+        
+        
         
         let font = DreamFont()
         
@@ -64,13 +69,17 @@ class DreamStatusRetweetView: UIView {
 
         self.reweetFrame = reweetFrame
         self.nameLabel?.frame = reweetFrame.nameFrame
-        self.nameLabel?.text = user.name
+        self.nameLabel?.text = "@\(user.name)"
+        self.nameLabel?.textColor = UIColor(red: 74/255, green: 102/255, blue: 105/255, alpha: 1)
         
         self.textLabel?.frame = reweetFrame.textFrame
         self.textLabel?.text = status.text
 
     }
-    
+
+//    override func drawRect(rect: CGRect) {
+//        UIImage.resizeImage("timeline_retweet_background").drawInRect(rect)
+//    }
     
 
     
