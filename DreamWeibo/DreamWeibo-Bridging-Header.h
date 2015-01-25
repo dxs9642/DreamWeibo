@@ -11,3 +11,9 @@
 #import "DreamStatus.h"
 #import "DreamPhoto.h"
 #import "DreamUnreadCountResult.h"
+#import "DreamStatusFrame.h"
+#import "DreamStatusDetailFrame.h"
+#import "DreamStatusOriginalFrame.h"
+#import "DreamStatusRetweetedFrame.h"
+
+

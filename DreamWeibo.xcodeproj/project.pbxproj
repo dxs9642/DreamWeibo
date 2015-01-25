@@ -12,6 +12,7 @@
 		D20BA51A1A68FF6400EFBE4A /* DreamSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA5191A68FF6400EFBE4A /* DreamSearchBar.swift */; };
 		D20BA51C1A690F0200EFBE4A /* DreamTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA51B1A690F0200EFBE4A /* DreamTitleButton.swift */; };
 		D20BA51E1A69334A00EFBE4A /* DreamPopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA51D1A69334A00EFBE4A /* DreamPopMenu.swift */; };
+		D21544C21A74E58800AB19F3 /* DreamFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21544C11A74E58800AB19F3 /* DreamFont.swift */; };
 		D2154BC11A67A8440043CD8A /* WeiboTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC01A67A8440043CD8A /* WeiboTabBarViewController.swift */; };
 		D2154BC31A67C4260043CD8A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC21A67C4260043CD8A /* HomeViewController.swift */; };
 		D2154BC51A67C43C0043CD8A /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC41A67C43C0043CD8A /* MessageViewController.swift */; };
@@ -103,6 +104,7 @@
 		D20BA5191A68FF6400EFBE4A /* DreamSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamSearchBar.swift; sourceTree = "<group>"; };
 		D20BA51B1A690F0200EFBE4A /* DreamTitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTitleButton.swift; sourceTree = "<group>"; };
 		D20BA51D1A69334A00EFBE4A /* DreamPopMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamPopMenu.swift; sourceTree = "<group>"; };
+		D21544C11A74E58800AB19F3 /* DreamFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamFont.swift; sourceTree = "<group>"; };
 		D2154BC01A67A8440043CD8A /* WeiboTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiboTabBarViewController.swift; sourceTree = "<group>"; };
 		D2154BC21A67C4260043CD8A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D2154BC41A67C43C0043CD8A /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				D2FE759B1A6B9DA200A13FFF /* DreamStatus.m */,
 				D2FE759C1A6B9DA200A13FFF /* DreamPhoto.h */,
 				D2FE759D1A6B9DA200A13FFF /* DreamPhoto.m */,
+				D21544C11A74E58800AB19F3 /* DreamFont.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -907,6 +910,7 @@
 				D2154BC11A67A8440043CD8A /* WeiboTabBarViewController.swift in Sources */,
 				D23130071A673E8900B83A3A /* AppDelegate.swift in Sources */,
 				D2FE758E1A6B981300A13FFF /* MJConst.m in Sources */,
+				D21544C21A74E58800AB19F3 /* DreamFont.swift in Sources */,
 				D23CCC781A6DFF4F0044003B /* DreamUnreadCountResult.m in Sources */,
 				D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */,
 				D2E5FB191A6E5CCD004812D3 /* DreamStatusCell.swift in Sources */,
@@ -1032,6 +1036,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DreamWeibo/Dream-Prefix.pch";
 				INFOPLIST_FILE = DreamWeibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1045,6 +1051,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DreamWeibo/Dream-Prefix.pch";
 				INFOPLIST_FILE = DreamWeibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

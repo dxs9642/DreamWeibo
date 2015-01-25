@@ -20,20 +20,26 @@ class DreamStatusRetweetView: UIView {
     
     
     var nameLabel:UILabel?
-    var contentLabel:UILabel?
-
+    var textLabel:UILabel?
+    var reweetFrame:DreamStatusRetweetedFrame?
+    
+    
     override init(){
         super.init()
         
-        nameLabel = UILabel()
+        let font = DreamFont()
         
+        nameLabel = UILabel()
+        nameLabel?.font = font.DreamStatusRetweetedNameFont
         
         
         self.addSubview(nameLabel!)
         
         
-        contentLabel = UILabel()
-        self.addSubview(contentLabel!)
+        textLabel = UILabel()
+        textLabel?.font = font.DreamStatusRetweetedTextFont
+        textLabel?.numberOfLines = 0
+        self.addSubview(textLabel!)
         
         
         
@@ -47,6 +53,26 @@ class DreamStatusRetweetView: UIView {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupReweetFrame(reweetFrame:DreamStatusRetweetedFrame){
+        self.reweetFrame = reweetFrame
+        
+        self.frame = reweetFrame.frame
+        
+        let status = reweetFrame.retweetedStatus
+        let user = status.user
+
+        self.reweetFrame = reweetFrame
+        self.nameLabel?.frame = reweetFrame.nameFrame
+        self.nameLabel?.text = user.name
+        
+        self.textLabel?.frame = reweetFrame.textFrame
+        self.textLabel?.text = status.text
+
+    }
+    
+    
+
     
     
 }

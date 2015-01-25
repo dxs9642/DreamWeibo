@@ -1,4 +1,4 @@
-//
+ //
 //  DreamStatusCell.swift
 //  DreamWeibo
 //
@@ -10,6 +10,8 @@ import UIKit
 
 class DreamStatusCell: UITableViewCell {
 
+    
+    var statusFrame:DreamStatusFrame?
     
     
     var detailView:DreamStatusDetailView?
@@ -30,6 +32,7 @@ class DreamStatusCell: UITableViewCell {
         
         setupStatusDetailView()
         setupToolBar()
+        
 
     }
 
@@ -48,16 +51,30 @@ class DreamStatusCell: UITableViewCell {
         
     }
     
+    func setupStatusFrame(statusFrame:DreamStatusFrame){
+        
+        self.statusFrame = statusFrame
+        self.detailView?.setupDetailFrame(statusFrame.detailFrame)
+        self.toolbar?.frame = statusFrame.toolbarFrame
+        
+        
+    }
+    
     func setupToolBar(){
         
         var toolbar = DreamStatusToolBar()
         self.toolbar = toolbar
-        
-        
-        
-        
-        
+
         self.contentView.addSubview(toolbar)
+        
+    }
+    
+    class func cellWithTableView(tabelView:UITableView) -> DreamStatusCell?{
+        let ID = "status"
+
+        let cell = DreamStatusCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
+        
+        return cell as DreamStatusCell
         
     }
     

@@ -11,7 +11,7 @@ import UIKit
 class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     var titleButton:UIButton?
-    var statuses:NSMutableArray = NSMutableArray()
+    var statusFrame:NSMutableArray = NSMutableArray()
     var footer:DreamLoadMoreFooter?
     
     
@@ -101,7 +101,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
         
-        var firstStatus = self.statuses.firstObject as DreamStatus?
+        let firstStatusFrame = self.statusFrame.firstObject as DreamStatusFrame?
+        let firstStatus = firstStatusFrame?.status
         
         if firstStatus != nil {
             params["since_id"] = firstStatus!.idstr
@@ -115,11 +116,11 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             
             
             let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
+            let newFrames = self.statusesFramesWithStatuses(newStatus)
             
-            
-            if newStatus.count != 0 {
+            if newFrames.count != 0 {
                 let range = NSMakeRange(0, newStatus.count)
-                self.statuses.insertObjects(newStatus, atIndexes:NSIndexSet(indexesInRange:range))
+                self.statusFrame.insertObjects(newFrames, atIndexes:NSIndexSet(indexesInRange:range))
                 self.tableView.reloadData()
             }
             if self.tabBarItem.badgeValue != nil{
@@ -138,6 +139,17 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
     }
     
+    func statusesFramesWithStatuses(statuses:NSArray) -> NSArray{
+        var frames =  NSMutableArray()
+        for statuss in statuses {
+            let status = statuss as DreamStatus
+            var frame = DreamStatusFrame()
+            frame.status = status
+            frames.addObject(frame)
+        }
+        return frames
+    }
+    
     
     func loadMoreStatus(){
         let account = Account.getAccount()
@@ -149,7 +161,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
         
-        var lastStatus = self.statuses.lastObject as DreamStatus?
+        let lastStatusFrame = self.statusFrame.lastObject as DreamStatusFrame?
+        let lastStatus = lastStatusFrame?.status
         
         if lastStatus != nil {
             params["max_id"] = lastStatus!.idstr.toInt()! - 1
@@ -163,14 +176,17 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             let statusDictArray = result["statuses"] as NSArray
             
             
+
+            
             let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
+            let newFrames = self.statusesFramesWithStatuses(newStatus)
             
             
-            if newStatus.count != 0 {
-                self.statuses.addObjectsFromArray(newStatus)
+            if newFrames.count != 0 {
+                self.statusFrame.addObjectsFromArray(newFrames)
                 self.tableView.reloadData()
             }
-            
+
             self.footer?.endRefreshing()
 
             
@@ -290,22 +306,17 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
 
-        tableView.tableFooterView?.hidden = (statuses.count==0) ? true : false
-        return self.statuses.count
+        tableView.tableFooterView?.hidden = (statusFrame.count==0) ? true : false
+        return self.statusFrame.count
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
-        if statuses.count != 0 {
-            let status = statuses[indexPath.row] as DreamStatus
-            cell.textLabel?.text = status.text
-            
-            let user = status.user
-            let imageUrlStr = user?.profile_image_url
-            cell.imageView?.setImageWithURL(NSURL(string: imageUrlStr!), placeholderImage: UIImage(named: "avatar_default_small"))
-        }
-        return cell
+        
+        let cell = DreamStatusCell.cellWithTableView(tableView)
+        cell!.setupStatusFrame(self.statusFrame[indexPath.row] as DreamStatusFrame)
+        
+        return cell!
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -328,7 +339,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        if self.statuses.count==0 || self.footer!.refreshing {
+        if self.statusFrame.count==0 || self.footer!.refreshing {
             return
         }
         
@@ -340,10 +351,11 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             self.footer?.beginRefreshing()
             self.loadMoreStatus()
         }
-        
-        
-        
-        
     }
 
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let frame = self.statusFrame[indexPath.row] as DreamStatusFrame
+        return frame.cellHeight
+    }
+    
 }

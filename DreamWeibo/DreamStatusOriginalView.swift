@@ -20,29 +20,33 @@ class DreamStatusOriginalView: UIView {
 
     var iconView:UIImageView?
     var nameLabel:UILabel?
-    var contentLabel:UILabel?
+    var textLabel:UILabel?
     var sourceLabel:UILabel?
     var timeLabel:UILabel?
+    var originalFrame:DreamStatusOriginalFrame?
     
     override init(){
         super.init()
         
-        nameLabel = UILabel()
+        let font = DreamFont()
         
+        
+        nameLabel = UILabel()
+        nameLabel?.font = font.DreamStatusOrginalNameFont
         
         
         self.addSubview(nameLabel!)
         
         
-        contentLabel = UILabel()
+        textLabel = UILabel()
+        textLabel?.font = font.DreamStatusOrginalTextFont
+        textLabel?.numberOfLines = 0
         
         
-        
-        
-        self.addSubview(contentLabel!)
+        self.addSubview(textLabel!)
         
         sourceLabel = UILabel()
-        
+        sourceLabel?.font = font.DreamStatusOrginalSourceFont
         
         
         
@@ -51,7 +55,7 @@ class DreamStatusOriginalView: UIView {
         
         
         timeLabel = UILabel()
-        
+        timeLabel?.font = font.DreamStatusOrginalTimeFont
         
         
         
@@ -60,7 +64,7 @@ class DreamStatusOriginalView: UIView {
         
         
         iconView = UIImageView()
-        
+    
         
         
         self.addSubview(iconView!)
@@ -75,5 +79,32 @@ class DreamStatusOriginalView: UIView {
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupOriginalFrame(originalFrame:DreamStatusOriginalFrame){
+        self.originalFrame = originalFrame
+
+        self.frame = originalFrame.frame
+        
+        let status = originalFrame.status
+        let user = status.user
+        
+        self.originalFrame = originalFrame
+        
+        
+        self.iconView?.frame = originalFrame.iconFrame
+        self.iconView?.setImageWithURL(NSURL(string: user.profile_image_url!), placeholderImage: UIImage(named: "avatar_default_small"))
+        
+        self.nameLabel?.frame = originalFrame.nameFrame
+        self.nameLabel?.text = user.name
+        
+        self.textLabel?.frame = originalFrame.textFrame
+        self.textLabel?.text = status.text
+        
+        self.sourceLabel?.frame = originalFrame.sourceFrame
+        self.sourceLabel?.text = status.source
+        
+        self.timeLabel?.frame = originalFrame.timeFrame
+        self.timeLabel?.text = status.created_at
     }
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class DreamStatusDetailView: UIView {
 
+    
+    var detailFrame:DreamStatusDetailFrame?
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -61,6 +63,19 @@ class DreamStatusDetailView: UIView {
         
         self.addSubview(retweetView)
         
+    }
+    
+    func setupDetailFrame(detailFrame:DreamStatusDetailFrame){
+        
+        self.detailFrame = detailFrame
+        
+        self.frame = detailFrame.frame
+        
+        self.originalView?.setupOriginalFrame(detailFrame.originalFrame)
+        if detailFrame.retweetedFrame != nil {
+            self.retweetView?.setupReweetFrame(detailFrame.retweetedFrame)
+        
+        }
     }
 
 
