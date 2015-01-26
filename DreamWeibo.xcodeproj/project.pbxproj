@@ -50,6 +50,8 @@
 		D23CCC781A6DFF4F0044003B /* DreamUnreadCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D23CCC771A6DFF4F0044003B /* DreamUnreadCountResult.m */; };
 		D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */; };
 		D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */; };
+		D29064311A76710800D6A4BC /* DreamEmotionKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29064301A76710800D6A4BC /* DreamEmotionKeyboard.swift */; };
+		D29064331A76754B00D6A4BC /* DreamEmotionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29064321A76754B00D6A4BC /* DreamEmotionListView.swift */; };
 		D29436711A69F8CE001CE8BE /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29436701A69F8CE001CE8BE /* ComposeViewController.swift */; };
 		D29436761A6A03AD001CE8BE /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29436751A6A03AD001CE8BE /* NewFeatureViewController.swift */; };
 		D2BAFE381A6CE7520081C4D5 /* DreamTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BAFE361A6CE7520081C4D5 /* DreamTextView.swift */; };
@@ -185,6 +187,8 @@
 		D26687ED1A6F14C7002AF7C0 /* Dream-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dream-Prefix.pch"; sourceTree = "<group>"; };
 		D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLoadMoreFooter.swift; sourceTree = "<group>"; };
 		D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamLoadMoreFooter.xib; sourceTree = "<group>"; };
+		D29064301A76710800D6A4BC /* DreamEmotionKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamEmotionKeyboard.swift; sourceTree = "<group>"; };
+		D29064321A76754B00D6A4BC /* DreamEmotionListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamEmotionListView.swift; sourceTree = "<group>"; };
 		D29436701A69F8CE001CE8BE /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		D29436751A6A03AD001CE8BE /* NewFeatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureViewController.swift; sourceTree = "<group>"; };
 		D2BAFE361A6CE7520081C4D5 /* DreamTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTextView.swift; sourceTree = "<group>"; };
@@ -638,6 +642,8 @@
 				D2BAFE361A6CE7520081C4D5 /* DreamTextView.swift */,
 				D2BAFE371A6CE7520081C4D5 /* DreamComposeToolbar.swift */,
 				D2BAFE3C1A6CFC3E0081C4D5 /* DreamComposePhotosView.swift */,
+				D29064301A76710800D6A4BC /* DreamEmotionKeyboard.swift */,
+				D29064321A76754B00D6A4BC /* DreamEmotionListView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -958,6 +964,7 @@
 				D2E5FB301A6E72BA004812D3 /* DreamStatusDetailFrame.m in Sources */,
 				D215450C1A761B0F00AB19F3 /* SDWebImageDownloader.m in Sources */,
 				D2FE74C81A6B3DA900A13FFF /* Account.swift in Sources */,
+				D29064331A76754B00D6A4BC /* DreamEmotionListView.swift in Sources */,
 				D2FE75931A6B981300A13FFF /* MJType.m in Sources */,
 				D2FE75BC1A6BD10600A13FFF /* AFSecurityPolicy.m in Sources */,
 				D2E5FB2D1A6E72BA004812D3 /* DreamStatusFrame.m in Sources */,
@@ -996,6 +1003,7 @@
 				D2154BC11A67A8440043CD8A /* WeiboTabBarViewController.swift in Sources */,
 				D23130071A673E8900B83A3A /* AppDelegate.swift in Sources */,
 				D2FE758E1A6B981300A13FFF /* MJConst.m in Sources */,
+				D29064311A76710800D6A4BC /* DreamEmotionKeyboard.swift in Sources */,
 				D21544DD1A761A6600AB19F3 /* MJPhotoToolbar.m in Sources */,
 				D215450A1A761B0F00AB19F3 /* SDWebImageCompat.m in Sources */,
 				D2C1B73E1A761EDE006FFD9D /* MBProgressHUD.m in Sources */,

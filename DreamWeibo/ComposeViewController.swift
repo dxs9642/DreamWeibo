@@ -13,6 +13,8 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     var textView:DreamTextView?
     var toolbar:DreamComposeToolbar?
     var photosView:DreamComposePhotosView?
+    var isChangingKeyboard = false
+    lazy var keyboard = DreamEmotionKeyboard()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +22,9 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         setupTextView()
         setupToolbar()
         setupPhotosView()
-
+        
+        keyboard.setHeight(216)
+        keyboard.setWidth(UIScreen.mainScreen().bounds.width)
         
     }
     
@@ -85,11 +89,11 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     
     func openEmotion(){
         
+        self.isChangingKeyboard = true
+        
         if self.textView?.inputView == nil {
-            var keyboard = UIView()
-            keyboard.bounds = CGRectMake(0, 0, 375, 216)
-            keyboard.backgroundColor = UIColor.blueColor()
-            self.textView?.inputView = keyboard
+
+            self.textView?.inputView = self.keyboard
             self.toolbar?.setEmotionButton(false)
         }else{
             self.textView?.inputView = nil
@@ -164,6 +168,9 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: "UIKeyboardWillHideNotification", object: nil)
     }
     
+    
+    
+    
     func keyBoardWillShow(note:NSNotification){
 
         
@@ -184,6 +191,11 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     }
     
     func keyboardWillHide(note:NSNotification){
+        
+        if isChangingKeyboard {
+            self.isChangingKeyboard = false
+            return
+        }
         
         let dic = note.userInfo!
         

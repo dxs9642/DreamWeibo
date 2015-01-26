@@ -69,6 +69,8 @@ class DreamComposeToolbar: UIView {
     }
     
     
+    
+    
     let type = DreamComposeToolbarButtonType()
 
     var delegate:DreamComposeToolbarButtonProtocol?
@@ -89,6 +91,8 @@ class DreamComposeToolbar: UIView {
         }
         
     }
+    
+
 
     
     func addButtonWithIcon(icon:String,highIcon:NSString,tag:Int) -> UIButton{
