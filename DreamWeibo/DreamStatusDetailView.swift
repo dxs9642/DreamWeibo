@@ -11,7 +11,6 @@ import UIKit
 class DreamStatusDetailView: UIImageView {
 
     
-    var detailFrame:DreamStatusDetailFrame?
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -68,8 +67,6 @@ class DreamStatusDetailView: UIImageView {
     }
     
     func setupDetailFrame(detailFrame:DreamStatusDetailFrame){
-        
-        self.detailFrame = detailFrame
         
         self.frame = detailFrame.frame
         

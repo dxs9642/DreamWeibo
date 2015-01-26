@@ -24,8 +24,50 @@ struct DreamComposeToolbarButtonType {
  
 class DreamComposeToolbar: UIView {
 
+    var emotionButton:UIButton?
+    
+    var isEmotionButton = false
 
+    override init() {
+        super.init()
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "compose_toolbar_background_os7")!)
+        
+        self.addButtonWithIcon("compose_camerabutton_background_os7", highIcon: "compose_camerabutton_background_highlighted_os7", tag:type.Camera)
+        self.addButtonWithIcon("compose_toolbar_picture_os7", highIcon: "compose_toolbar_picture_highlighted_os7", tag:type.Picture)
+        self.addButtonWithIcon("compose_mentionbutton_background_os7", highIcon: "compose_mentionbutton_background_highlighted_os7", tag: type.Mention)
+        self.addButtonWithIcon("compose_trendbutton_background_os7", highIcon: "compose_trendbutton_background_highlighted_os7",tag:type.Trend)
+        self.emotionButton = self.addButtonWithIcon("compose_emoticonbutton_background_os7", highIcon: "compose_emoticonbutton_background_highlighted_os7", tag:type.Emotion)
+        
 
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+
+    
+    
+    func setEmotionButton(isEmotionButton:Bool){
+        
+        if isEmotionButton {
+            self.emotionButton!.setImage(UIImage(named: "compose_emoticonbutton_background_os7"), forState: UIControlState.Normal)
+            self.emotionButton!.setImage(UIImage(named: "compose_emoticonbutton_background_highlighted_os7"), forState: UIControlState.Highlighted)
+
+        }else{
+
+            self.emotionButton!.setImage(UIImage(named: "compose_keyboardbutton_background"), forState: UIControlState.Normal)
+            self.emotionButton!.setImage(UIImage(named: "compose_keyboardbutton_background_highlighted"), forState: UIControlState.Highlighted)
+            
+        }
+        
+        
+    }
+    
     
     let type = DreamComposeToolbarButtonType()
 
@@ -34,14 +76,6 @@ class DreamComposeToolbar: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.backgroundColor = UIColor(patternImage: UIImage(named: "compose_toolbar_background_os7")!)
-
-        self.addButtonWithIcon("compose_camerabutton_background_os7", highIcon: "compose_camerabutton_background_highlighted_os7", tag:type.Camera)
-        self.addButtonWithIcon("compose_toolbar_picture_os7", highIcon: "compose_toolbar_picture_highlighted_os7", tag:type.Picture)
-        self.addButtonWithIcon("compose_mentionbutton_background_os7", highIcon: "compose_mentionbutton_background_highlighted_os7", tag: type.Mention)
-        self.addButtonWithIcon("compose_trendbutton_background_os7", highIcon: "compose_trendbutton_background_highlighted_os7",tag:type.Trend)
-        self.addButtonWithIcon("compose_emoticonbutton_background_os7", highIcon: "compose_emoticonbutton_background_highlighted_os7", tag:type.Emotion)
-
         
         let count = 5
         
@@ -57,13 +91,14 @@ class DreamComposeToolbar: UIView {
     }
 
     
-    func addButtonWithIcon(icon:String,highIcon:NSString,tag:Int){
+    func addButtonWithIcon(icon:String,highIcon:NSString,tag:Int) -> UIButton{
         var button = UIButton()
         button.tag = tag
         button.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         button.setImage(UIImage(named: icon), forState: UIControlState.Normal)
         button.setImage(UIImage(named: highIcon), forState: UIControlState.Highlighted)
         self.addSubview(button)
+        return button
     }
     
     func buttonClick(button:UIButton){

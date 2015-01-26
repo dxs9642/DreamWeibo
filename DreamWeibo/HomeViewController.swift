@@ -315,11 +315,22 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+                
+        let ID = "status\(indexPath.row)"
         
-        let cell = DreamStatusCell.cellWithTableView(tableView)
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as DreamStatusCell?
+        
+        if cell == nil{
+            cell = DreamStatusCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
+        }
+        
         cell!.setupStatusFrame(self.statusFrame[indexPath.row] as DreamStatusFrame)
-    
+
+        
         return cell!
+        
+
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

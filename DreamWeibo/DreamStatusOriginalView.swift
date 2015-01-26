@@ -113,6 +113,7 @@ class DreamStatusOriginalView: UIImageView {
             self.vipView?.image = UIImage(named: "common_icon_membership_level\(user.mbrank)")
         }else{
             self.vipView?.hidden = true
+            self.nameLabel?.textColor = UIColor.blackColor()
         }
         
         

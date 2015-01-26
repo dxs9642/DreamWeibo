@@ -24,8 +24,6 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         
     }
     
-    
-
 
     
     func setupPhotosView(){
@@ -86,6 +84,33 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     }
     
     func openEmotion(){
+        
+        if self.textView?.inputView == nil {
+            var keyboard = UIView()
+            keyboard.bounds = CGRectMake(0, 0, 375, 216)
+            keyboard.backgroundColor = UIColor.blueColor()
+            self.textView?.inputView = keyboard
+            self.toolbar?.setEmotionButton(false)
+        }else{
+            self.textView?.inputView = nil
+            self.toolbar?.setEmotionButton(true)
+            
+        }
+        
+
+        
+        self.textView!.resignFirstResponder()
+        
+        let delayInSeconds:Int64 =  100000000  * 1
+        var time:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
+        
+        dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
+        
+            let a = self.textView!.becomeFirstResponder()
+
+        }
+        
+
         
     
     }

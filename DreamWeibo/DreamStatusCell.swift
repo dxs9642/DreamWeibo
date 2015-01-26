@@ -11,7 +11,6 @@ import UIKit
 class DreamStatusCell: UITableViewCell {
 
     
-    var statusFrame:DreamStatusFrame?
     
     
     var detailView:DreamStatusDetailView?
@@ -33,8 +32,8 @@ class DreamStatusCell: UITableViewCell {
         
         setupStatusDetailView()
         setupToolBar()
-        
         self.backgroundColor = UIColor.clearColor()
+        
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -45,16 +44,12 @@ class DreamStatusCell: UITableViewCell {
         
         var detailView = DreamStatusDetailView()
         self.detailView = detailView
-        
-        
-        
         self.contentView.addSubview(detailView)
         
     }
     
     func setupStatusFrame(statusFrame:DreamStatusFrame){
         
-        self.statusFrame = statusFrame
         self.detailView?.setupDetailFrame(statusFrame.detailFrame)
         self.toolbar?.frame = statusFrame.toolbarFrame
         self.toolbar?.setupStatus(statusFrame.status)
@@ -69,19 +64,7 @@ class DreamStatusCell: UITableViewCell {
         
     }
     
-    class func cellWithTableView(tableView:UITableView) -> DreamStatusCell?{
-        let ID = "status"
 
-        
-        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as DreamStatusCell?
-        
-        if cell == nil{
-            cell = DreamStatusCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
-        }
-        
-        return cell         
-    }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
