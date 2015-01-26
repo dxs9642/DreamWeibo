@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DreamStatusOriginalView: UIView {
+class DreamStatusOriginalView: UIImageView {
 
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -29,7 +29,7 @@ class DreamStatusOriginalView: UIView {
     
     override init(){
         super.init()
-        
+        self.userInteractionEnabled = true
         let font = DreamFont()
         
         

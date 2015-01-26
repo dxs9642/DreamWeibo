@@ -25,7 +25,7 @@ class DreamStatusDetailView: UIImageView {
     
     override init(){
         super.init()
-        
+        self.userInteractionEnabled = true
         self.image = UIImage.resizeImage("timeline_card_top_background")
         self.highlightedImage = UIImage.resizeImage("timeline_card_top_background_highlighted")
         

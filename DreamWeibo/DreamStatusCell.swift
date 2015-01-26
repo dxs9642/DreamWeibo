@@ -20,6 +20,7 @@ class DreamStatusCell: UITableViewCell {
     
     override init() {
         super.init()
+        self.userInteractionEnabled = true
     }
     
     override init(frame: CGRect) {
