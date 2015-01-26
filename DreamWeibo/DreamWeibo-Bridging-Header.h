@@ -16,5 +16,9 @@
 #import "DreamStatusOriginalFrame.h"
 #import "DreamStatusRetweetedFrame.h"
 #import "NSDate+MJ.h"
+#import "MJPhotoBrowser.h"
+#import "UIImageView+MJWebCache.h"
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
 
 

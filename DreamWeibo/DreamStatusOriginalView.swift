@@ -102,7 +102,7 @@ class DreamStatusOriginalView: UIImageView {
         
         
         self.iconView?.frame = originalFrame.iconFrame
-        self.iconView?.setImageWithURL(NSURL(string: user.profile_image_url!), placeholderImage: UIImage(named: "avatar_default_small"))
+        self.iconView?.sd_setImageWithURL(NSURL(string: user.profile_image_url!), placeholderImage: UIImage(named: "avatar_default_small"))
         
         self.nameLabel?.frame = originalFrame.nameFrame
         self.nameLabel?.text = user.name

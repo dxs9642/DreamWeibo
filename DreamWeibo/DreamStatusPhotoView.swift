@@ -46,7 +46,8 @@ class DreamStatusPhotoView: UIImageView {
     
     func setupPhoto(photo:DreamPhoto){
         self.photo = photo
-        self.setImageWithURL(NSURL(string: photo.thumbnail_pic), placeholderImage: UIImage(named: "timeline_image_placeholder"))
+        
+        self.sd_setImageWithURL(NSURL(string: photo.thumbnail_pic), placeholderImage: UIImage(named: "timeline_image_placeholder"))
         if photo.thumbnail_pic.pathExtension.lowercaseString == "gif" {
             self.gifView?.hidden = false
         }else{

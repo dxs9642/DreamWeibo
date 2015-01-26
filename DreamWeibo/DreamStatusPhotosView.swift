@@ -11,9 +11,7 @@ import UIKit
 class DreamStatusPhotosView: UIView {
 
     var pic_urls:NSArray?
-    var imageView:UIImageView?
-    var lastFrame = CGRect()
-    
+
     override init() {
         super.init()
     }
@@ -26,6 +24,7 @@ class DreamStatusPhotosView: UIView {
             var recognizer = UITapGestureRecognizer()
             recognizer.addTarget(self, action: "tapPhoto:")
             self.addSubview(photoView)
+            photoView.tag = i
             photoView.addGestureRecognizer(recognizer)
         }
     }
@@ -33,54 +32,35 @@ class DreamStatusPhotosView: UIView {
     
     func tapPhoto(recognizer:UITapGestureRecognizer){
 
-        var cover = UIView()
-        cover.frame = UIScreen.mainScreen().bounds
-        cover.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
-        UIApplication.sharedApplication().keyWindow?.addSubview(cover)
+        var browser = MJPhotoBrowser()
         
-        var imageView = UIImageView()
-        self.imageView = imageView
-        var photoView = recognizer.view as DreamStatusPhotoView
+        var photos = NSMutableArray()
         
-        let imageStr = photoView.photo?.bmiddle_pic
-        imageView.setImageWithURL(NSURL(string: imageStr!))
-        imageView.frame = self.convertRect(photoView.frame, toView: cover)
-        lastFrame = imageView.frame
-        cover.addSubview(imageView)
-        UIView.animateWithDuration(1.0, animations: { () -> Void in
-            imageView.setWidth(cover.width())
-            imageView.setHeight(photoView.image!.size.height * imageView.width() / photoView.image!.size.width)
-            imageView.center = cover.center
-            
-        })
-        var recognizer = UITapGestureRecognizer()
-        recognizer.addTarget(self, action: "tapCover:")
-        cover.addGestureRecognizer(recognizer)
-    }
-
-  
-    func tapCover(recognizer:UITapGestureRecognizer){
+        let count = self.pic_urls!.count
         
-        
-        UIView.animateWithDuration(1.0, animations: { () -> Void in
+        for var i=0;i<count;i++ {
             
-
+            var pic = pic_urls![i] as DreamPhoto
+            var photo = MJPhoto()
+            photo.url = NSURL(string: pic.bmiddle_pic)
+            photo.srcImageView = self.subviews[i] as UIImageView
             
-        })
-        
-        UIView.animateWithDuration(1.0, animations: { () -> Void in
-            
-            self.imageView!.frame = self.lastFrame
-            recognizer.view?.backgroundColor = UIColor.clearColor()
-            
-            }) { (finished:Bool) -> Void in
-                
-            recognizer.view!.removeFromSuperview()
-            self.imageView = nil
+            photos.addObject(photo)
         }
         
         
+        browser.photos = photos
+        
+        
+        browser.currentPhotoIndex = UInt(recognizer.view!.tag)
+        
+        browser.show()
+        
+        
     }
+
+  
+
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
