@@ -22,18 +22,22 @@
 - (NSString *)created_at
 {
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    fmt.dateFormat = @"EEE MMM dd HH:mm:ss Z yyyy";
+    
+    [fmt setDateFormat:@"EEE MMM dd HH:mm:ss z yyyy"];
+    [fmt setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+
     // 获得微博发布的具体时间
     NSDate *createDate = [fmt dateFromString:_created_at];
+    
     
     // 判断是否为今年
     if (createDate.isThisYear) {
         if (createDate.isToday) { // 今天
             NSDateComponents *cmps = [createDate deltaWithNow];
             if (cmps.hour >= 1) { // 至少是1小时前发的
-                return [NSString stringWithFormat:@"%d小时前", cmps.hour];
+                return [NSString stringWithFormat:@"%ld小时前", (long)cmps.hour];
             } else if (cmps.minute >= 1) { // 1~59分钟之前发的
-                return [NSString stringWithFormat:@"%d分钟前", cmps.minute];
+                return [NSString stringWithFormat:@"%ld分钟前", (long)cmps.minute];
             } else { // 1分钟内发的
                 return @"刚刚";
             }
@@ -58,6 +62,9 @@
     range.location = [source rangeOfString:@">"].location + 1;
     range.length = [source rangeOfString:@"</"].location - range.location;
     // 开始截取
+    if ([source isEqual:@""]) {
+        return;
+    }
     
     NSString *subsource = [source substringWithRange:range];
     

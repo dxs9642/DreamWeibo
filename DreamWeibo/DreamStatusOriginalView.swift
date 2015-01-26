@@ -119,7 +119,6 @@ class DreamStatusOriginalView: UIImageView {
         self.textLabel?.frame = originalFrame.textFrame
         self.textLabel?.text = status.text
         
-        
         let time = status.created_at as NSString
         let timeX = CGRectGetMinX(self.nameLabel!.frame)
         let timeY = CGRectGetMaxY(self.nameLabel!.frame) + 5

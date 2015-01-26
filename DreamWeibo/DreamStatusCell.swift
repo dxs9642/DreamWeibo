@@ -69,13 +69,17 @@ class DreamStatusCell: UITableViewCell {
         
     }
     
-    class func cellWithTableView(tabelView:UITableView) -> DreamStatusCell?{
+    class func cellWithTableView(tableView:UITableView) -> DreamStatusCell?{
         let ID = "status"
 
-        let cell = DreamStatusCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
         
-        return cell as DreamStatusCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as DreamStatusCell?
         
+        if cell == nil{
+            cell = DreamStatusCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
+        }
+        
+        return cell         
     }
     
     

@@ -71,6 +71,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     }
     
     
+    
     func openCamera(){
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)==false{
@@ -86,6 +87,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     
     func openEmotion(){
         
+    
     }
     
     func openPicture(){

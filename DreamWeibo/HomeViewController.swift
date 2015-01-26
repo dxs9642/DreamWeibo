@@ -318,7 +318,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         let cell = DreamStatusCell.cellWithTableView(tableView)
         cell!.setupStatusFrame(self.statusFrame[indexPath.row] as DreamStatusFrame)
-        
+    
         return cell!
     }
 
