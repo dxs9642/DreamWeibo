@@ -21,6 +21,7 @@ class DreamStatusRetweetView: UIImageView {
     
     var nameLabel:UILabel?
     var textLabel:UILabel?
+    var photosView:DreamStatusPhotosView?
     var reweetFrame:DreamStatusRetweetedFrame?
     
     
@@ -46,7 +47,9 @@ class DreamStatusRetweetView: UIImageView {
         textLabel?.numberOfLines = 0
         self.addSubview(textLabel!)
         
+        photosView = DreamStatusPhotosView()
         
+        self.addSubview(photosView!)
         
         
     }
@@ -75,6 +78,14 @@ class DreamStatusRetweetView: UIImageView {
         self.textLabel?.frame = reweetFrame.textFrame
         self.textLabel?.text = status.text
 
+        if status.pic_urls!.count == 0 {
+            self.photosView?.hidden = true
+        }else{
+            self.photosView?.hidden = false
+            self.photosView?.frame = reweetFrame.photosFrame
+            self.photosView?.setupPic_urls(status.pic_urls)
+        }
+        
     }
 
 //    override func drawRect(rect: CGRect) {

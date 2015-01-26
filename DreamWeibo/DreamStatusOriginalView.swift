@@ -24,6 +24,7 @@ class DreamStatusOriginalView: UIView {
     var sourceLabel:UILabel?
     var timeLabel:UILabel?
     var vipView:UIImageView?
+    var photosView:DreamStatusPhotosView?
     var originalFrame:DreamStatusOriginalFrame?
     
     override init(){
@@ -73,6 +74,10 @@ class DreamStatusOriginalView: UIView {
         vipView = UIImageView()
         vipView?.contentMode = UIViewContentMode.Center
         self.addSubview(vipView!)
+        
+        photosView = DreamStatusPhotosView()
+        
+        self.addSubview(photosView!)
         
         
     }
@@ -132,6 +137,14 @@ class DreamStatusOriginalView: UIView {
         let sourceSize = source.sizeWithAttributes(dic)
         self.sourceLabel?.frame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height)
         self.sourceLabel?.text = source
+        
+        if status.pic_urls!.count == 0 {
+            self.photosView?.hidden = true
+        }else{
+            self.photosView?.hidden = false
+            self.photosView?.frame = originalFrame.photosFrame
+            self.photosView?.setupPic_urls(status.pic_urls)
+        }
         
     }
 }

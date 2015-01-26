@@ -14,6 +14,8 @@
 		D20BA51E1A69334A00EFBE4A /* DreamPopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA51D1A69334A00EFBE4A /* DreamPopMenu.swift */; };
 		D21544C21A74E58800AB19F3 /* DreamFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21544C11A74E58800AB19F3 /* DreamFont.swift */; };
 		D21544C51A75173E00AB19F3 /* NSDate+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = D21544C41A75173E00AB19F3 /* NSDate+MJ.m */; };
+		D21544C71A75BFF400AB19F3 /* DreamStatusPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21544C61A75BFF400AB19F3 /* DreamStatusPhotosView.swift */; };
+		D21544C91A75C01F00AB19F3 /* DreamStatusPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21544C81A75C01F00AB19F3 /* DreamStatusPhotoView.swift */; };
 		D2154BC11A67A8440043CD8A /* WeiboTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC01A67A8440043CD8A /* WeiboTabBarViewController.swift */; };
 		D2154BC31A67C4260043CD8A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC21A67C4260043CD8A /* HomeViewController.swift */; };
 		D2154BC51A67C43C0043CD8A /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC41A67C43C0043CD8A /* MessageViewController.swift */; };
@@ -108,6 +110,8 @@
 		D21544C11A74E58800AB19F3 /* DreamFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamFont.swift; sourceTree = "<group>"; };
 		D21544C31A75173E00AB19F3 /* NSDate+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MJ.h"; sourceTree = "<group>"; };
 		D21544C41A75173E00AB19F3 /* NSDate+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MJ.m"; sourceTree = "<group>"; };
+		D21544C61A75BFF400AB19F3 /* DreamStatusPhotosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamStatusPhotosView.swift; sourceTree = "<group>"; };
+		D21544C81A75C01F00AB19F3 /* DreamStatusPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamStatusPhotoView.swift; sourceTree = "<group>"; };
 		D2154BC01A67A8440043CD8A /* WeiboTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiboTabBarViewController.swift; sourceTree = "<group>"; };
 		D2154BC21A67C4260043CD8A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D2154BC41A67C43C0043CD8A /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 				D2E5FB1C1A6E664A004812D3 /* DreamStatusDetailView.swift */,
 				D2E5FB1E1A6E66C0004812D3 /* DreamStatusOriginalView.swift */,
 				D2E5FB201A6E6702004812D3 /* DreamStatusRetweetView.swift */,
+				D21544C61A75BFF400AB19F3 /* DreamStatusPhotosView.swift */,
+				D21544C81A75C01F00AB19F3 /* DreamStatusPhotoView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -882,11 +888,13 @@
 				D2E5FB2D1A6E72BA004812D3 /* DreamStatusFrame.m in Sources */,
 				D20BA51C1A690F0200EFBE4A /* DreamTitleButton.swift in Sources */,
 				D2FE75BB1A6BD10600A13FFF /* AFNetworkReachabilityManager.m in Sources */,
+				D21544C71A75BFF400AB19F3 /* DreamStatusPhotosView.swift in Sources */,
 				D2FE75511A6B8C1400A13FFF /* UIImage+WebP.m in Sources */,
 				D2FE75491A6B8C1400A13FFF /* SDWebImageDecoder.m in Sources */,
 				D2FE75501A6B8C1400A13FFF /* UIImage+MultiFormat.m in Sources */,
 				D2FE75471A6B8C1400A13FFF /* SDImageCache.m in Sources */,
 				D20BA51E1A69334A00EFBE4A /* DreamPopMenu.swift in Sources */,
+				D21544C91A75C01F00AB19F3 /* DreamStatusPhotoView.swift in Sources */,
 				D2E5FB1F1A6E66C0004812D3 /* DreamStatusOriginalView.swift in Sources */,
 				D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */,
 				D2FE75481A6B8C1400A13FFF /* SDWebImageCompat.m in Sources */,

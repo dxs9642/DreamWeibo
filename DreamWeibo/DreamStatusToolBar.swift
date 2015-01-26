@@ -41,8 +41,7 @@ class DreamStatusToolBar: UIImageView {
     
     
     func setupStatus(status:DreamStatus){
-        
-        
+
         var repostTitleCount = ""
         let reposts_count = Int(status.reposts_count)
         if reposts_count>10000 {
