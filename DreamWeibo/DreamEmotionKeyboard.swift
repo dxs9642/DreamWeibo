@@ -27,7 +27,6 @@ class DreamEmotionKeyboard: UIView {
         self.addSubview(listView!)
         
         toolbar = UIView()
-        toolbar?.backgroundColor = UIColor.purpleColor()
         self.addSubview(toolbar!)
         
         setupToolbarButton("最近", tag: 1)
