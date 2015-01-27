@@ -19,7 +19,7 @@ class DreamEmotionPopView: UIView {
     }
     
     
-    func showFromeEmotionView(buttonEmotionView:DreamEmotionView){
+    func showFromEmotionView(buttonEmotionView:DreamEmotionView){
         
         self.emotionView.setEmotion(buttonEmotionView.emotion!)
         
@@ -30,6 +30,18 @@ class DreamEmotionPopView: UIView {
         let center = CGPointMake(buttonEmotionView.center.x, buttonEmotionView.center.y - self.height() * 0.3)
         
         self.center = window!.convertPoint(center, fromView: buttonEmotionView.superview)
+        
+    }
+    
+    func showFormTouchPlace(buttonEmotionView:DreamEmotionView,point:CGPoint){
+        self.emotionView.setEmotion(buttonEmotionView.emotion!)
+        var window: AnyObject? = (UIApplication.sharedApplication().windows as NSArray).lastObject
+        window?.addSubview(self)
+        
+        let center = CGPointMake(point.x, point.y-35)
+        
+        self.center = window!.convertPoint(center, fromView: buttonEmotionView.superview)
+        
         
     }
     

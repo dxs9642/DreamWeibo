@@ -14,6 +14,7 @@ class DreamEmotionGridView: UIView {
     var deleteButton:DreamEmotionView?
     var emotionViews:NSMutableArray?
     var popView = DreamEmotionPopView.popView()
+    var movedEmotionView:DreamEmotionView?
     
     override init() {
         super.init()
@@ -57,11 +58,19 @@ class DreamEmotionGridView: UIView {
                     self.popView.dismiss()
                     if emotionView != nil {
                         finshSelectEmotion(emotionView!.emotion!)
+                    }else{
+                        finshSelectEmotion(movedEmotionView!.emotion!)
                     }
                 }else{
                     if emotionView != nil {
 
-                        self.popView.showFromeEmotionView(emotionView!)
+                        self.popView.showFromEmotionView(emotionView!)
+                    }else{
+                        
+                        
+                        if movedEmotionView != nil {
+                            self.popView.showFormTouchPlace(movedEmotionView!,point: point)
+                        }
                     }
                 }
     }
@@ -76,6 +85,7 @@ class DreamEmotionGridView: UIView {
             let emotionView = obj as DreamEmotionView
             if CGRectContainsPoint(emotionView.frame, point) {
                 resultEmotionView = emotionView
+                self.movedEmotionView = emotionView
             }
             
         })
@@ -122,7 +132,7 @@ class DreamEmotionGridView: UIView {
     
     func emotionClick(emotionView:DreamEmotionView){
         
-        popView.showFromeEmotionView(emotionView)
+        popView.showFromEmotionView(emotionView)
         
 
         
