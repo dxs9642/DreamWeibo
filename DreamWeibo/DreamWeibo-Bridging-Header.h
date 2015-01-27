@@ -1,6 +1,7 @@
 //
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
+#import "NSString+Emoji.h"
 #import "MBProgressHUD+MJ.h"
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
@@ -20,5 +21,7 @@
 #import "UIImageView+MJWebCache.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
+#import "DreamEmotion.h"
+
 
 
