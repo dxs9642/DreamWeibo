@@ -11,8 +11,9 @@ import UIKit
 class DreamEmotionGridView: UIView {
 
     var emotions:NSArray?
-    var deleteButton:UIButton?
+    var deleteButton:DreamEmotionView?
     var emotionViews:NSMutableArray?
+    var popView = DreamEmotionPopView.popView()
     
     override init() {
         super.init()
@@ -22,7 +23,7 @@ class DreamEmotionGridView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        deleteButton = UIButton()
+        deleteButton = DreamEmotionView()
         deleteButton?.setImage(UIImage(named: "compose_emotion_delete"), forState: UIControlState.Normal)
         deleteButton?.setImage(UIImage(named: "compose_emotion_delete_highlighted"), forState: UIControlState.Highlighted)
         self.addSubview(deleteButton!)
@@ -43,33 +44,37 @@ class DreamEmotionGridView: UIView {
         let currentButtonNum = self.subviews.count - 1
         
         for var i=0;i<count;i++ {
-            var emotionView:UIButton!
+            var emotionView:DreamEmotionView!
             if i>currentButtonNum-1 {
-                emotionView = UIButton()
+                emotionView = DreamEmotionView()
                 self.addSubview(emotionView)
                 emotionViews?.addObject(emotionView)
+                emotionView.addTarget(self, action: "emotionClick:", forControlEvents: UIControlEvents.TouchUpInside)
+                emotionView.hidden = false
+
             }else{
-                emotionView = emotionViews![i] as? UIButton
+                emotionView = emotionViews![i] as? DreamEmotionView
             }
-            emotionView.hidden = false
             emotionView.adjustsImageWhenHighlighted = false
             let emotion = emotions[i] as DreamEmotion
-            if emotion.code == nil {
-                let icon = "\(emotion.directory)\(emotion.png)"
-                emotionView.setImage(UIImage(named:icon), forState: UIControlState.Normal)
-                emotionView.setTitle(nil, forState: UIControlState.Normal)
-            }else{
-                emotionView.setImage(nil, forState: UIControlState.Normal)
-                emotionView.setTitle(emotion.emoji, forState: UIControlState.Normal)
-                emotionView.titleLabel?.font = UIFont.systemFontOfSize(32)
-            }
+            emotionView.setEmotion(emotion)
             
         }
         
         for var i=count;i<currentButtonNum;i++ {
-            (emotionViews![i] as? UIButton)?.hidden = true
+            (emotionViews![i] as? DreamEmotionView)?.hidden = true
         }
+    }
+    
+    func emotionClick(emotionView:DreamEmotionView){
         
+        popView.showFromeEmotionView(emotionView)
+        
+
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.25 * Float(NSEC_PER_SEC) )) , dispatch_get_main_queue()) { () -> Void in
+            self.popView.dismiss()
+        }
         
     }
     
@@ -86,7 +91,7 @@ class DreamEmotionGridView: UIView {
         let emotionViewH = ( self.height() - CGFloat(Float(topInset)) ) / CGFloat(Float(properties.maxRows))
         
         for var i=0;i<count;i++ {
-            let button = emotionViews![i] as UIButton
+            let button = emotionViews![i] as DreamEmotionView
             let x = leftInset + CGFloat(Float(i % properties.maxCols)) * emotionViewW
             let y = topInset + CGFloat(Float(i / properties.maxCols)) * emotionViewH
             button.frame = CGRectMake(x, y, emotionViewW, emotionViewH)

@@ -11,7 +11,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "emoticon_keyboard_magnifier@3x.png"
     }
   ],
   "info" : {

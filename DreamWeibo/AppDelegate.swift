@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        
+
         return true
         
     }

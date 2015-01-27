@@ -51,6 +51,8 @@
 		D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */; };
 		D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */; };
 		D2881AF61A778A460001DB8B /* DreamEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881AF51A778A460001DB8B /* DreamEmotionView.swift */; };
+		D2881AF81A7794EC0001DB8B /* DreamEmotionPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881AF71A7794EC0001DB8B /* DreamEmotionPopView.swift */; };
+		D2881AFA1A7795280001DB8B /* DreamEmotionPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2881AF91A7795280001DB8B /* DreamEmotionPopView.xib */; };
 		D28E38451A77237E000F8AB9 /* EmotionIcons in Resources */ = {isa = PBXBuildFile; fileRef = D28E38441A77237E000F8AB9 /* EmotionIcons */; };
 		D28E38471A773540000F8AB9 /* DreamEmotionGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E38461A773540000F8AB9 /* DreamEmotionGridView.swift */; };
 		D28E384A1A7740A8000F8AB9 /* NSString+Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = D28E38491A7740A8000F8AB9 /* NSString+Emoji.m */; };
@@ -194,6 +196,8 @@
 		D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLoadMoreFooter.swift; sourceTree = "<group>"; };
 		D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamLoadMoreFooter.xib; sourceTree = "<group>"; };
 		D2881AF51A778A460001DB8B /* DreamEmotionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamEmotionView.swift; sourceTree = "<group>"; };
+		D2881AF71A7794EC0001DB8B /* DreamEmotionPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamEmotionPopView.swift; sourceTree = "<group>"; };
+		D2881AF91A7795280001DB8B /* DreamEmotionPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamEmotionPopView.xib; sourceTree = "<group>"; };
 		D28E38441A77237E000F8AB9 /* EmotionIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EmotionIcons; sourceTree = "<group>"; };
 		D28E38461A773540000F8AB9 /* DreamEmotionGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamEmotionGridView.swift; sourceTree = "<group>"; };
 		D28E38481A7740A8000F8AB9 /* NSString+Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Emoji.h"; sourceTree = "<group>"; };
@@ -662,6 +666,8 @@
 				D2A0B1EE1A7704F300041E22 /* DreamEmotionToolbar.swift */,
 				D28E38461A773540000F8AB9 /* DreamEmotionGridView.swift */,
 				D2881AF51A778A460001DB8B /* DreamEmotionView.swift */,
+				D2881AF71A7794EC0001DB8B /* DreamEmotionPopView.swift */,
+				D2881AF91A7795280001DB8B /* DreamEmotionPopView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -948,6 +954,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2881AFA1A7795280001DB8B /* DreamEmotionPopView.xib in Resources */,
 				D2BAFE3B1A6CE9660081C4D5 /* LaunchScreen.xib in Resources */,
 				D231300E1A673E8900B83A3A /* Images.xcassets in Resources */,
 				D2C1B7401A761EDE006FFD9D /* MBProgressHUD.bundle in Resources */,
@@ -1021,6 +1028,7 @@
 				D2154BC91A67C4840043CD8A /* DiscoverViewController.swift in Sources */,
 				D2FE75901A6B981300A13FFF /* MJIvar.m in Sources */,
 				D2FE74C61A6B36A800A13FFF /* AppInfo.swift in Sources */,
+				D2881AF81A7794EC0001DB8B /* DreamEmotionPopView.swift in Sources */,
 				D2BAFE381A6CE7520081C4D5 /* DreamTextView.swift in Sources */,
 				D2FE759F1A6B9DA200A13FFF /* DreamStatus.m in Sources */,
 				D2DF93141A6D49AA00C024BC /* DreamHttpTool.swift in Sources */,

@@ -103,7 +103,7 @@ class DreamPopMenu: UIView {
     }
     
     func showInRect(rect:CGRect){
-        var window = UIApplication.sharedApplication().keyWindow
+        var window: AnyObject? = (UIApplication.sharedApplication().windows as NSArray).lastObject
         self.frame = window!.bounds
         window?.addSubview(self)
         
