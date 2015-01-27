@@ -26,15 +26,69 @@ class DreamEmotionGridView: UIView {
         deleteButton = DreamEmotionView()
         deleteButton?.setImage(UIImage(named: "compose_emotion_delete"), forState: UIControlState.Normal)
         deleteButton?.setImage(UIImage(named: "compose_emotion_delete_highlighted"), forState: UIControlState.Highlighted)
+        deleteButton?.addTarget(self, action: "deleteClick", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(deleteButton!)
         emotionViews = NSMutableArray()
 
+        var recognizer = UILongPressGestureRecognizer()
+        recognizer.addTarget(self, action: "longPress:")
+        self.addGestureRecognizer(recognizer)
     }
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    func deleteClick(){
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("DreamEmotionDidDeletedNotification", object: nil)
+
+
+    }
+    
+    func longPress(recogniser:UILongPressGestureRecognizer){
+    
+        let point = recogniser.locationInView(recogniser.view)
+
+        let emotionView = emotionViewWithPoint(point)
+        
+                if recogniser.state == UIGestureRecognizerState.Ended {
+                    self.popView.dismiss()
+                    if emotionView != nil {
+                        finshSelectEmotion(emotionView!.emotion!)
+                    }
+                }else{
+                    if emotionView != nil {
+
+                        self.popView.showFromeEmotionView(emotionView!)
+                    }
+                }
+    }
+    
+    func emotionViewWithPoint(point:CGPoint)->DreamEmotionView?{
+        
+        
+        var resultEmotionView:DreamEmotionView?
+        
+        self.emotionViews?.enumerateObjectsUsingBlock({ (obj, idx, stop) -> Void in
+            
+            let emotionView = obj as DreamEmotionView
+            if CGRectContainsPoint(emotionView.frame, point) {
+                resultEmotionView = emotionView
+            }
+            
+        })
+        
+        return resultEmotionView
+    }
+    
+    
+    func finshSelectEmotion(emotion:DreamEmotion){
+        let userInfo = NSMutableDictionary()
+        userInfo["emotion"] = emotion
+        NSNotificationCenter.defaultCenter().postNotificationName("DreamEmotionDidSelectedNotification", object: nil, userInfo: userInfo)
+    }
     
     
     func setEmotions(emotions:NSArray){
@@ -76,7 +130,10 @@ class DreamEmotionGridView: UIView {
             self.popView.dismiss()
         }
         
+        finshSelectEmotion(emotionView.emotion!)
+        
     }
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()

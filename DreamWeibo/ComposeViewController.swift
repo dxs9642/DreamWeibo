@@ -26,8 +26,27 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         keyboard.setHeight(216)
         keyboard.setWidth(UIScreen.mainScreen().bounds.width)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "emotionDidSelect:", name: "DreamEmotionDidSelectedNotification", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "emotionDidDeleted:", name: "DreamEmotionDidDeletedNotification", object: nil)
+
+        
     }
     
+    
+    func emotionDidDeleted(note:NSNotification){
+
+        print("alaal")
+        
+    }
+
+    
+    
+    func emotionDidSelect(note:NSNotification){
+        let emotion = note.userInfo!["emotion"] as DreamEmotion
+        
+        print(emotion.emoji)
+    }
 
     
     func setupPhotosView(){
