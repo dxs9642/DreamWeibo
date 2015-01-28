@@ -57,9 +57,9 @@ class DreamEmotionGridView: UIView {
                 if recogniser.state == UIGestureRecognizerState.Ended {
                     self.popView.dismiss()
                     if emotionView != nil {
-                        finshSelectEmotion(emotionView!.emotion!)
+                        finishSelectEmotion(emotionView!.emotion!)
                     }else{
-                        finshSelectEmotion(movedEmotionView!.emotion!)
+                        finishSelectEmotion(movedEmotionView!.emotion!)
                     }
                 }else{
                     if emotionView != nil {
@@ -94,10 +94,13 @@ class DreamEmotionGridView: UIView {
     }
     
     
-    func finshSelectEmotion(emotion:DreamEmotion){
+    func finishSelectEmotion(emotion:DreamEmotion){
         let userInfo = NSMutableDictionary()
         userInfo["emotion"] = emotion
         NSNotificationCenter.defaultCenter().postNotificationName("DreamEmotionDidSelectedNotification", object: nil, userInfo: userInfo)
+        let tool = DreamEmotionTool()
+        tool.addRecentEmotion(emotion)
+        
     }
     
     
@@ -114,7 +117,6 @@ class DreamEmotionGridView: UIView {
                 self.addSubview(emotionView)
                 emotionViews?.addObject(emotionView)
                 emotionView.addTarget(self, action: "emotionClick:", forControlEvents: UIControlEvents.TouchUpInside)
-                emotionView.hidden = false
 
             }else{
                 emotionView = emotionViews![i] as? DreamEmotionView
@@ -122,7 +124,8 @@ class DreamEmotionGridView: UIView {
             emotionView.adjustsImageWhenHighlighted = false
             let emotion = emotions[i] as DreamEmotion
             emotionView.setEmotion(emotion)
-            
+            emotionView.hidden = false
+
         }
         
         for var i=count;i<currentButtonNum;i++ {
@@ -136,11 +139,11 @@ class DreamEmotionGridView: UIView {
         
 
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.25 * Float(NSEC_PER_SEC) )) , dispatch_get_main_queue()) { () -> Void in
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.15 * Float(NSEC_PER_SEC) )) , dispatch_get_main_queue()) { () -> Void in
             self.popView.dismiss()
         }
         
-        finshSelectEmotion(emotionView.emotion!)
+        finishSelectEmotion(emotionView.emotion!)
         
     }
     

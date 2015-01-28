@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20401871A78628F00E7ADE6 /* DreamEmotionTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20401861A78628F00E7ADE6 /* DreamEmotionTool.swift */; };
 		D20BA5161A68C99600EFBE4A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA5151A68C99600EFBE4A /* UIImage+Extension.swift */; };
 		D20BA5181A68EDBF00EFBE4A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA5171A68EDBF00EFBE4A /* UIView+Extension.swift */; };
 		D20BA51A1A68FF6400EFBE4A /* DreamSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA5191A68FF6400EFBE4A /* DreamSearchBar.swift */; };
@@ -122,6 +123,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D20401861A78628F00E7ADE6 /* DreamEmotionTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamEmotionTool.swift; sourceTree = "<group>"; };
 		D20BA5151A68C99600EFBE4A /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		D20BA5171A68EDBF00EFBE4A /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		D20BA5191A68FF6400EFBE4A /* DreamSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamSearchBar.swift; sourceTree = "<group>"; };
@@ -309,6 +311,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D20401851A78626500E7ADE6 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				D20401861A78628F00E7ADE6 /* DreamEmotionTool.swift */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
 		D21544CA1A761A6600AB19F3 /* MJPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,6 +658,7 @@
 		D294366A1A69F856001CE8BE /* Compose */ = {
 			isa = PBXGroup;
 			children = (
+				D20401851A78626500E7ADE6 /* Tool */,
 				D294366D1A69F86C001CE8BE /* Model */,
 				D294366C1A69F865001CE8BE /* ViewController */,
 				D294366B1A69F862001CE8BE /* View */,
@@ -1066,6 +1077,7 @@
 				D21545131A761B0F00AB19F3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				D20BA51A1A68FF6400EFBE4A /* DreamSearchBar.swift in Sources */,
 				D20BA5181A68EDBF00EFBE4A /* UIView+Extension.swift in Sources */,
+				D20401871A78628F00E7ADE6 /* DreamEmotionTool.swift in Sources */,
 				D29436761A6A03AD001CE8BE /* NewFeatureViewController.swift in Sources */,
 				D21545111A761B0F00AB19F3 /* UIImage+GIF.m in Sources */,
 				D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */,

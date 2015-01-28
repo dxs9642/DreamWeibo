@@ -123,7 +123,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
 
         
         self.textView!.resignFirstResponder()
-        
+        self.isChangingKeyboard = false
         let delayInSeconds:Int64 =  100000000  * 1
         var time:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
         
@@ -212,7 +212,6 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     func keyboardWillHide(note:NSNotification){
         
         if isChangingKeyboard {
-            self.isChangingKeyboard = false
             return
         }
         

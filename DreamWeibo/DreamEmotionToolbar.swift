@@ -37,7 +37,7 @@ class DreamEmotionToolbar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+
     func setupToolbarButton(title:NSString,tag:Int){
         
         var button = UIButton()

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DreamEmotion : NSObject
+@interface DreamEmotion : NSObject  <NSCoding>
 /** 表情的文字描述 */
 @property (nonatomic, copy) NSString *chs;
 /** 表情的文png图片名 */

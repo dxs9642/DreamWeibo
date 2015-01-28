@@ -30,14 +30,12 @@ class DreamEmotionListView: UIView,UIScrollViewDelegate {
         super.init(frame: frame)
         
         scrollView = UIScrollView()
-        scrollView?.backgroundColor = UIColor.whiteColor()
         self.scrollView?.delegate = self
         self.addSubview(scrollView!)
         
         pageControl = UIPageControl()
         pageControl?.setValue(UIImage(named: "compose_keyboard_dot_selected"), forKey: "_currentPageImage")
         pageControl?.setValue(UIImage(named: "compose_keyboard_dot_normal"), forKey: "_pageImage")
-        pageControl?.backgroundColor = UIColor.whiteColor()
 
         self.addSubview(pageControl!)
         
@@ -71,6 +69,8 @@ class DreamEmotionListView: UIView,UIScrollViewDelegate {
         let properties = DreamEmotionProperty()
         let totalPages = (emotions.count + properties.maxCountPerPage - 1) / properties.maxCountPerPage
 
+        pageControl?.hidden = totalPages<=1
+        
         pageControl?.numberOfPages = totalPages
         pageControl?.currentPage = 0
         let count = emotions.count
