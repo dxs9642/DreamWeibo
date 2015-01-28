@@ -36,8 +36,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     
     func emotionDidDeleted(note:NSNotification){
 
-        print("alaal")
-        
+        self.textView?.deleteBackward()
     }
 
     
@@ -45,7 +44,11 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     func emotionDidSelect(note:NSNotification){
         let emotion = note.userInfo!["emotion"] as DreamEmotion
         
-        print(emotion.emoji)
+        self.textView?.appendEmotion(emotion)
+        
+        self.textViewDidChange(self.textView!)
+
+        
     }
 
     
@@ -152,7 +155,29 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     
     
     func setupTitle(){
-        self.title = "发微博"
+        
+        let name = Account.getName()
+        let prefix = "发微博"
+        if name==nil {
+            self.title = prefix
+        }else{
+            
+            let text:NSString = "发微博\n\(name!)"
+            var string = NSMutableAttributedString(string: text)
+            string.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(15), range: text.rangeOfString(prefix))
+            string.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: text.rangeOfString(name!))
+            
+            var titleLabel = UILabel()
+            titleLabel.attributedText = string
+            titleLabel.textAlignment = NSTextAlignment.Center
+            titleLabel.numberOfLines = 0
+            titleLabel.setWidth(100)
+            titleLabel.setHeight(44)
+            self.navigationItem.titleView = titleLabel
+        }
+        
+        
+        
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Bordered, target: self, action:"cancel")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发送", style: UIBarButtonItemStyle.Bordered
@@ -258,7 +283,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
         
-        params["status"] = textView!.text
+        params["status"] = textView!.realText()
         
         DreamHttpTool.post("https://api.weibo.com/2/statuses/update.json", params: params, success: { (obj:AnyObject!) -> Void in
             MBProgressHUD.showSuccess("发送成功")
@@ -353,11 +378,12 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         
 }
     
+
     
     func textViewDidChange(textView: UITextView) {
         var textAttrs = NSMutableDictionary()
         
-        if countElements(textView.text) != 0 {
+        if textView.hasText() {
             
             self.textView?.placehoderLabel.hidden = true
             

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class DreamComposePhotosView: UIView {
 
     func addImage(image:UIImage){
