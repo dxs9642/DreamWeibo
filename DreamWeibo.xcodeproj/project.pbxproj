@@ -45,11 +45,14 @@
 		D2154BC51A67C43C0043CD8A /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC41A67C43C0043CD8A /* MessageViewController.swift */; };
 		D2154BC71A67C4560043CD8A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC61A67C4560043CD8A /* ProfileViewController.swift */; };
 		D2154BC91A67C4840043CD8A /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC81A67C4840043CD8A /* DiscoverViewController.swift */; };
+		D2290B951A79045D004B0EA2 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2290B941A79045D004B0EA2 /* libicucore.dylib */; };
 		D23130071A673E8900B83A3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23130061A673E8900B83A3A /* AppDelegate.swift */; };
 		D231300E1A673E8900B83A3A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231300D1A673E8900B83A3A /* Images.xcassets */; };
 		D231301D1A673E8900B83A3A /* DreamWeiboTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231301C1A673E8900B83A3A /* DreamWeiboTests.swift */; };
 		D23483841A78D18700CB535D /* DreamEmotionAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = D23483831A78D18700CB535D /* DreamEmotionAttachment.m */; };
 		D23CCC781A6DFF4F0044003B /* DreamUnreadCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D23CCC771A6DFF4F0044003B /* DreamUnreadCountResult.m */; };
+		D2432B211A79071A00FD7CFC /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = D2432B201A79071A00FD7CFC /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D2432B241A7907DE00FD7CFC /* DreamRegexResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D2432B231A7907DE00FD7CFC /* DreamRegexResult.m */; };
 		D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */; };
 		D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */; };
 		D2881AF61A778A460001DB8B /* DreamEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881AF51A778A460001DB8B /* DreamEmotionView.swift */; };
@@ -186,6 +189,7 @@
 		D2154BC41A67C43C0043CD8A /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		D2154BC61A67C4560043CD8A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D2154BC81A67C4840043CD8A /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		D2290B941A79045D004B0EA2 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		D23130011A673E8900B83A3A /* DreamWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23130051A673E8900B83A3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D23130061A673E8900B83A3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +201,10 @@
 		D23483831A78D18700CB535D /* DreamEmotionAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamEmotionAttachment.m; sourceTree = "<group>"; };
 		D23CCC761A6DFF4F0044003B /* DreamUnreadCountResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamUnreadCountResult.h; sourceTree = "<group>"; };
 		D23CCC771A6DFF4F0044003B /* DreamUnreadCountResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamUnreadCountResult.m; sourceTree = "<group>"; };
+		D2432B1F1A79071A00FD7CFC /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		D2432B201A79071A00FD7CFC /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		D2432B221A7907DE00FD7CFC /* DreamRegexResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamRegexResult.h; sourceTree = "<group>"; };
+		D2432B231A7907DE00FD7CFC /* DreamRegexResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamRegexResult.m; sourceTree = "<group>"; };
 		D26687ED1A6F14C7002AF7C0 /* Dream-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dream-Prefix.pch"; sourceTree = "<group>"; };
 		D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLoadMoreFooter.swift; sourceTree = "<group>"; };
 		D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamLoadMoreFooter.xib; sourceTree = "<group>"; };
@@ -301,6 +309,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2290B951A79045D004B0EA2 /* libicucore.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,17 +451,11 @@
 		D2154BCF1A67C63B0043CD8A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D2432B251A7913C700FD7CFC /* Cell */,
 				D20BA51B1A690F0200EFBE4A /* DreamTitleButton.swift */,
 				D20BA51D1A69334A00EFBE4A /* DreamPopMenu.swift */,
 				D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */,
 				D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */,
-				D2E5FB181A6E5CCD004812D3 /* DreamStatusCell.swift */,
-				D2E5FB1A1A6E65FF004812D3 /* DreamStatusToolBar.swift */,
-				D2E5FB1C1A6E664A004812D3 /* DreamStatusDetailView.swift */,
-				D2E5FB1E1A6E66C0004812D3 /* DreamStatusOriginalView.swift */,
-				D2E5FB201A6E6702004812D3 /* DreamStatusRetweetView.swift */,
-				D21544C61A75BFF400AB19F3 /* DreamStatusPhotosView.swift */,
-				D21544C81A75C01F00AB19F3 /* DreamStatusPhotoView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -483,6 +486,8 @@
 				D2FE759C1A6B9DA200A13FFF /* DreamPhoto.h */,
 				D2FE759D1A6B9DA200A13FFF /* DreamPhoto.m */,
 				D21544C11A74E58800AB19F3 /* DreamFont.swift */,
+				D2432B221A7907DE00FD7CFC /* DreamRegexResult.h */,
+				D2432B231A7907DE00FD7CFC /* DreamRegexResult.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -611,6 +616,7 @@
 		D2312FF81A673E8900B83A3A = {
 			isa = PBXGroup;
 			children = (
+				D2290B941A79045D004B0EA2 /* libicucore.dylib */,
 				D23130031A673E8900B83A3A /* DreamWeibo */,
 				D23130191A673E8900B83A3A /* DreamWeiboTests */,
 				D23130021A673E8900B83A3A /* Products */,
@@ -670,6 +676,29 @@
 				D231301B1A673E8900B83A3A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D2432B1E1A79071A00FD7CFC /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				D2432B1F1A79071A00FD7CFC /* RegexKitLite.h */,
+				D2432B201A79071A00FD7CFC /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
+			sourceTree = "<group>";
+		};
+		D2432B251A7913C700FD7CFC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D2E5FB181A6E5CCD004812D3 /* DreamStatusCell.swift */,
+				D2E5FB1A1A6E65FF004812D3 /* DreamStatusToolBar.swift */,
+				D2E5FB1C1A6E664A004812D3 /* DreamStatusDetailView.swift */,
+				D2E5FB1E1A6E66C0004812D3 /* DreamStatusOriginalView.swift */,
+				D2E5FB201A6E6702004812D3 /* DreamStatusRetweetView.swift */,
+				D21544C61A75BFF400AB19F3 /* DreamStatusPhotosView.swift */,
+				D21544C81A75C01F00AB19F3 /* DreamStatusPhotoView.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		D294366A1A69F856001CE8BE /* Compose */ = {
@@ -828,6 +857,7 @@
 		D2FE74611A6A880800A13FFF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				D2432B1E1A79071A00FD7CFC /* RegexKitLite */,
 				D2C1B7371A761EDE006FFD9D /* MBProgressHUD */,
 				D21544E51A761B0E00AB19F3 /* SDWebImage */,
 				D21544CA1A761A6600AB19F3 /* MJPhotoBrowser */,
@@ -1027,11 +1057,13 @@
 				D2E5FB2D1A6E72BA004812D3 /* DreamStatusFrame.m in Sources */,
 				D21544DA1A761A6600AB19F3 /* MJPhotoBrowser.m in Sources */,
 				D20BA51C1A690F0200EFBE4A /* DreamTitleButton.swift in Sources */,
+				D2432B211A79071A00FD7CFC /* RegexKitLite.m in Sources */,
 				D2FE75BB1A6BD10600A13FFF /* AFNetworkReachabilityManager.m in Sources */,
 				D21544C71A75BFF400AB19F3 /* DreamStatusPhotosView.swift in Sources */,
 				D215450D1A761B0F00AB19F3 /* SDWebImageDownloaderOperation.m in Sources */,
 				D20BA51E1A69334A00EFBE4A /* DreamPopMenu.swift in Sources */,
 				D21544D81A761A6600AB19F3 /* MJPhoto.m in Sources */,
+				D2432B241A7907DE00FD7CFC /* DreamRegexResult.m in Sources */,
 				D21544C91A75C01F00AB19F3 /* DreamStatusPhotoView.swift in Sources */,
 				D2E5FB1F1A6E66C0004812D3 /* DreamStatusOriginalView.swift in Sources */,
 				D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */,
@@ -1202,6 +1234,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DreamWeibo/Dream-Prefix.pch";
 				INFOPLIST_FILE = DreamWeibo/Info.plist;
@@ -1217,6 +1250,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DreamWeibo/Dream-Prefix.pch";
 				INFOPLIST_FILE = DreamWeibo/Info.plist;

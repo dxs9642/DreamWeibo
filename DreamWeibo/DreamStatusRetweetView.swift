@@ -76,7 +76,7 @@ class DreamStatusRetweetView: UIImageView {
         self.nameLabel?.textColor = UIColor(red: 74/255, green: 102/255, blue: 105/255, alpha: 1)
         
         self.textLabel?.frame = reweetFrame.textFrame
-        self.textLabel?.text = status.text
+        self.textLabel?.attributedText = status.attributedText
 
         if status.pic_urls!.count == 0 {
             self.photosView?.hidden = true

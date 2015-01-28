@@ -118,7 +118,7 @@ class DreamStatusOriginalView: UIImageView {
         
         
         self.textLabel?.frame = originalFrame.textFrame
-        self.textLabel?.text = status.text
+        self.textLabel?.attributedText = status.attributedText
         
         let time = status.created_at as NSString
         let timeX = CGRectGetMinX(self.nameLabel!.frame)

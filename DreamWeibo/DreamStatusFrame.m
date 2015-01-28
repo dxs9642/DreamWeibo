@@ -15,6 +15,7 @@
 - (void)setStatus:(DreamStatus *)status
 {
     _status = status;
+
     
     // 1.计算微博具体内容（微博整体）
     [self setupDetailFrame];
