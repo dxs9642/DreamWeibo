@@ -13,7 +13,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     var titleButton:UIButton?
     var statusFrame:NSMutableArray = NSMutableArray()
     var footer:DreamLoadMoreFooter?
-    
+    var changeValue = 0
     
     
     override func viewDidLoad() {
@@ -124,6 +124,9 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             if newFrames.count != 0 {
                 let range = NSMakeRange(0, newStatus.count)
                 self.statusFrame.insertObjects(newFrames, atIndexes:NSIndexSet(indexesInRange:range))
+                
+                self.changeValue += 1000
+                
                 self.tableView.reloadData()
             }
             if self.tabBarItem.badgeValue != nil{
@@ -316,7 +319,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
                 
-        let ID = "status\(indexPath.row)"
+        let ID = "status\(indexPath.row+changeValue)"
         
         
         var cell = tableView.dequeueReusableCellWithIdentifier(ID) as DreamStatusCell?
