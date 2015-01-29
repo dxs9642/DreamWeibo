@@ -12,8 +12,9 @@ class DreamSearchBar: UITextField {
 
     class func buildSearchBar() -> DreamSearchBar {
         var searchBar = DreamSearchBar()
-        searchBar.frame = CGRectMake(0, 0, 300, 30)
+        searchBar.frame = CGRectMake(0, 0, 400, 30)
         searchBar.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+        searchBar.placeholder = "大家都在搜："
         searchBar.background = UIImage.resizeImage("searchbar_textfield_background")
         var imageVeiw = UIImageView(image: UIImage(named: "searchbar_textfield_search_icon"))
         

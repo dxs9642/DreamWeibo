@@ -24,4 +24,6 @@
 #import "DreamEmotion.h"
 #import "DreamEmotionAttachment.h"
 #import "DreamLink.h"
-
+#import "DreamCommonItem.h"
+#import "DreamCommonGroup.h"
+#import "UIView+Extension.h"
