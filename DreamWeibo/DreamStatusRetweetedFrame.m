@@ -18,19 +18,19 @@
 {
     _retweetedStatus = retweetedStatus;
     
-    // 1.昵称
-    CGFloat nameX = DreamStatusCellInset;
-    CGFloat nameY = DreamStatusCellInset;
-    NSString *name = [NSString stringWithFormat:@"@%@",retweetedStatus.user.name];
-    CGSize nameSize = [name sizeWithFont:DreamStatusRetweetedNameFont];
-    self.nameFrame = (CGRect){{nameX, nameY}, nameSize};
+//    // 1.昵称
+//    CGFloat nameX = DreamStatusCellInset;
+//    CGFloat nameY = DreamStatusCellInset;
+//    NSString *name = [NSString stringWithFormat:@"@%@",retweetedStatus.user.name];
+//    CGSize nameSize = [name sizeWithFont:DreamStatusRetweetedNameFont];
+//    self.nameFrame = (CGRect){{nameX, nameY}, nameSize};
     
     // 2.正文
-    CGFloat textX = nameX;
-    CGFloat textY = CGRectGetMaxY(self.nameFrame) + DreamStatusCellInset*0.3;
+    CGFloat textX = DreamStatusCellInset;
+    CGFloat textY = DreamStatusCellInset*0.3;
     CGFloat maxW = DreamScreenW - 2 * textX;
     CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);
-    CGSize textSize = [retweetedStatus.text sizeWithFont:DreamStatusRetweetedTextFont constrainedToSize:maxSize];
+    CGSize textSize = [retweetedStatus.attributedText boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     self.textFrame = (CGRect){{textX, textY}, textSize};
     
     // 3.配图相册

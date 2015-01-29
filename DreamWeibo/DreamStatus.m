@@ -15,6 +15,7 @@
 #import "DreamEmotionAttachment.h"
 #import "DreamWeibo-Swift.h"
 #import "DreamEmotion.h"
+#import "DreamUser.h"
 
 
 @implementation DreamStatus
@@ -151,11 +152,8 @@ static NSMutableArray *_recentEmotions;
     return regexResults;
 }
 
-- (void)setText:(NSString *)text
-{
-    _text = [text copy];
-    
-    // 链接、@提到、#话题#
+
+- (NSAttributedString *)attributedStringWithText:(NSString *)text{
     
     // 1.匹配字符串
     NSArray *regexResults = [self regexResultsWithText:text];
@@ -164,7 +162,15 @@ static NSMutableArray *_recentEmotions;
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] init];
     // 遍历
     [regexResults enumerateObjectsUsingBlock:^(DreamRegexResult *result, NSUInteger idx, BOOL *stop) {
+        
+        
+        DreamEmotion *emotion = nil;
         if (result.isEmotion) { // 表情
+            emotion = [DreamStatus emotionWithDesc:result.string];
+        }
+        
+        
+        if (emotion) { // 表情
             // 创建附件对象
             DreamEmotionAttachment *attach = [[DreamEmotionAttachment alloc] init];
             
@@ -174,7 +180,7 @@ static NSMutableArray *_recentEmotions;
             attach.bounds = CGRectMake(0, -3, DreamStatusOrginalTextFont.lineHeight, DreamStatusOrginalTextFont.lineHeight);
             
             // 将附件包装成富文本
-
+            
             
             NSAttributedString *attachString = [NSAttributedString attributedStringWithAttachment:attach];
             [attributedText appendAttributedString:attachString];
@@ -184,32 +190,83 @@ static NSMutableArray *_recentEmotions;
             NSString *trendRegex = @"#[a-zA-Z0-9\\u4e00-\\u9fa5]+#";
             [result.string enumerateStringsMatchedByRegex:trendRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
                 [substr addAttribute:NSForegroundColorAttributeName value:DreamStatusHighTextColor range:*capturedRanges];
+                [substr addAttribute:DreamLinkText value:*capturedStrings range:*capturedRanges];
+
             }];
             
             
             // 匹配@提到
-            NSString *mentionRegex = @"@[a-zA-Z0-9\\u4e00-\\u9fa5\\-]+ ?";
+            NSString *mentionRegex = @"@[a-zA-Z0-9\\u4e00-\\u9fa5\\-_]+";
             [result.string enumerateStringsMatchedByRegex:mentionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
                 [substr addAttribute:NSForegroundColorAttributeName value:DreamStatusHighTextColor range:*capturedRanges];
+                [substr addAttribute:DreamLinkText value:*capturedStrings range:*capturedRanges];
+
             }];
             
             // 匹配超链接
             NSString *httpRegex = @"http(s)?://([a-zA-Z|\\d]+\\.)+[a-zA-Z|\\d]+(/[a-zA-Z|\\d|\\-|\\+|_./?%&=]*)?";
             [result.string enumerateStringsMatchedByRegex:httpRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
                 [substr addAttribute:NSForegroundColorAttributeName value:DreamStatusHighTextColor range:*capturedRanges];
+                [substr addAttribute:DreamLinkText value:*capturedStrings range:*capturedRanges];
+
             }];
-//
+
+            //
             [attributedText appendAttributedString:substr];
         }
     }];
     
     // 设置字体
     [attributedText addAttribute:NSFontAttributeName value: DreamStatusRichTextFont range:NSMakeRange(0, attributedText.length)];
-    
-    self.attributedText = attributedText;
+
+    return attributedText;
 }
 
 
+- (void)setText:(NSString *)text
+{
+    _text = [text copy];
+    
+    // 链接、@提到、#话题#
+
+[self createAttributedText];
+}
+
+- (void)setUser:(DreamUser *)user
+{
+    _user = user;
+    
+    [self createAttributedText];
+}
+
+- (void)setRetweeted_status:(DreamStatus *)retweeted_status
+{
+    _retweeted_status = retweeted_status;
+    
+    self.retweeted = NO;
+    retweeted_status.retweeted = YES;
+}
+
+- (void)setRetweeted:(BOOL)retweeted
+{
+    _retweeted = retweeted;
+    
+    [self createAttributedText];
+}
+
+
+- (void)createAttributedText
+{
+    if (self.text == nil || self.user == nil) return;
+    
+    if (self.retweeted) {
+        NSString *totalText = [NSString stringWithFormat:@"@%@ : %@", self.user.name, self.text];
+        NSAttributedString *attributedString = [self attributedStringWithText:totalText];
+        self.attributedText = attributedString;
+    } else {
+        self.attributedText = [self attributedStringWithText:self.text];
+    }
+}
 
 + (DreamEmotion *)emotionWithDesc:(NSString *)desc
 {

@@ -23,4 +23,5 @@
 #import "MJPhoto.h"
 #import "DreamEmotion.h"
 #import "DreamEmotionAttachment.h"
+#import "DreamLink.h"
 

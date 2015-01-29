@@ -20,7 +20,7 @@ class DreamStatusOriginalView: UIImageView {
 
     var iconView:UIImageView?
     var nameLabel:UILabel?
-    var textLabel:UILabel?
+    var textLabel:DreamStatusLabel?
     var sourceLabel:UILabel?
     var timeLabel:UILabel?
     var vipView:UIImageView?
@@ -40,10 +40,7 @@ class DreamStatusOriginalView: UIImageView {
         self.addSubview(nameLabel!)
         
         
-        textLabel = UILabel()
-        textLabel?.font = font.DreamStatusOrginalTextFont
-        textLabel?.numberOfLines = 0
-        
+        textLabel = DreamStatusLabel()
         
         self.addSubview(textLabel!)
         

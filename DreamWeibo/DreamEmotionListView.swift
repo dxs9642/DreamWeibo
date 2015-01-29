@@ -34,6 +34,7 @@ class DreamEmotionListView: UIView,UIScrollViewDelegate {
         self.addSubview(scrollView!)
         
         pageControl = UIPageControl()
+        pageControl?.hidesForSinglePage = true
         pageControl?.setValue(UIImage(named: "compose_keyboard_dot_selected"), forKey: "_currentPageImage")
         pageControl?.setValue(UIImage(named: "compose_keyboard_dot_normal"), forKey: "_pageImage")
 
@@ -69,7 +70,6 @@ class DreamEmotionListView: UIView,UIScrollViewDelegate {
         let properties = DreamEmotionProperty()
         let totalPages = (emotions.count + properties.maxCountPerPage - 1) / properties.maxCountPerPage
 
-        pageControl?.hidden = totalPages<=1
         
         pageControl?.numberOfPages = totalPages
         pageControl?.currentPage = 0

@@ -19,8 +19,8 @@ class DreamStatusRetweetView: UIImageView {
     */
     
     
-    var nameLabel:UILabel?
-    var textLabel:UILabel?
+//    var nameLabel:UILabel?
+    var textLabel:DreamStatusLabel?
     var photosView:DreamStatusPhotosView?
     var reweetFrame:DreamStatusRetweetedFrame?
     
@@ -35,16 +35,14 @@ class DreamStatusRetweetView: UIImageView {
         
         let font = DreamFont()
         
-        nameLabel = UILabel()
-        nameLabel?.font = font.DreamStatusRetweetedNameFont
+//        nameLabel = UILabel()
+//        nameLabel?.font = font.DreamStatusRetweetedNameFont
+//        
+//        
+//        self.addSubview(nameLabel!)
         
         
-        self.addSubview(nameLabel!)
-        
-        
-        textLabel = UILabel()
-        textLabel?.font = font.DreamStatusRetweetedTextFont
-        textLabel?.numberOfLines = 0
+        textLabel = DreamStatusLabel()
         self.addSubview(textLabel!)
         
         photosView = DreamStatusPhotosView()
@@ -71,9 +69,9 @@ class DreamStatusRetweetView: UIImageView {
         let user = status.user
 
         self.reweetFrame = reweetFrame
-        self.nameLabel?.frame = reweetFrame.nameFrame
-        self.nameLabel?.text = "@\(user.name)"
-        self.nameLabel?.textColor = UIColor(red: 74/255, green: 102/255, blue: 105/255, alpha: 1)
+//        self.nameLabel?.frame = reweetFrame.nameFrame
+//        self.nameLabel?.text = "@\(user.name)"
+//        self.nameLabel?.textColor = UIColor(red: 74/255, green: 102/255, blue: 105/255, alpha: 1)
         
         self.textLabel?.frame = reweetFrame.textFrame
         self.textLabel?.attributedText = status.attributedText

@@ -53,6 +53,8 @@
 		D23CCC781A6DFF4F0044003B /* DreamUnreadCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D23CCC771A6DFF4F0044003B /* DreamUnreadCountResult.m */; };
 		D2432B211A79071A00FD7CFC /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = D2432B201A79071A00FD7CFC /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D2432B241A7907DE00FD7CFC /* DreamRegexResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D2432B231A7907DE00FD7CFC /* DreamRegexResult.m */; };
+		D2432B271A79B56900FD7CFC /* DreamStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2432B261A79B56900FD7CFC /* DreamStatusLabel.swift */; };
+		D2432B2B1A79CBB900FD7CFC /* DreamLink.m in Sources */ = {isa = PBXBuildFile; fileRef = D2432B2A1A79CBB900FD7CFC /* DreamLink.m */; };
 		D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */; };
 		D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */; };
 		D2881AF61A778A460001DB8B /* DreamEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881AF51A778A460001DB8B /* DreamEmotionView.swift */; };
@@ -205,6 +207,9 @@
 		D2432B201A79071A00FD7CFC /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		D2432B221A7907DE00FD7CFC /* DreamRegexResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamRegexResult.h; sourceTree = "<group>"; };
 		D2432B231A7907DE00FD7CFC /* DreamRegexResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamRegexResult.m; sourceTree = "<group>"; };
+		D2432B261A79B56900FD7CFC /* DreamStatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamStatusLabel.swift; sourceTree = "<group>"; };
+		D2432B291A79CBB900FD7CFC /* DreamLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamLink.h; sourceTree = "<group>"; };
+		D2432B2A1A79CBB900FD7CFC /* DreamLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamLink.m; sourceTree = "<group>"; };
 		D26687ED1A6F14C7002AF7C0 /* Dream-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dream-Prefix.pch"; sourceTree = "<group>"; };
 		D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLoadMoreFooter.swift; sourceTree = "<group>"; };
 		D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamLoadMoreFooter.xib; sourceTree = "<group>"; };
@@ -471,14 +476,7 @@
 		D2154BD11A67C6650043CD8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D2E5FB251A6E72BA004812D3 /* DreamStatusFrame.h */,
-				D2E5FB261A6E72BA004812D3 /* DreamStatusFrame.m */,
-				D2E5FB271A6E72BA004812D3 /* DreamStatusOriginalFrame.h */,
-				D2E5FB281A6E72BA004812D3 /* DreamStatusOriginalFrame.m */,
-				D2E5FB291A6E72BA004812D3 /* DreamStatusRetweetedFrame.h */,
-				D2E5FB2A1A6E72BA004812D3 /* DreamStatusRetweetedFrame.m */,
-				D2E5FB2B1A6E72BA004812D3 /* DreamStatusDetailFrame.h */,
-				D2E5FB2C1A6E72BA004812D3 /* DreamStatusDetailFrame.m */,
+				D2432B281A79CB5700FD7CFC /* Cell */,
 				D2FE75981A6B9DA200A13FFF /* DreamUser.h */,
 				D2FE75991A6B9DA200A13FFF /* DreamUser.m */,
 				D2FE759A1A6B9DA200A13FFF /* DreamStatus.h */,
@@ -697,6 +695,24 @@
 				D2E5FB201A6E6702004812D3 /* DreamStatusRetweetView.swift */,
 				D21544C61A75BFF400AB19F3 /* DreamStatusPhotosView.swift */,
 				D21544C81A75C01F00AB19F3 /* DreamStatusPhotoView.swift */,
+				D2432B261A79B56900FD7CFC /* DreamStatusLabel.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		D2432B281A79CB5700FD7CFC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D2432B291A79CBB900FD7CFC /* DreamLink.h */,
+				D2432B2A1A79CBB900FD7CFC /* DreamLink.m */,
+				D2E5FB251A6E72BA004812D3 /* DreamStatusFrame.h */,
+				D2E5FB261A6E72BA004812D3 /* DreamStatusFrame.m */,
+				D2E5FB271A6E72BA004812D3 /* DreamStatusOriginalFrame.h */,
+				D2E5FB281A6E72BA004812D3 /* DreamStatusOriginalFrame.m */,
+				D2E5FB291A6E72BA004812D3 /* DreamStatusRetweetedFrame.h */,
+				D2E5FB2A1A6E72BA004812D3 /* DreamStatusRetweetedFrame.m */,
+				D2E5FB2B1A6E72BA004812D3 /* DreamStatusDetailFrame.h */,
+				D2E5FB2C1A6E72BA004812D3 /* DreamStatusDetailFrame.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1054,6 +1070,7 @@
 				D29064331A76754B00D6A4BC /* DreamEmotionListView.swift in Sources */,
 				D2FE75931A6B981300A13FFF /* MJType.m in Sources */,
 				D2FE75BC1A6BD10600A13FFF /* AFSecurityPolicy.m in Sources */,
+				D2432B2B1A79CBB900FD7CFC /* DreamLink.m in Sources */,
 				D2E5FB2D1A6E72BA004812D3 /* DreamStatusFrame.m in Sources */,
 				D21544DA1A761A6600AB19F3 /* MJPhotoBrowser.m in Sources */,
 				D20BA51C1A690F0200EFBE4A /* DreamTitleButton.swift in Sources */,
@@ -1127,6 +1144,7 @@
 				D29436761A6A03AD001CE8BE /* NewFeatureViewController.swift in Sources */,
 				D21545111A761B0F00AB19F3 /* UIImage+GIF.m in Sources */,
 				D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */,
+				D2432B271A79B56900FD7CFC /* DreamStatusLabel.swift in Sources */,
 				D21544DE1A761A6600AB19F3 /* MJPhotoView.m in Sources */,
 				D2154BC51A67C43C0043CD8A /* MessageViewController.swift in Sources */,
 				D2FE75BA1A6BD10600A13FFF /* AFHTTPSessionManager.m in Sources */,

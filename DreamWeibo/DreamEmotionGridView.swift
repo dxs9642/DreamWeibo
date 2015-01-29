@@ -59,7 +59,10 @@ class DreamEmotionGridView: UIView {
                     if emotionView != nil {
                         finishSelectEmotion(emotionView!.emotion!)
                     }else{
-                        finishSelectEmotion(movedEmotionView!.emotion!)
+                        if movedEmotionView != nil {
+                            finishSelectEmotion(movedEmotionView!.emotion!)
+
+                        }
                     }
                 }else{
                     if emotionView != nil {
@@ -83,7 +86,7 @@ class DreamEmotionGridView: UIView {
         self.emotionViews?.enumerateObjectsUsingBlock({ (obj, idx, stop) -> Void in
             
             let emotionView = obj as DreamEmotionView
-            if CGRectContainsPoint(emotionView.frame, point) {
+            if CGRectContainsPoint(emotionView.frame, point) && emotionView.hidden == false {
                 resultEmotionView = emotionView
                 self.movedEmotionView = emotionView
             }

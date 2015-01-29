@@ -40,6 +40,8 @@
 
 #define DreamStatusRichTextFont [UIFont systemFontOfSize:15]
 
+#define DreamLinkText @"DreamLinkText"
+
 
 #endif
 

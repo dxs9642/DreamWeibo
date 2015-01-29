@@ -35,4 +35,6 @@
 
 /** 	 object 	微博配图地址。多图时返回多图链接。无配图返回“[]”  数组里面都是HMPhoto模型*/
 @property (nonatomic, strong) NSArray *pic_urls;
+@property (nonatomic, assign, getter = isRetweeted) BOOL retweeted;
+
 @end

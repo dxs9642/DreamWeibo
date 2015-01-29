@@ -28,7 +28,26 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         setupUserInfo()
         
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "linkDidSelect:", name: "DreamDidSelectTextNotionfication", object: nil)
+
+//        dic["DreamLinkText"] = touchLink?.text
+//        NSNotificationCenter.defaultCenter().postNotificationName("DreamDidSelectTextNotionfication", object: nil, userInfo: dic)
+
     }
+    
+    func linkDidSelect(note:NSNotification){
+        
+        
+        let linkText = note.userInfo!["DreamLinkText"] as NSString
+        
+        if linkText.hasPrefix("http"){
+            
+        }else{
+            
+        }
+        
+    }
+    
     
     func setupUserInfo(){
         
