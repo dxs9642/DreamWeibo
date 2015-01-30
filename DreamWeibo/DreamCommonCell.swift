@@ -13,6 +13,36 @@ class DreamCommonCell: UITableViewCell {
     var numberOfSections:NSInteger!
     let bgView = UIImageView()
     let selectedBgView = UIImageView()
+    
+    
+    var rightArrow:UIImageView!{
+        get{
+            return UIImageView(image: UIImage(named: "common_icon_arrow"))
+        }
+    }
+    
+    var rightSwitch:UISwitch!{
+        get{
+            return UISwitch()
+        }
+    }
+    
+    var rightLabel:UILabel!{
+        get{
+            var rightLabel = UILabel()
+            rightLabel.textColor = UIColor.lightGrayColor()
+            rightLabel.font = UIFont.systemFontOfSize(13)
+            return rightLabel
+        }
+    }
+    
+    var badgeView:DreamBadgeView!{
+        get{
+            return DreamBadgeView()
+        }
+    }
+    
+    
 
     var indexPath:NSIndexPath!{
         didSet{
@@ -43,9 +73,32 @@ class DreamCommonCell: UITableViewCell {
     
     var item:DreamCommonItem!{
         didSet{
-            self.imageView?.image = UIImage(named: item.icon)
+            if item.icon != nil {
+                self.imageView?.image = UIImage(named: item.icon)
+            }
             self.textLabel?.text = item.title
             self.detailTextLabel?.text = item.subtitle
+            
+            if item.badgeValue != nil {
+                let badgeView =  self.badgeView
+                badgeView.badgeValue = item.badgeValue
+                self.accessoryView = badgeView
+            }else if item.isKindOfClass(DreamCommonArrowItem){
+                self.accessoryView = self.rightArrow
+            }else if item.isKindOfClass(DreamCommonSwitchItem){
+                self.accessoryView = self.rightSwitch
+            }else if item.isKindOfClass(DreamCommonLabelItem){
+                let labelItem = item as DreamCommonLabelItem
+                self.rightLabel.text = labelItem.text
+                var attr = NSMutableDictionary()
+                attr[NSFontAttributeName] = self.rightLabel.font
+
+                self.rightLabel.size = (labelItem.text as NSString).sizeWithAttributes(attr)
+                self.accessoryView = self.rightLabel
+            }else{
+                self.accessoryView = nil
+            }
+            
         }
     }
     

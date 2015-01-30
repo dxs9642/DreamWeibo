@@ -27,3 +27,6 @@
 #import "DreamCommonItem.h"
 #import "DreamCommonGroup.h"
 #import "UIView+Extension.h"
+#import "DreamCommonLabelItem.h"
+#import "DreamCommonArrowItem.h"
+#import "DreamCommonSwitchItem.h"
