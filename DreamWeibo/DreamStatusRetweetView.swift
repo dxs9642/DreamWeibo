@@ -10,36 +10,23 @@ import UIKit
 
 class DreamStatusRetweetView: UIImageView {
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-    
-    
-//    var nameLabel:UILabel?
     var textLabel:DreamStatusLabel?
     var photosView:DreamStatusPhotosView?
     var reweetFrame:DreamStatusRetweetedFrame?
-    
+    var toolbar:DreamStatusRetweetedToolbar?
     
     override init(){
         super.init()
+        
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
         self.userInteractionEnabled = true
         self.image = UIImage.resizeImage("timeline_retweet_background")
         self.highlightedImage = UIImage.resizeImage("timeline_retweet_background_highlighted")
-        
-        
-        
-        let font = DreamFont()
-        
-//        nameLabel = UILabel()
-//        nameLabel?.font = font.DreamStatusRetweetedNameFont
-//        
-//        
-//        self.addSubview(nameLabel!)
         
         
         textLabel = DreamStatusLabel()
@@ -49,11 +36,11 @@ class DreamStatusRetweetView: UIImageView {
         
         self.addSubview(photosView!)
         
+        toolbar = DreamStatusRetweetedToolbar()
+        self.addSubview(toolbar!)
         
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+        
+
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -69,9 +56,6 @@ class DreamStatusRetweetView: UIImageView {
         let user = status.user
 
         self.reweetFrame = reweetFrame
-//        self.nameLabel?.frame = reweetFrame.nameFrame
-//        self.nameLabel?.text = "@\(user.name)"
-//        self.nameLabel?.textColor = UIColor(red: 74/255, green: 102/255, blue: 105/255, alpha: 1)
         
         self.textLabel?.frame = reweetFrame.textFrame
         self.textLabel?.attributedText = status.attributedText
@@ -83,12 +67,15 @@ class DreamStatusRetweetView: UIImageView {
             self.photosView?.frame = reweetFrame.photosFrame
             self.photosView?.setupPic_urls(status.pic_urls)
         }
-        
+        if status.detail {
+            self.toolbar?.frame = reweetFrame.toolbarFrame
+            self.toolbar?.status = reweetFrame.retweetedStatus
+            self.toolbar?.hidden = false
+        }else{
+            self.toolbar?.hidden = true
+        }
     }
 
-//    override func drawRect(rect: CGRect) {
-//        UIImage.resizeImage("timeline_retweet_background").drawInRect(rect)
-//    }
     
 
     

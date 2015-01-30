@@ -52,7 +52,7 @@ class DreamStatusCell: UITableViewCell {
         
         self.detailView?.setupDetailFrame(statusFrame.detailFrame)
         self.toolbar?.frame = statusFrame.toolbarFrame
-        self.toolbar?.setupStatus(statusFrame.status)
+        self.toolbar?.status = statusFrame.status
     }
     
     func setupToolBar(){

@@ -99,6 +99,9 @@
 		D2E5FB301A6E72BA004812D3 /* DreamStatusDetailFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E5FB2C1A6E72BA004812D3 /* DreamStatusDetailFrame.m */; };
 		D2FB2A8B1A7B141D00A08817 /* DreamSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB2A8A1A7B141D00A08817 /* DreamSettingViewController.swift */; };
 		D2FB2A8D1A7B16B600A08817 /* DreamGeneralSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB2A8C1A7B16B600A08817 /* DreamGeneralSettingViewController.swift */; };
+		D2FB2A8F1A7B1EFC00A08817 /* DreamStatusDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB2A8E1A7B1EFC00A08817 /* DreamStatusDetailViewController.swift */; };
+		D2FB2A911A7B32E700A08817 /* DreamStatusRetweetedToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB2A901A7B32E700A08817 /* DreamStatusRetweetedToolbar.swift */; };
+		D2FB2A941A7B5E8300A08817 /* DreamBaseToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB2A931A7B5E8300A08817 /* DreamBaseToolbar.swift */; };
 		D2FB935C1A67D4E300DB5535 /* DreamNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */; };
 		D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */; };
 		D2FE74601A6A7DD600A13FFF /* OauthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE745F1A6A7DD600A13FFF /* OauthViewController.swift */; };
@@ -281,6 +284,9 @@
 		D2E5FB2C1A6E72BA004812D3 /* DreamStatusDetailFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamStatusDetailFrame.m; sourceTree = "<group>"; };
 		D2FB2A8A1A7B141D00A08817 /* DreamSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamSettingViewController.swift; sourceTree = "<group>"; };
 		D2FB2A8C1A7B16B600A08817 /* DreamGeneralSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamGeneralSettingViewController.swift; sourceTree = "<group>"; };
+		D2FB2A8E1A7B1EFC00A08817 /* DreamStatusDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamStatusDetailViewController.swift; sourceTree = "<group>"; };
+		D2FB2A901A7B32E700A08817 /* DreamStatusRetweetedToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamStatusRetweetedToolbar.swift; sourceTree = "<group>"; };
+		D2FB2A931A7B5E8300A08817 /* DreamBaseToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamBaseToolbar.swift; sourceTree = "<group>"; };
 		D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamNavigationViewController.swift; sourceTree = "<group>"; };
 		D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
 		D2FE745F1A6A7DD600A13FFF /* OauthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthViewController.swift; sourceTree = "<group>"; };
@@ -497,6 +503,7 @@
 			isa = PBXGroup;
 			children = (
 				D2154BC21A67C4260043CD8A /* HomeViewController.swift */,
+				D2FB2A8E1A7B1EFC00A08817 /* DreamStatusDetailViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -722,8 +729,8 @@
 		D2432B251A7913C700FD7CFC /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				D2FB2A921A7B5E4800A08817 /* Toolbar */,
 				D2E5FB181A6E5CCD004812D3 /* DreamStatusCell.swift */,
-				D2E5FB1A1A6E65FF004812D3 /* DreamStatusToolBar.swift */,
 				D2E5FB1C1A6E664A004812D3 /* DreamStatusDetailView.swift */,
 				D2E5FB1E1A6E66C0004812D3 /* DreamStatusOriginalView.swift */,
 				D2E5FB201A6E6702004812D3 /* DreamStatusRetweetView.swift */,
@@ -853,6 +860,16 @@
 				D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */,
 			);
 			name = Tool;
+			sourceTree = "<group>";
+		};
+		D2FB2A921A7B5E4800A08817 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				D2FB2A931A7B5E8300A08817 /* DreamBaseToolbar.swift */,
+				D2E5FB1A1A6E65FF004812D3 /* DreamStatusToolBar.swift */,
+				D2FB2A901A7B32E700A08817 /* DreamStatusRetweetedToolbar.swift */,
+			);
+			name = Toolbar;
 			sourceTree = "<group>";
 		};
 		D2FB93581A67D4B500DB5535 /* View */ = {
@@ -1105,6 +1122,7 @@
 				D2FE75911A6B981300A13FFF /* MJMember.m in Sources */,
 				D2C1B7431A761F28006FFD9D /* MBProgressHUD+MJ.m in Sources */,
 				D21545161A761B0F00AB19F3 /* SDWebImageManager+MJ.m in Sources */,
+				D2FB2A911A7B32E700A08817 /* DreamStatusRetweetedToolbar.swift in Sources */,
 				D215450B1A761B0F00AB19F3 /* SDWebImageDecoder.m in Sources */,
 				D2FE75961A6B981300A13FFF /* NSObject+MJKeyValue.m in Sources */,
 				D2FE75971A6B981300A13FFF /* NSObject+MJMember.m in Sources */,
@@ -1132,6 +1150,7 @@
 				D20BA51C1A690F0200EFBE4A /* DreamTitleButton.swift in Sources */,
 				D2432B211A79071A00FD7CFC /* RegexKitLite.m in Sources */,
 				D2FE75BB1A6BD10600A13FFF /* AFNetworkReachabilityManager.m in Sources */,
+				D2FB2A8F1A7B1EFC00A08817 /* DreamStatusDetailViewController.swift in Sources */,
 				D21544C71A75BFF400AB19F3 /* DreamStatusPhotosView.swift in Sources */,
 				D215450D1A761B0F00AB19F3 /* SDWebImageDownloaderOperation.m in Sources */,
 				D20BA51E1A69334A00EFBE4A /* DreamPopMenu.swift in Sources */,
@@ -1161,6 +1180,7 @@
 				D2FE75901A6B981300A13FFF /* MJIvar.m in Sources */,
 				D2432B371A7A168600FD7CFC /* UIView+Extension.m in Sources */,
 				D2432B3F1A7A333500FD7CFC /* DreamCommonArrowItem.m in Sources */,
+				D2FB2A941A7B5E8300A08817 /* DreamBaseToolbar.swift in Sources */,
 				D2FE74C61A6B36A800A13FFF /* AppInfo.swift in Sources */,
 				D2881AF81A7794EC0001DB8B /* DreamEmotionPopView.swift in Sources */,
 				D2BAFE381A6CE7520081C4D5 /* DreamTextView.swift in Sources */,

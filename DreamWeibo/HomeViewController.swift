@@ -356,10 +356,12 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var newView = UIViewController()
-        newView.view.backgroundColor = UIColor.purpleColor()
-        newView.title = "微博正文"
-        self.navigationController?.pushViewController(newView, animated: true)
+
+        let detail = DreamStatusDetailViewController()
+        let frame = self.statusFrame[indexPath.row] as DreamStatusFrame
+        detail.status = frame.status
+        self.navigationController?.pushViewController(detail, animated: true)
+    
     }
     
     func popMenuDidDismissed(popMenu:DreamPopMenu){
