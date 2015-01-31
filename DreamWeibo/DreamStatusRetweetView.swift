@@ -25,6 +25,9 @@ class DreamStatusRetweetView: UIImageView {
         super.init(frame: frame)
         
         self.userInteractionEnabled = true
+        
+        
+        self.userInteractionEnabled = true
         self.image = UIImage.resizeImage("timeline_retweet_background")
         self.highlightedImage = UIImage.resizeImage("timeline_retweet_background_highlighted")
         
@@ -75,8 +78,27 @@ class DreamStatusRetweetView: UIImageView {
             self.toolbar?.hidden = true
         }
     }
-
     
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        
+    }
+    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        
+    }
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        let tabbarVc = UIApplication.sharedApplication().keyWindow?.rootViewController as UITabBarController
+        let nav = tabbarVc.selectedViewController as UINavigationController
+        let detailVc = DreamStatusDetailViewController()
+        detailVc.status = self.reweetFrame?.retweetedStatus
+
+        
+        nav.pushViewController(detailVc, animated: true)
+        
+    }
+    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+        
+    }
 
     
     

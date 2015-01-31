@@ -175,4 +175,11 @@ class DreamStatusLabel: UIView {
         }
     }
     
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        if (self.touchLinkWithPoint(point) != nil){
+            return self
+        }
+        return nil
+    }
+    
 }

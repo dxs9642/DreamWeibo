@@ -30,3 +30,6 @@
 #import "DreamCommonLabelItem.h"
 #import "DreamCommonArrowItem.h"
 #import "DreamCommonSwitchItem.h"
+#import "DreamCommentsResult.h"
+#import "DreamComment.h"
+#import "DreamRepostResult.h"

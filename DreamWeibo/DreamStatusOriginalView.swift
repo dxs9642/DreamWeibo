@@ -113,9 +113,16 @@ class DreamStatusOriginalView: UIImageView {
             self.nameLabel?.textColor = UIColor.blackColor()
         }
         
-        
+        if status.retweeted {
+            let text = NSMutableAttributedString(attributedString: status.attributedText)
+            let len = (user.name as NSString).length + 4
+            text.deleteCharactersInRange(NSMakeRange(0, len))
+            self.textLabel?.attributedText = text
+        }else {
+            self.textLabel?.attributedText = status.attributedText
+
+        }
         self.textLabel?.frame = originalFrame.textFrame
-        self.textLabel?.attributedText = status.attributedText
         
         let time = status.created_at as NSString
         let timeX = CGRectGetMinX(self.nameLabel!.frame)

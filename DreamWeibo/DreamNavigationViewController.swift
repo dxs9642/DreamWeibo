@@ -20,7 +20,7 @@ class DreamNavigationViewController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.interactivePopGestureRecognizer.delegate = nil
 
     }
 

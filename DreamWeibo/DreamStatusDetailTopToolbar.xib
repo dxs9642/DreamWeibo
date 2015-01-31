@@ -9,11 +9,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" tag="700" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rEO-3V-xic" userLabel="repost">
+                <button opaque="NO" tag="700" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rEO-3V-xic" userLabel="repost">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <state key="normal" title="1000 转发">
+                    <state key="normal" title="转发 0">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -24,11 +24,11 @@
                         <action selector="buttonClick:" destination="LpQ-Qy-1nh" eventType="touchUpInside" id="7hw-Ns-i8O"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="701" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="74v-Q4-YQ2" userLabel="comment">
+                <button opaque="NO" tag="701" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="74v-Q4-YQ2" userLabel="comment">
                     <rect key="frame" x="80" y="0.0" width="80" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <state key="normal" title="1000 转发">
+                    <state key="normal" title="评论 0">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -43,11 +43,11 @@
                     <rect key="frame" x="80" y="0.0" width="1" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statusdetail_comment_top_arrow" id="3QD-Ma-72v" userLabel="arrowleft">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statusdetail_comment_top_arrow" id="3QD-Ma-72v" userLabel="arrowleft">
                     <rect key="frame" x="37" y="37" width="12" height="7"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statusdetail_comment_top_arrow" id="0Kl-Kr-SZz" userLabel="arrowright">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statusdetail_comment_top_arrow" id="0Kl-Kr-SZz" userLabel="arrowright">
                     <rect key="frame" x="117" y="37" width="12" height="7"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -55,7 +55,7 @@
                     <rect key="frame" x="304" y="0.0" width="71" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <state key="normal" title="1000 转发">
+                    <state key="normal" title="赞 0">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -72,6 +72,8 @@
             <connections>
                 <outlet property="arrowLeft" destination="3QD-Ma-72v" id="R6U-5I-7Ur"/>
                 <outlet property="arrowRight" destination="0Kl-Kr-SZz" id="ae9-7h-Lbx"/>
+                <outlet property="attitudes" destination="qib-23-LE8" id="07A-3d-2Bb"/>
+                <outlet property="comment" destination="74v-Q4-YQ2" id="478-gw-0D3"/>
                 <outlet property="repost" destination="rEO-3V-xic" id="FFO-qN-Slh"/>
             </connections>
             <point key="canvasLocation" x="139.5" y="154"/>

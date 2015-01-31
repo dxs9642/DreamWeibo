@@ -66,7 +66,7 @@ class DreamBaseToolbar: UIImageView {
             title = "\(count)"
         }
 
-        self.repostButton!.setTitle(title, forState: UIControlState.Normal)
+        button.setTitle(title, forState: UIControlState.Normal)
         
 
     }

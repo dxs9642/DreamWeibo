@@ -13,6 +13,9 @@
 		D20BA51A1A68FF6400EFBE4A /* DreamSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA5191A68FF6400EFBE4A /* DreamSearchBar.swift */; };
 		D20BA51C1A690F0200EFBE4A /* DreamTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA51B1A690F0200EFBE4A /* DreamTitleButton.swift */; };
 		D20BA51E1A69334A00EFBE4A /* DreamPopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BA51D1A69334A00EFBE4A /* DreamPopMenu.swift */; };
+		D20CC5BE1A7C54C600406207 /* DreamComment.m in Sources */ = {isa = PBXBuildFile; fileRef = D20CC5BD1A7C54C600406207 /* DreamComment.m */; };
+		D20CC5C81A7C703F00406207 /* DreamCommentsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D20CC5C71A7C703F00406207 /* DreamCommentsResult.m */; };
+		D20CC5CB1A7C705100406207 /* DreamRepostResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D20CC5CA1A7C705100406207 /* DreamRepostResult.m */; };
 		D21544C21A74E58800AB19F3 /* DreamFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21544C11A74E58800AB19F3 /* DreamFont.swift */; };
 		D21544C51A75173E00AB19F3 /* NSDate+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = D21544C41A75173E00AB19F3 /* NSDate+MJ.m */; };
 		D21544C71A75BFF400AB19F3 /* DreamStatusPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21544C61A75BFF400AB19F3 /* DreamStatusPhotosView.swift */; };
@@ -152,6 +155,12 @@
 		D20BA5191A68FF6400EFBE4A /* DreamSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamSearchBar.swift; sourceTree = "<group>"; };
 		D20BA51B1A690F0200EFBE4A /* DreamTitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTitleButton.swift; sourceTree = "<group>"; };
 		D20BA51D1A69334A00EFBE4A /* DreamPopMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamPopMenu.swift; sourceTree = "<group>"; };
+		D20CC5BC1A7C54C600406207 /* DreamComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamComment.h; sourceTree = "<group>"; };
+		D20CC5BD1A7C54C600406207 /* DreamComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamComment.m; sourceTree = "<group>"; };
+		D20CC5C61A7C703F00406207 /* DreamCommentsResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamCommentsResult.h; sourceTree = "<group>"; };
+		D20CC5C71A7C703F00406207 /* DreamCommentsResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamCommentsResult.m; sourceTree = "<group>"; };
+		D20CC5C91A7C705100406207 /* DreamRepostResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamRepostResult.h; sourceTree = "<group>"; };
+		D20CC5CA1A7C705100406207 /* DreamRepostResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamRepostResult.m; sourceTree = "<group>"; };
 		D21544C11A74E58800AB19F3 /* DreamFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamFont.swift; sourceTree = "<group>"; };
 		D21544C31A75173E00AB19F3 /* NSDate+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MJ.h"; sourceTree = "<group>"; };
 		D21544C41A75173E00AB19F3 /* NSDate+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MJ.m"; sourceTree = "<group>"; };
@@ -390,6 +399,17 @@
 			name = DreamEmotion;
 			sourceTree = "<group>";
 		};
+		D20CC5BF1A7C552B00406207 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				D20CC5C61A7C703F00406207 /* DreamCommentsResult.h */,
+				D20CC5C71A7C703F00406207 /* DreamCommentsResult.m */,
+				D20CC5C91A7C705100406207 /* DreamRepostResult.h */,
+				D20CC5CA1A7C705100406207 /* DreamRepostResult.m */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
 		D21544CA1A761A6600AB19F3 /* MJPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +547,8 @@
 				D21544C11A74E58800AB19F3 /* DreamFont.swift */,
 				D2432B221A7907DE00FD7CFC /* DreamRegexResult.h */,
 				D2432B231A7907DE00FD7CFC /* DreamRegexResult.m */,
+				D20CC5BC1A7C54C600406207 /* DreamComment.h */,
+				D20CC5BD1A7C54C600406207 /* DreamComment.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -638,6 +660,7 @@
 		D2154BDE1A67C7410043CD8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D20CC5BF1A7C552B00406207 /* Comments */,
 				D2432B321A7A067400FD7CFC /* Common */,
 				D23CCC761A6DFF4F0044003B /* DreamUnreadCountResult.h */,
 				D23CCC771A6DFF4F0044003B /* DreamUnreadCountResult.m */,
@@ -1152,6 +1175,7 @@
 				D215450C1A761B0F00AB19F3 /* SDWebImageDownloader.m in Sources */,
 				D2FE74C81A6B3DA900A13FFF /* Account.swift in Sources */,
 				D29064331A76754B00D6A4BC /* DreamEmotionListView.swift in Sources */,
+				D20CC5CB1A7C705100406207 /* DreamRepostResult.m in Sources */,
 				D2FE75931A6B981300A13FFF /* MJType.m in Sources */,
 				D2FE75BC1A6BD10600A13FFF /* AFSecurityPolicy.m in Sources */,
 				D2432B2B1A79CBB900FD7CFC /* DreamLink.m in Sources */,
@@ -1178,6 +1202,7 @@
 				D2154BC31A67C4260043CD8A /* HomeViewController.swift in Sources */,
 				D21544C51A75173E00AB19F3 /* NSDate+MJ.m in Sources */,
 				D2432B3E1A7A333500FD7CFC /* DreamCommonLabelItem.m in Sources */,
+				D20CC5BE1A7C54C600406207 /* DreamComment.m in Sources */,
 				D2FE758F1A6B981300A13FFF /* MJFoundation.m in Sources */,
 				D2E5FB1B1A6E65FF004812D3 /* DreamStatusToolBar.swift in Sources */,
 				D2E5FB2E1A6E72BA004812D3 /* DreamStatusOriginalFrame.m in Sources */,
@@ -1233,6 +1258,7 @@
 				D2FE75A01A6B9DA200A13FFF /* DreamPhoto.m in Sources */,
 				D2A0B3B61A7715D600041E22 /* DreamEmotion.m in Sources */,
 				D21545131A761B0F00AB19F3 /* UIImageView+HighlightedWebCache.m in Sources */,
+				D20CC5C81A7C703F00406207 /* DreamCommentsResult.m in Sources */,
 				D20BA51A1A68FF6400EFBE4A /* DreamSearchBar.swift in Sources */,
 				D20BA5181A68EDBF00EFBE4A /* UIView+Extension.swift in Sources */,
 				D20401871A78628F00E7ADE6 /* DreamEmotionTool.swift in Sources */,
