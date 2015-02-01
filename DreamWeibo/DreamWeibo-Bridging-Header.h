@@ -33,3 +33,4 @@
 #import "DreamCommentsResult.h"
 #import "DreamComment.h"
 #import "DreamRepostResult.h"
+#import "FMDB.h"

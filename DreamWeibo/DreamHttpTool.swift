@@ -9,6 +9,28 @@
 import UIKit
 
 class DreamHttpTool: NSObject {
+    
+    
+    class var db:FMDatabase{
+        get{
+            let doc = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString
+            let filename = doc.stringByAppendingPathComponent("status.sqlite")
+            let db = FMDatabase(path: filename)
+            
+            if db.open() {
+                let result = db.executeUpdate("CREATE TABLE IF NOT EXIST t_home_status(id integer PRIMARY KEY AUTOINCREMENT, uid text NOT NULL, status_idstr text NOT NULL,status_dic blob NOT NULL);",withArgumentsInArray: [])
+                
+                if result {
+                    println("success")
+                }else{
+                    println("failed")
+                }
+            }
+            
+            return db
+        }
+    }
+
    
     class func get(url:NSString,params:NSDictionary,success:(AnyObject!)->Void,errors:()->Void){
         

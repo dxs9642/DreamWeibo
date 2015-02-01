@@ -111,9 +111,6 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
     
     func loadNewStatus(){
-        
-        
-        
         let account = Account.getAccount()
         if account == nil {
             Account.expiredAndReAuth()
@@ -129,6 +126,11 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         if firstStatus != nil {
             params["since_id"] = firstStatus!.idstr
         }
+        
+        
+        if !loadNewOfflineStatus(params) {
+            return
+        }
  
         DreamHttpTool.get("https://api.weibo.com/2/statuses/home_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
             let result = obj as NSDictionary
@@ -136,48 +138,97 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             
             let statusDictArray = result["statuses"] as NSArray
             
+            let newStatus =  DreamStatus.objectArrayWithKeyValuesArray(statusDictArray)
+
             
-            let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
-            let newFrames = self.statusesFramesWithStatuses(newStatus)
             
-            for tmp in newFrames {
-                let frame = tmp as DreamStatusFrame
-
-                if frame.detailFrame.retweetedFrame != nil {
-
-                    let tmpframe = frame.detailFrame.retweetedFrame.frame.height
-                    println(tmpframe)
-                    let tmpname = frame.status.retweeted_status.user.name
-
-                }
-
-            }
+            self.doWithResults(newStatus)
             
-            if newFrames.count != 0 {
-
-
-                let range = NSMakeRange(0, newStatus.count)
-                self.statusFrame.insertObjects(newFrames, atIndexes:NSIndexSet(indexesInRange:range))
-                
-
-                
-                self.tableView.reloadData()
-            }
-            if self.tabBarItem.badgeValue != nil{
-                UIApplication.sharedApplication().applicationIconBadgeNumber -= self.tabBarItem!.badgeValue!.toInt()!
-            }
-            self.tabBarItem.badgeValue = nil
-            self.showStatusCount(newStatus.count)
-            self.refreshControl?.endRefreshing()
-
-            let firstRow = NSIndexPath(forRow: 0, inSection: 0)
-            self.tableView.scrollToRowAtIndexPath(firstRow, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
             
         }) { () -> Void in
             
         }
         
     }
+    
+    
+    func loadNewOfflineStatus(params:NSDictionary) -> Bool{
+        
+        let db = DreamHttpTool.db
+        
+        let id = params["since_id"] as? NSString
+        
+        var resultSet:FMResultSet!
+        if id != nil {
+
+            resultSet =  db.executeQuery("SELECT * FROM t_home_status WHERE status_idstr > \(id) ORDER BY status_idstr DESC;", withArgumentsInArray: [])
+
+        }else {
+            resultSet =  db.executeQuery("SELECT * FROM t_home_status ORDER BY status_idstr DESC;", withArgumentsInArray: [])
+
+        }
+        
+        
+        var statuses = NSMutableArray()
+        
+        while resultSet.next() {
+            
+            let statusDic =  resultSet.objectForColumnName("status_dict") as NSDictionary
+            let status = DreamStatus(keyValues: statusDic)
+            
+            statuses.addObject(status)
+            
+        }
+        if statuses.count == 0{
+            return false
+        }else{
+            doWithResults(statuses)
+            return true
+        }
+    }
+    
+    
+    func doWithResults(newStatus:NSArray){
+        
+        let newFrames = self.statusesFramesWithStatuses(newStatus)
+        
+        
+        
+        for tmp in newFrames {
+            let frame = tmp as DreamStatusFrame
+            
+            if frame.detailFrame.retweetedFrame != nil {
+                
+                let tmpframe = frame.detailFrame.retweetedFrame.frame.height
+                
+                let tmpname = frame.status.retweeted_status.user.name
+                
+            }
+            
+        }
+        
+        if newFrames.count != 0 {
+            
+            
+            let range = NSMakeRange(0, newStatus.count)
+            self.statusFrame.insertObjects(newFrames, atIndexes:NSIndexSet(indexesInRange:range))
+            
+            
+            
+            self.tableView.reloadData()
+        }
+        if self.tabBarItem.badgeValue != nil{
+            UIApplication.sharedApplication().applicationIconBadgeNumber -= self.tabBarItem!.badgeValue!.toInt()!
+        }
+        self.tabBarItem.badgeValue = nil
+        self.showStatusCount(newStatus.count)
+        self.refreshControl?.endRefreshing()
+        
+        let firstRow = NSIndexPath(forRow: 0, inSection: 0)
+        self.tableView.scrollToRowAtIndexPath(firstRow, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+
+    }
+    
     
     func statusesFramesWithStatuses(statuses:NSArray) -> NSArray{
         var frames =  NSMutableArray()
