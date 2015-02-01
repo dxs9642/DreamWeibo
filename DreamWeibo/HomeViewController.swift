@@ -13,7 +13,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     var titleButton:UIButton?
     var statusFrame:NSMutableArray = NSMutableArray()
     var footer:DreamLoadMoreFooter?
-    var changeValue = 0
+
     
     
     override func viewDidLoad() {
@@ -140,11 +140,26 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
             let newFrames = self.statusesFramesWithStatuses(newStatus)
             
+            for tmp in newFrames {
+                let frame = tmp as DreamStatusFrame
+
+                if frame.detailFrame.retweetedFrame != nil {
+
+                    let tmpframe = frame.detailFrame.retweetedFrame.frame.height
+                    println(tmpframe)
+                    let tmpname = frame.status.retweeted_status.user.name
+
+                }
+
+            }
+            
             if newFrames.count != 0 {
+
+
                 let range = NSMakeRange(0, newStatus.count)
                 self.statusFrame.insertObjects(newFrames, atIndexes:NSIndexSet(indexesInRange:range))
                 
-                self.changeValue += 1000
+
                 
                 self.tableView.reloadData()
             }
@@ -177,6 +192,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     
     
     func loadMoreStatus(){
+        
         let account = Account.getAccount()
         if account == nil {
             Account.expiredAndReAuth()
@@ -338,7 +354,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
                 
-        let ID = "status\(indexPath.row+changeValue)"
+        let ID = "status"
+        
         
         
         var cell = tableView.dequeueReusableCellWithIdentifier(ID) as DreamStatusCell?

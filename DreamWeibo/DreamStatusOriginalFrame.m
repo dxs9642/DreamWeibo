@@ -39,47 +39,51 @@
     
 
     
-    // 5.正文
+    // 3.正文
     CGFloat textX = iconX;
-    CGFloat textY = CGRectGetMaxY(self.iconFrame) + DreamStatusCellInset;
+    CGFloat textY = CGRectGetMaxY(self.iconFrame) + DreamStatusCellInset * 0.5;
     CGFloat maxW = DreamScreenW - 2 * textX;
     CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);
-    CGSize textSize = [status.attributedText boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+    
+    // 删掉最前面的昵称
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:status.attributedText];
+    if (status.isRetweeted) {
+        int len = status.user.name.length + 4;
+        [text deleteCharactersInRange:NSMakeRange(0, len)];
+    }
+    CGSize textSize = [text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     self.textFrame = (CGRect){{textX, textY}, textSize};
     
+
     // 4.配图相册
     CGFloat h = 0;
     if (status.pic_urls.count) {
         CGFloat photosX = textX;
-        CGFloat photosY = CGRectGetMaxY(self.textFrame) + DreamStatusCellInset;
-        int photosCount = (int)status.pic_urls.count;
-        CGFloat photoW = 70;
-        CGFloat photoH = photoW;
-        CGFloat photoMargin = 10;
+        CGFloat photosY = CGRectGetMaxY(self.textFrame) + DreamStatusCellInset * 0.5;
         
-        // 一行最多几列
-        int maxCols = photosCount==4 ? 2 : 3;
+        int photosCount = status.pic_urls.count;
+        
+        int maxCols = DreamStatusPhotosMaxCols(photosCount);
         
         // 总列数
         int totalCols = photosCount >= maxCols ?  maxCols : photosCount;
         
         // 总行数
-        // 知道总个数
-        // 知道每一页最多显示多少个
-        // 能算出一共能显示多少页
         int totalRows = (photosCount + maxCols - 1) / maxCols;
         
         // 计算尺寸
-        CGFloat photosW = totalCols * photoW + (totalCols - 1) * photoMargin;
-        CGFloat photosH = totalRows * photoH + (totalRows - 1) * photoMargin;
+        CGFloat photosW = totalCols * 70 + (totalCols - 1) * 10;
+        CGFloat photosH = totalRows * 70 + (totalRows - 1) * 10;
         
-        CGSize photosSize =  CGSizeMake(photosW, photosH);
+        CGSize photosSize = CGSizeMake(photosW, photosH);
+        
         self.photosFrame = (CGRect){{photosX, photosY}, photosSize};
         
         h = CGRectGetMaxY(self.photosFrame) + DreamStatusCellInset;
     } else {
         h = CGRectGetMaxY(self.textFrame) + DreamStatusCellInset;
     }
+    
     
     // 自己
     CGFloat x = 0;

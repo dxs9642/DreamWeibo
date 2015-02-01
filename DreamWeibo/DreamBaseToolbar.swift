@@ -14,20 +14,20 @@ class DreamBaseToolbar: UIImageView {
     var repostButton:UIButton?
     var commentButton:UIButton?
     var attitudesButton:UIButton?
-    var firstTime = true
+
     
     var status:DreamStatus!{
         didSet{
             
-            if !firstTime {return}
+
+            
             let reposts_count = Int(status.reposts_count)
             setupBtnTitle(repostButton!, count: reposts_count, defaultTitle: "转发")
             let comment_count = Int(status.comments_count)
             setupBtnTitle(commentButton!, count: comment_count, defaultTitle: "评论")
-            
             let attitudes_count = Int(status.attitudes_count)
             setupBtnTitle(attitudesButton!, count: attitudes_count, defaultTitle: "赞")
-            firstTime = false
+
         }
     }
     
@@ -42,6 +42,8 @@ class DreamBaseToolbar: UIImageView {
         self.repostButton = setupButtonWithIcon("timeline_icon_retweet", title: "转发")
         self.commentButton = setupButtonWithIcon("timeline_icon_comment", title: "评论")
         self.attitudesButton = setupButtonWithIcon("timeline_icon_unlike", title: "赞")
+        
+
         
     }
     
@@ -76,13 +78,11 @@ class DreamBaseToolbar: UIImageView {
     func setupButtonWithIcon(icon:NSString,title:NSString) -> UIButton{
         var button = UIButton()
         button.setImage(UIImage(named: icon), forState: UIControlState.Normal)
-        button.setTitle(title, forState: UIControlState.Normal)
         button.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         button.titleLabel?.font = UIFont.systemFontOfSize(13)
         
-        
         button.setBackgroundImage(UIImage.resizeImage("timeline_card_bottom_background_highlighted"), forState: UIControlState.Highlighted)
-        
+
         button.adjustsImageWhenDisabled = false
         
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
@@ -93,7 +93,6 @@ class DreamBaseToolbar: UIImageView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         let buttonNum = self.buttons.count
         let buttonW = self.width() / CGFloat(Float(buttonNum))
         let buttonH = self.height()

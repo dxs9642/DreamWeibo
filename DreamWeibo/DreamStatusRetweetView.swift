@@ -13,7 +13,7 @@ class DreamStatusRetweetView: UIImageView {
     var textLabel:DreamStatusLabel?
     var photosView:DreamStatusPhotosView?
     var reweetFrame:DreamStatusRetweetedFrame?
-    var toolbar:DreamStatusRetweetedToolbar?
+    var toolbar:DreamBaseToolbar?
     
     override init(){
         super.init()
@@ -27,7 +27,7 @@ class DreamStatusRetweetView: UIImageView {
         self.userInteractionEnabled = true
         
         
-        self.userInteractionEnabled = true
+
         self.image = UIImage.resizeImage("timeline_retweet_background")
         self.highlightedImage = UIImage.resizeImage("timeline_retweet_background_highlighted")
         
@@ -50,18 +50,24 @@ class DreamStatusRetweetView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupEmptyRetweetFrame(){
+        self.frame = CGRectMake(0, 0, 0, 0)
+        self.hidden = true
+
+    }
+    
     func setupReweetFrame(reweetFrame:DreamStatusRetweetedFrame){
         self.reweetFrame = reweetFrame
-        
+        self.hidden = false
         self.frame = reweetFrame.frame
         
         let status = reweetFrame.retweetedStatus
         let user = status.user
 
-        self.reweetFrame = reweetFrame
         
         self.textLabel?.frame = reweetFrame.textFrame
         self.textLabel?.attributedText = status.attributedText
+
 
         if status.pic_urls!.count == 0 {
             self.photosView?.hidden = true
@@ -76,6 +82,7 @@ class DreamStatusRetweetView: UIImageView {
             self.toolbar?.hidden = false
         }else{
             self.toolbar?.hidden = true
+
         }
     }
     

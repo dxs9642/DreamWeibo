@@ -33,38 +33,26 @@
     // 3.配图相册
     if (retweetedStatus.pic_urls.count) {
         CGFloat photosX = textX;
-        CGFloat photosY = CGRectGetMaxY(self.textFrame) + DreamStatusCellInset;
+        CGFloat photosY = CGRectGetMaxY(self.textFrame) + DreamStatusCellInset * 0.5;
         
-        int photosCount = (int)retweetedStatus.pic_urls.count;
-        CGFloat photoW = 70;
-        CGFloat photoH = photoW;
-        CGFloat photoMargin = 10;
+        int photosCount = retweetedStatus.pic_urls.count;
         
-        // 一行最多几列
-        int maxCols = photosCount==4 ? 2 : 3;
-
+        int maxCols = DreamStatusPhotosMaxCols(photosCount);
         
         // 总列数
         int totalCols = photosCount >= maxCols ?  maxCols : photosCount;
         
         // 总行数
-        // 知道总个数
-        // 知道每一页最多显示多少个
-        // 能算出一共能显示多少页
         int totalRows = (photosCount + maxCols - 1) / maxCols;
         
         // 计算尺寸
-        CGFloat photosW = totalCols * photoW + (totalCols - 1) * photoMargin;
-        CGFloat photosH = totalRows * photoH + (totalRows - 1) * photoMargin;
+        CGFloat photosW = totalCols * 70 + (totalCols - 1) * 10;
+        CGFloat photosH = totalRows * 70 + (totalRows - 1) * 10;
         
-        CGSize photosSize =  CGSizeMake(photosW, photosH);
-
         
+        CGSize photosSize = CGSizeMake(photosW, photosH);
         self.photosFrame = (CGRect){{photosX, photosY}, photosSize};
-        
         h = CGRectGetMaxY(self.photosFrame) + DreamStatusCellInset;
-    } else {
-        h = CGRectGetMaxY(self.textFrame) + DreamStatusCellInset;
     }
     
     // 3.工具条

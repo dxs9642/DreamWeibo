@@ -113,15 +113,8 @@ class DreamStatusOriginalView: UIImageView {
             self.nameLabel?.textColor = UIColor.blackColor()
         }
         
-        if status.retweeted {
-            let text = NSMutableAttributedString(attributedString: status.attributedText)
-            let len = (user.name as NSString).length + 4
-            text.deleteCharactersInRange(NSMakeRange(0, len))
-            self.textLabel?.attributedText = text
-        }else {
-            self.textLabel?.attributedText = status.attributedText
 
-        }
+        self.textLabel?.attributedText = status.attributedText
         self.textLabel?.frame = originalFrame.textFrame
         
         let time = status.created_at as NSString
@@ -135,12 +128,14 @@ class DreamStatusOriginalView: UIImageView {
         self.timeLabel?.text = time
         
         let source = status.source
-        let sourceX = CGRectGetMaxX(self.timeLabel!.frame) + 10
-        let sourceY = timeY
-        dic[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
-        let sourceSize = source.sizeWithAttributes(dic)
-        self.sourceLabel?.frame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height)
-        self.sourceLabel?.text = source
+        if source != nil {
+            let sourceX = CGRectGetMaxX(self.timeLabel!.frame) + 10
+            let sourceY = timeY
+            dic[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
+            let sourceSize = source.sizeWithAttributes(dic)
+            self.sourceLabel?.frame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height)
+            self.sourceLabel?.text = source
+        }
         
         if status.pic_urls!.count == 0 {
             self.photosView?.hidden = true

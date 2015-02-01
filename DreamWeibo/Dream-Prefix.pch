@@ -41,6 +41,7 @@
 #define DreamStatusRichTextFont [UIFont systemFontOfSize:15]
 
 #define DreamLinkText @"DreamLinkText"
+#define DreamStatusPhotosMaxCols(photosCount) ((photosCount==4)?2:3)
 
 
 #endif

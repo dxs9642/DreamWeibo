@@ -61,10 +61,18 @@ class DreamStatusDetailView: UIImageView {
         self.frame = detailFrame.frame
         
         self.originalView?.setupOriginalFrame(detailFrame.originalFrame)
+
+        
         if detailFrame.retweetedFrame != nil {
+            
+
+            
             self.retweetView?.setupReweetFrame(detailFrame.retweetedFrame)
+            
+            
+            
         }else{
-            self.retweetView?.removeFromSuperview()
+            self.retweetView?.setupEmptyRetweetFrame()
         }
     }
 
