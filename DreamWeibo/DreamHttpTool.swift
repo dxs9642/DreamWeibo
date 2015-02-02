@@ -18,13 +18,13 @@ class DreamHttpTool: NSObject {
             let db = FMDatabase(path: filename)
             
             if db.open() {
-                let result = db.executeUpdate("CREATE TABLE IF NOT EXIST t_home_status(id integer PRIMARY KEY AUTOINCREMENT, uid text NOT NULL, status_idstr text NOT NULL,status_dic blob NOT NULL);",withArgumentsInArray: [])
+                let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS t_home_status(status_idstr text PRIMARY KEY NOT NULL,status_dict blob NOT NULL);",withArgumentsInArray: [])
                 
-                if result {
-                    println("success")
-                }else{
-                    println("failed")
-                }
+//                if result {
+//                    println("success")
+//                }else{
+//                    println("failed")
+//                }
             }
             
             return db
@@ -68,12 +68,5 @@ class DreamHttpTool: NSObject {
 
     }
     
-    
-//    class func postWithData(url:NSString,params:NSDictionary,success:(AnyObject!)->Void,errors:()->Void){
-//        
-//        var mgr = AFHTTPRequestOperationManager()
-//        mgr.POST(<#URLString: String!#>, parameters: <#AnyObject!#>, constructingBodyWithBlock: <#((AFMultipartFormData!) -> Void)!##(AFMultipartFormData!) -> Void#>, success: <#((AFHTTPRequestOperation!, AnyObject!) -> Void)!##(AFHTTPRequestOperation!, AnyObject!) -> Void#>, failure: <#((AFHTTPRequestOperation!, NSError!) -> Void)!##(AFHTTPRequestOperation!, NSError!) -> Void#>)
-//        
-//    }
     
 }

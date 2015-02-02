@@ -24,7 +24,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         setupNavigationBar()
         setupRefresh()
         self.refreshControl?.beginRefreshing()
-        loadNewStatus()
+        loadNewStatus(true)
         setupUserInfo()
         
         
@@ -50,9 +50,6 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     
     
     func setupUserInfo(){
-        
-
-            
         
             let account = Account.getAccount()
             if account == nil {
@@ -106,11 +103,11 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
     
     func refreshData(){
-        loadNewStatus()
+        loadNewStatus(false)
         
     }
     
-    func loadNewStatus(){
+    func loadNewStatus(isFirstTime:Bool){
         let account = Account.getAccount()
         if account == nil {
             Account.expiredAndReAuth()
@@ -127,22 +124,23 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             params["since_id"] = firstStatus!.idstr
         }
         
-        
-        if !loadNewOfflineStatus(params) {
-            return
+        if isFirstTime{
+            if loadNewOfflineStatus(params) {
+                return
+            }
         }
- 
+        
         DreamHttpTool.get("https://api.weibo.com/2/statuses/home_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
             let result = obj as NSDictionary
             
             
             let statusDictArray = result["statuses"] as NSArray
             
-            let newStatus =  DreamStatus.objectArrayWithKeyValuesArray(statusDictArray)
+            self.AddStatusInToSqlite(statusDictArray)
+
 
             
-            
-            self.doWithResults(newStatus)
+            self.doWithNewResults(statusDictArray,fromSqlite:false)
             
             
         }) { () -> Void in
@@ -151,45 +149,72 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
     }
     
+    func AddStatusInToSqlite(statues:NSArray){
+        let db = DreamHttpTool.db
+
+        for statue in statues {
+            let statueDic = statue as NSDictionary
+            let data = NSKeyedArchiver.archivedDataWithRootObject(statueDic)
+            let status_idstr = statueDic["idstr"] as NSString
+            db.executeUpdate("INSERT INTO t_home_status (status_idstr,status_dict) VALUES(?,?);",withArgumentsInArray: [status_idstr,data])
+            
+        }
+        
+    }
+
+    
     
     func loadNewOfflineStatus(params:NSDictionary) -> Bool{
         
         let db = DreamHttpTool.db
         
-        let id = params["since_id"] as? NSString
+        let since_id = params["since_id"] as? NSString
+        let max_id = params["max_id"] as? NSInteger
         
         var resultSet:FMResultSet!
-        if id != nil {
+        if since_id != nil{
 
-            resultSet =  db.executeQuery("SELECT * FROM t_home_status WHERE status_idstr > \(id) ORDER BY status_idstr DESC;", withArgumentsInArray: [])
-
-        }else {
-            resultSet =  db.executeQuery("SELECT * FROM t_home_status ORDER BY status_idstr DESC;", withArgumentsInArray: [])
+            resultSet =  db.executeQuery("SELECT * FROM t_home_status WHERE status_idstr > ? ORDER BY status_idstr DESC LIMIT 20;", withArgumentsInArray: [since_id!])
 
         }
+        else if max_id != nil {
+            resultSet =  db.executeQuery("SELECT * FROM t_home_status WHERE status_idstr <= ?  ORDER BY status_idstr DESC LIMIT 20;", withArgumentsInArray: [max_id!])
+
+        }else {
+            resultSet =  db.executeQuery("SELECT * FROM t_home_status ORDER BY status_idstr DESC LIMIT 20;", withArgumentsInArray: [])
+        }
+        
         
         
         var statuses = NSMutableArray()
         
         while resultSet.next() {
+            let data =  resultSet.objectForColumnName("status_dict") as NSData
+            let statusDic = NSKeyedUnarchiver.unarchiveObjectWithData(data) as NSDictionary
             
-            let statusDic =  resultSet.objectForColumnName("status_dict") as NSDictionary
-            let status = DreamStatus(keyValues: statusDic)
-            
-            statuses.addObject(status)
+            statuses.addObject(statusDic)
             
         }
         if statuses.count == 0{
             return false
         }else{
-            doWithResults(statuses)
+            if since_id != nil {
+                doWithNewResults(statuses,fromSqlite: true)
+            }else if max_id != nil {
+                doWithMoreResults(statuses, fromSqlite: true)
+            }else{
+                doWithNewResults(statuses, fromSqlite: true)
+            }
             return true
         }
     }
     
     
-    func doWithResults(newStatus:NSArray){
+    func doWithNewResults(status:NSArray,fromSqlite:Bool){
         
+        
+        let newStatus =  DreamStatus.objectArrayWithKeyValuesArray(status)
+
         let newFrames = self.statusesFramesWithStatuses(newStatus)
         
         
@@ -217,12 +242,15 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             
             self.tableView.reloadData()
         }
+        self.refreshControl?.endRefreshing()
+
+        if fromSqlite { return }
+        
         if self.tabBarItem.badgeValue != nil{
             UIApplication.sharedApplication().applicationIconBadgeNumber -= self.tabBarItem!.badgeValue!.toInt()!
         }
         self.tabBarItem.badgeValue = nil
         self.showStatusCount(newStatus.count)
-        self.refreshControl?.endRefreshing()
         
         let firstRow = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.scrollToRowAtIndexPath(firstRow, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
@@ -260,6 +288,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             params["max_id"] = lastStatus!.idstr.toInt()! - 1
         }
         
+        if loadNewOfflineStatus(params) {
+            return
+        }
+        
         DreamHttpTool.get("https://api.weibo.com/2/statuses/home_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
             
             let result = obj as NSDictionary
@@ -268,25 +300,31 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             let statusDictArray = result["statuses"] as NSArray
             
             
+            self.AddStatusInToSqlite(statusDictArray)
+
+            self.doWithMoreResults(statusDictArray,fromSqlite:false)
 
             
-            let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(statusDictArray))
-            let newFrames = self.statusesFramesWithStatuses(newStatus)
-            
-            
-            if newFrames.count != 0 {
-                self.statusFrame.addObjectsFromArray(newFrames)
-                self.tableView.reloadData()
-            }
-
-            self.footer?.endRefreshing()
 
             
         }) { () -> Void in
             
         }
-        
 
+    }
+    
+
+    func doWithMoreResults(status:NSArray,fromSqlite:Bool){
+        let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(status))
+        let newFrames = self.statusesFramesWithStatuses(newStatus)
+        
+        
+        if newFrames.count != 0 {
+            self.statusFrame.addObjectsFromArray(newFrames)
+            self.tableView.reloadData()
+        }
+        
+        self.footer?.endRefreshing()
 
     }
     
