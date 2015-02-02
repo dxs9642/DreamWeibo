@@ -95,6 +95,7 @@
 		D2C1B73F1A761EDE006FFD9D /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1B73C1A761EDE006FFD9D /* MBProgressHUD+Add.m */; };
 		D2C1B7401A761EDE006FFD9D /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2C1B73D1A761EDE006FFD9D /* MBProgressHUD.bundle */; };
 		D2C1B7431A761F28006FFD9D /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1B7421A761F28006FFD9D /* MBProgressHUD+MJ.m */; };
+		D2C636F01A7F587A00F3C0E0 /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */; };
 		D2DF93141A6D49AA00C024BC /* DreamHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */; };
 		D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */; };
 		D2E5FB191A6E5CCD004812D3 /* DreamStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E5FB181A6E5CCD004812D3 /* DreamStatusCell.swift */; };
@@ -297,6 +298,8 @@
 		D2C1B73D1A761EDE006FFD9D /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		D2C1B7411A761F28006FFD9D /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		D2C1B7421A761F28006FFD9D /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
+		D2C636EE1A7F587A00F3C0E0 /* NSString+File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+File.h"; sourceTree = "<group>"; };
+		D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+File.m"; sourceTree = "<group>"; };
 		D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamHttpTool.swift; sourceTree = "<group>"; };
 		D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTabBar.swift; sourceTree = "<group>"; };
 		D2E5FB181A6E5CCD004812D3 /* DreamStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamStatusCell.swift; sourceTree = "<group>"; };
@@ -967,6 +970,8 @@
 		D2FB935D1A67F16400DB5535 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D2C636EE1A7F587A00F3C0E0 /* NSString+File.h */,
+				D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */,
 				D2432B351A7A168600FD7CFC /* UIView+Extension.h */,
 				D2432B361A7A168600FD7CFC /* UIView+Extension.m */,
 				D2FB935E1A67F22500DB5535 /* UIBarButtonItem+Extension.swift */,
@@ -1207,6 +1212,7 @@
 				D2BAFE3D1A6CFC3E0081C4D5 /* DreamComposePhotosView.swift in Sources */,
 				D215450F1A761B0F00AB19F3 /* SDWebImagePrefetcher.m in Sources */,
 				D2FB2A8D1A7B16B600A08817 /* DreamGeneralSettingViewController.swift in Sources */,
+				D2C636F01A7F587A00F3C0E0 /* NSString+File.m in Sources */,
 				D29436711A69F8CE001CE8BE /* ComposeViewController.swift in Sources */,
 				D2FE75C01A6BD10600A13FFF /* AFURLSessionManager.m in Sources */,
 				D2881AF61A778A460001DB8B /* DreamEmotionView.swift in Sources */,

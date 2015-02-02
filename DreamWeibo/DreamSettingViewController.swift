@@ -50,7 +50,7 @@ class DreamSettingViewController: DreamCommonViewController {
     
     
     
-    func setupGroup0(){
+    func setupGroup1(){
         let group = DreamCommonGroup()
         group.footer = "tail部"
         
@@ -61,7 +61,7 @@ class DreamSettingViewController: DreamCommonViewController {
     }
     
     
-    func setupGroup1(){
+    func setupGroup2(){
         
         let group = DreamCommonGroup()
         
@@ -74,7 +74,7 @@ class DreamSettingViewController: DreamCommonViewController {
         
         
     }
-    func setupGroup2(){
+    func setupGroup0(){
         
         let group = DreamCommonGroup()
         group.header = "头部"

@@ -34,3 +34,4 @@
 #import "DreamComment.h"
 #import "DreamRepostResult.h"
 #import "FMDB.h"
+#import "NSString+File.h"
