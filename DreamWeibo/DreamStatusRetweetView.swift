@@ -94,7 +94,8 @@ class DreamStatusRetweetView: UIImageView {
         
     }
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        let tabbarVc = UIApplication.sharedApplication().keyWindow?.rootViewController as UITabBarController
+       let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+         let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
         let nav = tabbarVc.selectedViewController as UINavigationController
         let detailVc = DreamStatusDetailViewController()
         detailVc.status = self.reweetFrame?.retweetedStatus

@@ -23,13 +23,14 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBar
         addAllChildVCs()
         addCustomTabBar()
         setUnreadCount()
-
+    
 
         let timer = NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "setUnreadCount", userInfo: nil, repeats: true)
         
         NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
         
-        // Do any additional setup after loading the view.
+        
+
     }
 
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
@@ -114,6 +115,7 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBar
         self.profile = profile
     }
     
+    
     func addChildVC(vc:UIViewController,title:NSString,image:NSString,select_image:NSString){
         
         //下面的所有代码都没有调用viewDidLoad()，因为没有加载view
@@ -129,14 +131,12 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBar
         self.addChildViewController(nav)
     }
 
-    /*
-    // MARK: - Navigation
+    
+    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        
     }
-    */
+    
 
 }

@@ -96,6 +96,9 @@
 		D2C1B7401A761EDE006FFD9D /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2C1B73D1A761EDE006FFD9D /* MBProgressHUD.bundle */; };
 		D2C1B7431A761F28006FFD9D /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1B7421A761F28006FFD9D /* MBProgressHUD+MJ.m */; };
 		D2C636F01A7F587A00F3C0E0 /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */; };
+		D2C636F21A7F6EA000F3C0E0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C636F11A7F6EA000F3C0E0 /* MainViewController.swift */; };
+		D2C636F41A7F6ECA00F3C0E0 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C636F31A7F6ECA00F3C0E0 /* MainView.xib */; };
+		D2C636F61A7F7A1B00F3C0E0 /* DreamLeftMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C636F51A7F7A1B00F3C0E0 /* DreamLeftMenu.swift */; };
 		D2DF93141A6D49AA00C024BC /* DreamHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */; };
 		D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */; };
 		D2E5FB191A6E5CCD004812D3 /* DreamStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E5FB181A6E5CCD004812D3 /* DreamStatusCell.swift */; };
@@ -300,6 +303,9 @@
 		D2C1B7421A761F28006FFD9D /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 		D2C636EE1A7F587A00F3C0E0 /* NSString+File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+File.h"; sourceTree = "<group>"; };
 		D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+File.m"; sourceTree = "<group>"; };
+		D2C636F11A7F6EA000F3C0E0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D2C636F31A7F6ECA00F3C0E0 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
+		D2C636F51A7F7A1B00F3C0E0 /* DreamLeftMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLeftMenu.swift; sourceTree = "<group>"; };
 		D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamHttpTool.swift; sourceTree = "<group>"; };
 		D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTabBar.swift; sourceTree = "<group>"; };
 		D2E5FB181A6E5CCD004812D3 /* DreamStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamStatusCell.swift; sourceTree = "<group>"; };
@@ -673,6 +679,7 @@
 		D2154BDD1A67C73B0043CD8A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */,
 				D2154BC01A67A8440043CD8A /* WeiboTabBarViewController.swift */,
 				D2432B411A7AFC2E00FD7CFC /* DreamCommonViewController.swift */,
 			);
@@ -948,6 +955,7 @@
 		D2FB93581A67D4B500DB5535 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D2C636F51A7F7A1B00F3C0E0 /* DreamLeftMenu.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -955,7 +963,8 @@
 		D2FB93591A67D4C000DB5535 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D2FB935B1A67D4E300DB5535 /* DreamNavigationViewController.swift */,
+				D2C636F11A7F6EA000F3C0E0 /* MainViewController.swift */,
+				D2C636F31A7F6ECA00F3C0E0 /* MainView.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1173,6 +1182,7 @@
 				D2881AFA1A7795280001DB8B /* DreamEmotionPopView.xib in Resources */,
 				D2BAFE3B1A6CE9660081C4D5 /* LaunchScreen.xib in Resources */,
 				D231300E1A673E8900B83A3A /* Images.xcassets in Resources */,
+				D2C636F41A7F6ECA00F3C0E0 /* MainView.xib in Resources */,
 				D2C1B7401A761EDE006FFD9D /* MBProgressHUD.bundle in Resources */,
 				D28E38451A77237E000F8AB9 /* EmotionIcons in Resources */,
 				D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */,
@@ -1224,6 +1234,7 @@
 				D20CC5CB1A7C705100406207 /* DreamRepostResult.m in Sources */,
 				D2FE75931A6B981300A13FFF /* MJType.m in Sources */,
 				D2FE75BC1A6BD10600A13FFF /* AFSecurityPolicy.m in Sources */,
+				D2C636F61A7F7A1B00F3C0E0 /* DreamLeftMenu.swift in Sources */,
 				D2432B2B1A79CBB900FD7CFC /* DreamLink.m in Sources */,
 				D2E5FB2D1A6E72BA004812D3 /* DreamStatusFrame.m in Sources */,
 				D21544DA1A761A6600AB19F3 /* MJPhotoBrowser.m in Sources */,
@@ -1300,6 +1311,7 @@
 				D2432B441A7B007D00FD7CFC /* DreamBadgeView.swift in Sources */,
 				D2FB2A961A7B820400A08817 /* DreamStatusDetailTopToolbar.swift in Sources */,
 				D21545081A761B0F00AB19F3 /* NSData+ImageContentType.m in Sources */,
+				D2C636F21A7F6EA000F3C0E0 /* MainViewController.swift in Sources */,
 				D21545141A761B0F00AB19F3 /* UIImageView+WebCache.m in Sources */,
 				D2FB2A8B1A7B141D00A08817 /* DreamSettingViewController.swift in Sources */,
 				D2FE75BE1A6BD10600A13FFF /* AFURLRequestSerialization.m in Sources */,

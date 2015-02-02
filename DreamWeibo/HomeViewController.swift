@@ -13,7 +13,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     var titleButton:UIButton?
     var statusFrame:NSMutableArray = NSMutableArray()
     var footer:DreamLoadMoreFooter?
-
+    let cover = UIButton()
     
     
     override func viewDidLoad() {
@@ -412,20 +412,41 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     
     func friendSearch(){
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            
+            let firstTrans = CGAffineTransformMakeScale(0.75, 0.75)
+            tabbarVc.view.transform = CGAffineTransformTranslate(firstTrans, 200, 0)
+            self.cover.frame = tabbarVc.view.bounds
+            self.cover.backgroundColor = UIColor.clearColor()
+            self.cover.addTarget(self, action: "coverClick", forControlEvents: UIControlEvents.TouchUpInside)
+            tabbarVc.view.addSubview(self.cover)
+                
+
+            
+        })
         
     }
 
     func pop(){
 
     }
+    
+    func coverClick(){
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
+         UIView.animateWithDuration(0.5, animations: { () -> Void in
+            tabbarVc.view.transform = CGAffineTransformIdentity
+            self.cover.removeFromSuperview()
+         })
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
-
-    // MARK: - Table view data source
-
+    
+    
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.

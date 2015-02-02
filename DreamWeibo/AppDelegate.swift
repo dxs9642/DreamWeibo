@@ -33,7 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if currentVersion == lastVersion{
             if accessToken != nil {
-                self.window?.rootViewController = WeiboTabBarViewController()
+                self.window?.rootViewController = MainViewController()
+//                self.window?.rootViewController = WeiboTabBarViewController()
             }else{
                 self.window?.rootViewController = OauthViewController()
             }
