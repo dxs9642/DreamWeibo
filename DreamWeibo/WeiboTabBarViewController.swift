@@ -94,7 +94,10 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBar
         var compose = ComposeViewController()
         compose.view.backgroundColor = UIColor.whiteColor()
         var nav = DreamNavigationViewController(rootViewController: compose)
-        self.presentViewController(nav, animated: true,nil)
+        
+        
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        mainVc.presentViewController(nav, animated: true,nil)
     }
 
 

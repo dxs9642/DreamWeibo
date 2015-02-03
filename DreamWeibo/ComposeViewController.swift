@@ -89,11 +89,21 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
             openPicture()
         case type.Trend:
             print("Trend")
+            openMap()
         default:
             print("null")
         }
     }
     
+    
+    func openMap(){
+        
+        let lookupLocation = LookupLocationViewController()
+        self.presentViewController(lookupLocation, animated: true) { () -> Void in
+            
+        }
+        
+    }
     
     
     func openCamera(){

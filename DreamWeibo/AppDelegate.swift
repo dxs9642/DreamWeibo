@@ -9,15 +9,15 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
     
     var window: UIWindow?
-    
+    var mapManager:BMKMapManager!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-
+        
         
         window = UIWindow()
         window?.frame = UIScreen.mainScreen().bounds
@@ -55,6 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
 
+        setupBaiduMapManager()
+        
+        
         return true
         
     }
@@ -118,9 +121,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         apperance.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
         
         
-        
     }
     
+    func setupBaiduMapManager(){
+        mapManager = BMKMapManager()
+        let ret = mapManager.start("7pjx7xGF4lZPmrb2HTkhG1Nm", generalDelegate: self)
+
+    }
+    
+    func onGetNetworkState(iError: Int32) {
+        if iError==0 {
+            NSLog("联网成功")
+        }else{
+            NSLog("onGetNetworkState %d",iError)
+        }
+    }
+    
+    func onGetPermissionState(iError: Int32) {
+        if iError==0 {
+            NSLog("授权成功")
+        }else{
+            NSLog("onGetPermissionState %d",iError)
+        }
+    }
+
+
     
     
     func applicationWillResignActive(application: UIApplication) {

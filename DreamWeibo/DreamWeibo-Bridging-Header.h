@@ -35,3 +35,5 @@
 #import "DreamRepostResult.h"
 #import "FMDB.h"
 #import "NSString+File.h"
+#import "BMKMapView.h"
+#import "BMapKit.h"
