@@ -7,33 +7,81 @@
 //
 
 import UIKit
+import CoreLocation
 
-class LookupLocationViewController: UIViewController {
+class LookupLocationViewController: UIViewController,BMKMapViewDelegate,BMKLocationServiceDelegate {
 
+    var mapView:BMKMapView!
+    var locationService:BMKLocationService!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        self.title = "位置查询"
         
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "退出", style: UIBarButtonItemStyle.Done, target: self, action: "exit")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确定", style: UIBarButtonItemStyle.Done, target: self, action: "done")
         
+        setupLocationRequireService()
         
-        let mapView = BMKMapView()
+        mapView = BMKMapView()
         mapView.frame = self.view.bounds
         self.view.addSubview(mapView)
+        mapView.delegate = self
+
+        locationService = BMKLocationService()
+
+        locationService.delegate = self
+        
+        startLocation()
         
         // Do any additional setup after loading the view.
     }
 
-
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func exit(){
+        
     }
-    */
+    
+    func done(){
+        
+    }
+    
+    func setupLocationRequireService(){
+        let manager = CLLocationManager()
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            manager.requestAlwaysAuthorization()
+        }
+
+    }
+    
+    func startLocation(){
+        locationService.startUserLocationService()
+        mapView.showsUserLocation = false
+        mapView.userTrackingMode = BMKUserTrackingModeFollowWithHeading
+        mapView.showsUserLocation = true
+    }
+    
+    func willStartLocatingUser() {
+        NSLog("start locate")
+
+    }
+    
+    func didUpdateUserHeading(userLocation: BMKUserLocation!) {
+        mapView.updateLocationData(userLocation)
+        NSLog("heading is %@",userLocation.heading)
+    }
+    
+    func didStopLocatingUser() {
+        NSLog("stop locate")
+
+    }
+
+    func didFailToLocateUserWithError(error: NSError!) {
+        NSLog("location error:%@",error);
+
+    }
+    
 
 }

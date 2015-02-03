@@ -88,7 +88,6 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         case type.Picture:
             openPicture()
         case type.Trend:
-            print("Trend")
             openMap()
         default:
             print("null")
@@ -99,7 +98,9 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     func openMap(){
         
         let lookupLocation = LookupLocationViewController()
-        self.presentViewController(lookupLocation, animated: true) { () -> Void in
+        let nvc = DreamNavigationViewController(rootViewController: lookupLocation)
+
+        self.presentViewController(nvc, animated: true) { () -> Void in
             
         }
         
