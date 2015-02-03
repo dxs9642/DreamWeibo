@@ -14,6 +14,7 @@ class Account: NSObject , NSCoding {
     var expires_in:NSString?
     var uid:NSString?
     var expires_time:NSDate?
+
     
     override init() {
         super.init()
@@ -93,5 +94,64 @@ class Account: NSObject , NSCoding {
         window?.rootViewController = OauthViewController()
 
     }
+    
+    
+    func getUserImage()->UIImage?{
+        
+        let filePath = ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/account.jpg"
+        
+        let fm = NSFileManager.defaultManager()
+        
+        if fm.fileExistsAtPath(filePath){
+            
+            let image = UIImage(contentsOfFile: filePath)
+            return image
+        }
+        
+
+
+        
+        var params = NSMutableDictionary()
+        params["access_token"] = self.access_token
+        params["uid"] = self.uid
+        DreamHttpTool.get("https://api.weibo.com/2/users/show.json", params: params, success: { (obj:AnyObject!) -> Void in
+            
+            let result = obj as NSDictionary
+            
+            
+            let userInfo = DreamUser(keyValues: result)
+            
+
+            self.saveImage(userInfo.avatar_large)
+          
+            
+            }) { () -> Void in
+                MBProgressHUD.showError("网络未知错误")
+        }
+        
+        
+        return nil
+    }
+    
+    func saveImage(url:NSString){
+        
+        let imageUrl = NSURL(string: url)
+        let request = NSURLRequest(URL: imageUrl!)
+
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{
+        
+        
+        (response:NSURLResponse!,data:NSData!,error:NSError!) -> Void in
+            
+            let image = UIImage(data: data)
+            
+            let filePath = ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/account.jpg"
+
+            UIImageJPEGRepresentation(image, 1.0).writeToFile(filePath, atomically: true)
+
+        })
+
+    }
+    
     
 }

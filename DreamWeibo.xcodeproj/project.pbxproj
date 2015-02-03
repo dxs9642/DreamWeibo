@@ -53,6 +53,7 @@
 		D231300E1A673E8900B83A3A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231300D1A673E8900B83A3A /* Images.xcassets */; };
 		D231301D1A673E8900B83A3A /* DreamWeiboTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231301C1A673E8900B83A3A /* DreamWeiboTests.swift */; };
 		D23483841A78D18700CB535D /* DreamEmotionAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = D23483831A78D18700CB535D /* DreamEmotionAttachment.m */; };
+		D23C74C91A803EE7002B2067 /* DreamRightMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C74C81A803EE7002B2067 /* DreamRightMenu.swift */; };
 		D23CCC781A6DFF4F0044003B /* DreamUnreadCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D23CCC771A6DFF4F0044003B /* DreamUnreadCountResult.m */; };
 		D2432B211A79071A00FD7CFC /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = D2432B201A79071A00FD7CFC /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D2432B241A7907DE00FD7CFC /* DreamRegexResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D2432B231A7907DE00FD7CFC /* DreamRegexResult.m */; };
@@ -97,7 +98,6 @@
 		D2C1B7431A761F28006FFD9D /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C1B7421A761F28006FFD9D /* MBProgressHUD+MJ.m */; };
 		D2C636F01A7F587A00F3C0E0 /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */; };
 		D2C636F21A7F6EA000F3C0E0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C636F11A7F6EA000F3C0E0 /* MainViewController.swift */; };
-		D2C636F41A7F6ECA00F3C0E0 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C636F31A7F6ECA00F3C0E0 /* MainView.xib */; };
 		D2C636F61A7F7A1B00F3C0E0 /* DreamLeftMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C636F51A7F7A1B00F3C0E0 /* DreamLeftMenu.swift */; };
 		D2DF93141A6D49AA00C024BC /* DreamHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */; };
 		D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */; };
@@ -237,6 +237,7 @@
 		D231301C1A673E8900B83A3A /* DreamWeiboTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamWeiboTests.swift; sourceTree = "<group>"; };
 		D23483821A78D18700CB535D /* DreamEmotionAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamEmotionAttachment.h; sourceTree = "<group>"; };
 		D23483831A78D18700CB535D /* DreamEmotionAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamEmotionAttachment.m; sourceTree = "<group>"; };
+		D23C74C81A803EE7002B2067 /* DreamRightMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamRightMenu.swift; sourceTree = "<group>"; };
 		D23CCC761A6DFF4F0044003B /* DreamUnreadCountResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamUnreadCountResult.h; sourceTree = "<group>"; };
 		D23CCC771A6DFF4F0044003B /* DreamUnreadCountResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamUnreadCountResult.m; sourceTree = "<group>"; };
 		D2432B1F1A79071A00FD7CFC /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
@@ -304,7 +305,6 @@
 		D2C636EE1A7F587A00F3C0E0 /* NSString+File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+File.h"; sourceTree = "<group>"; };
 		D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+File.m"; sourceTree = "<group>"; };
 		D2C636F11A7F6EA000F3C0E0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		D2C636F31A7F6ECA00F3C0E0 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		D2C636F51A7F7A1B00F3C0E0 /* DreamLeftMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLeftMenu.swift; sourceTree = "<group>"; };
 		D2DF93131A6D49AA00C024BC /* DreamHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamHttpTool.swift; sourceTree = "<group>"; };
 		D2E152CB1A69DE7700175A8C /* DreamTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTabBar.swift; sourceTree = "<group>"; };
@@ -956,6 +956,7 @@
 			isa = PBXGroup;
 			children = (
 				D2C636F51A7F7A1B00F3C0E0 /* DreamLeftMenu.swift */,
+				D23C74C81A803EE7002B2067 /* DreamRightMenu.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -964,7 +965,6 @@
 			isa = PBXGroup;
 			children = (
 				D2C636F11A7F6EA000F3C0E0 /* MainViewController.swift */,
-				D2C636F31A7F6ECA00F3C0E0 /* MainView.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1182,7 +1182,6 @@
 				D2881AFA1A7795280001DB8B /* DreamEmotionPopView.xib in Resources */,
 				D2BAFE3B1A6CE9660081C4D5 /* LaunchScreen.xib in Resources */,
 				D231300E1A673E8900B83A3A /* Images.xcassets in Resources */,
-				D2C636F41A7F6ECA00F3C0E0 /* MainView.xib in Resources */,
 				D2C1B7401A761EDE006FFD9D /* MBProgressHUD.bundle in Resources */,
 				D28E38451A77237E000F8AB9 /* EmotionIcons in Resources */,
 				D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */,
@@ -1312,6 +1311,7 @@
 				D2FB2A961A7B820400A08817 /* DreamStatusDetailTopToolbar.swift in Sources */,
 				D21545081A761B0F00AB19F3 /* NSData+ImageContentType.m in Sources */,
 				D2C636F21A7F6EA000F3C0E0 /* MainViewController.swift in Sources */,
+				D23C74C91A803EE7002B2067 /* DreamRightMenu.swift in Sources */,
 				D21545141A761B0F00AB19F3 /* UIImageView+WebCache.m in Sources */,
 				D2FB2A8B1A7B141D00A08817 /* DreamSettingViewController.swift in Sources */,
 				D2FE75BE1A6BD10600A13FFF /* AFURLRequestSerialization.m in Sources */,

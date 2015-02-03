@@ -414,6 +414,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     func friendSearch(){
         let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
         let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
+
+        mainVc.rightMenu.hidden = true
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             
@@ -431,7 +433,27 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
 
     func pop(){
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
+        
+        mainVc.leftMenu.hidden = true
 
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            
+            let firstTrans = CGAffineTransformMakeScale(0.75, 0.75)
+            tabbarVc.view.transform = CGAffineTransformTranslate(firstTrans, -200, 0)
+            self.cover.frame = tabbarVc.view.bounds
+            self.cover.backgroundColor = UIColor.clearColor()
+            self.cover.addTarget(self, action: "coverClick", forControlEvents: UIControlEvents.TouchUpInside)
+            tabbarVc.view.addSubview(self.cover)
+            
+        }) { (finished) -> Void in
+            mainVc.rightMenu.didShow()
+
+        }
+        
+
+        
     }
     
     func coverClick(){
@@ -441,6 +463,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             tabbarVc.view.transform = CGAffineTransformIdentity
             self.cover.removeFromSuperview()
          })
+        mainVc.leftMenu.hidden = false
+        mainVc.rightMenu.hidden = false
 
 
     }
