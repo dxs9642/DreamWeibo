@@ -52,15 +52,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
         
         setupNetwokMonitor()
         
-        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+
 
         setupBaiduMapManager()
+//        setupLocalNotification()
         
         
         return true
         
     }
+    
+//    func setupLocalNotification(){
+//
+//        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound , categories: nil)
+//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+//        
+//        let ln = UILocalNotification()
+//        ln.soundName = ""
+//        ln.alertBody = "good News"
+//        ln.alertAction = "good News"
+//        ln.timeZone = NSTimeZone.defaultTimeZone()
+//        ln.fireDate = NSDate(timeIntervalSinceNow: 5)
+//        ln.repeatInterval = NSCalendarUnit.MonthCalendarUnit
+//        UIApplication.sharedApplication().scheduleLocalNotification(ln)
+//
+//    }
     
     
     func setupNetwokMonitor(){

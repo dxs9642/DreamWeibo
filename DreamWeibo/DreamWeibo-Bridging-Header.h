@@ -37,3 +37,4 @@
 #import "NSString+File.h"
 #import "BMKMapView.h"
 #import "BMapKit.h"
+#import "UIImage+UIImageExtras.h"

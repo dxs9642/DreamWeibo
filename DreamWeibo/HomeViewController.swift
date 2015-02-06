@@ -42,6 +42,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         if linkText.hasPrefix("http"){
             
+            let webPage = DreamWebViewController()
+            webPage.loadURL = linkText
+            self.navigationController?.pushViewController(webPage, animated: true)
+            
         }else{
             
         }
