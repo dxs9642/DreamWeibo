@@ -66,7 +66,7 @@ class DreamRightMenu: UIView {
         
         let image = account?.getUserImage()
         if image != nil {
-            self.userImage = image
+            self.userImage = UIImage.circleImageWithImage(image, borderWidth: 0, borderColor: UIColor.clearColor());
         }
         
     }

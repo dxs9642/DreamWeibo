@@ -10,5 +10,6 @@
 
 @interface UIImage (UIImageExtras)
 - (UIImage *)imageByScalingToSize:(CGSize)targetSize;
-
++ (instancetype)circleImageWithName:(NSString *)name borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor;
++ (instancetype)circleImageWithImage:(UIImage *)image borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor;
 @end
