@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
             self.window?.rootViewController = NewFeatureViewController()
         }
         
-        
+        setupLocalNotification()
         setupNavigationBarAppearance()
         setupBarButtonItemAppearance()
         
@@ -62,11 +62,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
         
     }
     
-//    func setupLocalNotification(){
+    
+    
+    func setupLocalNotification(){
 //
-//        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound , categories: nil)
-//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-//        
+        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound , categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+//
 //        let ln = UILocalNotification()
 //        ln.soundName = ""
 //        ln.alertBody = "good News"
@@ -76,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
 //        ln.repeatInterval = NSCalendarUnit.MonthCalendarUnit
 //        UIApplication.sharedApplication().scheduleLocalNotification(ln)
 //
-//    }
+    }
     
     
     func setupNetwokMonitor(){

@@ -26,13 +26,14 @@ class MainViewController: UIViewController {
         self.view.addSubview(bgImage)
         
         let ScreenH = UIScreen.mainScreen().bounds.height
+        let screenW = UIScreen.mainScreen().bounds.width
+        
+        
         leftMenu.width = 275
         leftMenu.height = 200
         leftMenu.y = 100
         self.view.addSubview(leftMenu)
         
-
-        let screenW = UIScreen.mainScreen().bounds.width
         rightMenu.width = 275
         rightMenu.height = 200
         rightMenu.y = 100

@@ -64,15 +64,13 @@ class DreamStatusDetailView: UIImageView {
 
         
         if detailFrame.retweetedFrame != nil {
-            
 
-            
             self.retweetView?.setupReweetFrame(detailFrame.retweetedFrame)
             
-            
-            
         }else{
+            
             self.retweetView?.setupEmptyRetweetFrame()
+            
         }
     }
 

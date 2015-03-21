@@ -35,6 +35,17 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
 
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1);
+        self.navigationController?.navigationBar.translucent = true;
+        self.navigationController?.navigationBar.alpha = 0.9;
+        
+
+    }
+
+    
     func linkDidSelect(note:NSNotification){
         
         
@@ -46,8 +57,11 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             webPage.loadURL = linkText
             self.navigationController?.pushViewController(webPage, animated: true)
             
-        }else{
-            
+        }else if linkText.hasPrefix("@"){
+            //push到新的View中区
+            let userView = DreamUserViewController()
+            userView.userName = linkText.substringFromIndex(1);
+            self.navigationController?.pushViewController(userView, animated: true)
         }
         
     }
@@ -370,7 +384,15 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
 
 
+
     func setupNavigationBar(){
+
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1);
+        self.navigationController?.navigationBar.translucent = true;
+        self.navigationController?.navigationBar.alpha = 0.9;
+        
+        
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.initBarButtonItem("navigationbar_friendsearch", imageHighlight: "navigationbar_friendsearch_highlighted", target:self,action: "friendSearch")
         
         

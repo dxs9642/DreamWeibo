@@ -98,6 +98,8 @@
 		D29436761A6A03AD001CE8BE /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29436751A6A03AD001CE8BE /* NewFeatureViewController.swift */; };
 		D2A0B1EF1A7704F300041E22 /* DreamEmotionToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0B1EE1A7704F300041E22 /* DreamEmotionToolbar.swift */; };
 		D2A0B3B61A7715D600041E22 /* DreamEmotion.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A0B3B51A7715D600041E22 /* DreamEmotion.m */; };
+		D2B54B411AAF3BD900A52669 /* DreamUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B54B401AAF3BD900A52669 /* DreamUserViewController.swift */; };
+		D2B54B441AAF3E4400A52669 /* UserTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B54B431AAF3E4400A52669 /* UserTopView.swift */; };
 		D2BAFE381A6CE7520081C4D5 /* DreamTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BAFE361A6CE7520081C4D5 /* DreamTextView.swift */; };
 		D2BAFE391A6CE7520081C4D5 /* DreamComposeToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BAFE371A6CE7520081C4D5 /* DreamComposeToolbar.swift */; };
 		D2BAFE3B1A6CE9660081C4D5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2BAFE3A1A6CE9660081C4D5 /* LaunchScreen.xib */; };
@@ -375,6 +377,8 @@
 		D2A0B1EE1A7704F300041E22 /* DreamEmotionToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamEmotionToolbar.swift; sourceTree = "<group>"; };
 		D2A0B3B41A7715D600041E22 /* DreamEmotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamEmotion.h; sourceTree = "<group>"; };
 		D2A0B3B51A7715D600041E22 /* DreamEmotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamEmotion.m; sourceTree = "<group>"; };
+		D2B54B401AAF3BD900A52669 /* DreamUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamUserViewController.swift; sourceTree = "<group>"; };
+		D2B54B431AAF3E4400A52669 /* UserTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTopView.swift; sourceTree = "<group>"; };
 		D2BAFE361A6CE7520081C4D5 /* DreamTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTextView.swift; sourceTree = "<group>"; };
 		D2BAFE371A6CE7520081C4D5 /* DreamComposeToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamComposeToolbar.swift; sourceTree = "<group>"; };
 		D2BAFE3A1A6CE9660081C4D5 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -638,6 +642,7 @@
 		D2154BCF1A67C63B0043CD8A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D2B54B421AAF3E2200A52669 /* User */,
 				D2432B251A7913C700FD7CFC /* Cell */,
 				D20BA51B1A690F0200EFBE4A /* DreamTitleButton.swift */,
 				D20BA51D1A69334A00EFBE4A /* DreamPopMenu.swift */,
@@ -653,6 +658,7 @@
 				D2154BC21A67C4260043CD8A /* HomeViewController.swift */,
 				D2FB2A8E1A7B1EFC00A08817 /* DreamStatusDetailViewController.swift */,
 				D2E5AEEB1A848FBB006930A8 /* DreamWebViewController.swift */,
+				D2B54B401AAF3BD900A52669 /* DreamUserViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1096,6 +1102,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		D2B54B421AAF3E2200A52669 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				D2B54B431AAF3E4400A52669 /* UserTopView.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
 		D2C1B7371A761EDE006FFD9D /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1489,6 +1503,7 @@
 				D2C1B73F1A761EDE006FFD9D /* MBProgressHUD+Add.m in Sources */,
 				D21544DC1A761A6600AB19F3 /* MJPhotoProgressView.m in Sources */,
 				D21545171A761B0F00AB19F3 /* UIImageView+MJWebCache.m in Sources */,
+				D2B54B411AAF3BD900A52669 /* DreamUserViewController.swift in Sources */,
 				D21544DB1A761A6600AB19F3 /* MJPhotoLoadingView.m in Sources */,
 				D21544C21A74E58800AB19F3 /* DreamFont.swift in Sources */,
 				D23CCC781A6DFF4F0044003B /* DreamUnreadCountResult.m in Sources */,
@@ -1506,6 +1521,7 @@
 				D2FE759E1A6B9DA200A13FFF /* DreamUser.m in Sources */,
 				D2432B441A7B007D00FD7CFC /* DreamBadgeView.swift in Sources */,
 				D23C751B1A809E7D002B2067 /* LookupLocationViewController.swift in Sources */,
+				D2B54B441AAF3E4400A52669 /* UserTopView.swift in Sources */,
 				D2FB2A961A7B820400A08817 /* DreamStatusDetailTopToolbar.swift in Sources */,
 				D21545081A761B0F00AB19F3 /* NSData+ImageContentType.m in Sources */,
 				D2C636F21A7F6EA000F3C0E0 /* MainViewController.swift in Sources */,
