@@ -78,6 +78,8 @@
 		D2432B401A7A333500FD7CFC /* DreamCommonSwitchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D2432B3D1A7A333500FD7CFC /* DreamCommonSwitchItem.m */; };
 		D2432B421A7AFC2E00FD7CFC /* DreamCommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2432B411A7AFC2E00FD7CFC /* DreamCommonViewController.swift */; };
 		D2432B441A7B007D00FD7CFC /* DreamBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2432B431A7B007D00FD7CFC /* DreamBadgeView.swift */; };
+		D2546DD11ABE531700E7EB6E /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2546DD01ABE531700E7EB6E /* ButtonsView.swift */; };
+		D2546DD31ABEC04600E7EB6E /* UserWeiboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2546DD21ABEC04600E7EB6E /* UserWeiboView.swift */; };
 		D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */; };
 		D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */; };
 		D286984B1A7E4525002E9BE7 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D28698421A7E4525002E9BE7 /* FMDatabase.m */; };
@@ -348,6 +350,8 @@
 		D2432B3D1A7A333500FD7CFC /* DreamCommonSwitchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamCommonSwitchItem.m; sourceTree = "<group>"; };
 		D2432B411A7AFC2E00FD7CFC /* DreamCommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamCommonViewController.swift; sourceTree = "<group>"; };
 		D2432B431A7B007D00FD7CFC /* DreamBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamBadgeView.swift; sourceTree = "<group>"; };
+		D2546DD01ABE531700E7EB6E /* ButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
+		D2546DD21ABEC04600E7EB6E /* UserWeiboView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserWeiboView.swift; sourceTree = "<group>"; };
 		D26687ED1A6F14C7002AF7C0 /* Dream-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dream-Prefix.pch"; sourceTree = "<group>"; };
 		D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLoadMoreFooter.swift; sourceTree = "<group>"; };
 		D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamLoadMoreFooter.xib; sourceTree = "<group>"; };
@@ -1106,6 +1110,8 @@
 			isa = PBXGroup;
 			children = (
 				D2B54B431AAF3E4400A52669 /* UserTopView.swift */,
+				D2546DD01ABE531700E7EB6E /* ButtonsView.swift */,
+				D2546DD21ABEC04600E7EB6E /* UserWeiboView.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1498,6 +1504,7 @@
 				D21544DD1A761A6600AB19F3 /* MJPhotoToolbar.m in Sources */,
 				D215450A1A761B0F00AB19F3 /* SDWebImageCompat.m in Sources */,
 				D2C1B73E1A761EDE006FFD9D /* MBProgressHUD.m in Sources */,
+				D2546DD31ABEC04600E7EB6E /* UserWeiboView.swift in Sources */,
 				D215450E1A761B0F00AB19F3 /* SDWebImageManager.m in Sources */,
 				D2FB2A981A7B82D900A08817 /* DreamStatusDetailBottomToolbar.swift in Sources */,
 				D2C1B73F1A761EDE006FFD9D /* MBProgressHUD+Add.m in Sources */,
@@ -1508,6 +1515,7 @@
 				D21544C21A74E58800AB19F3 /* DreamFont.swift in Sources */,
 				D23CCC781A6DFF4F0044003B /* DreamUnreadCountResult.m in Sources */,
 				D2E152CC1A69DE7700175A8C /* DreamTabBar.swift in Sources */,
+				D2546DD11ABE531700E7EB6E /* ButtonsView.swift in Sources */,
 				D2E5FB191A6E5CCD004812D3 /* DreamStatusCell.swift in Sources */,
 				D21545101A761B0F00AB19F3 /* UIButton+WebCache.m in Sources */,
 				D2FE74601A6A7DD600A13FFF /* OauthViewController.swift in Sources */,

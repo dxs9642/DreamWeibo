@@ -35,9 +35,11 @@ class DreamStatusOriginalView: UIImageView {
         
         nameLabel = UILabel()
         nameLabel?.font = font.DreamStatusOrginalNameFont
-        
-        
         self.addSubview(nameLabel!)
+        nameLabel?.userInteractionEnabled = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: "showUserInfo:")
+        nameLabel?.addGestureRecognizer(tapGesture)
         
         
         textLabel = DreamStatusLabel()
@@ -146,4 +148,20 @@ class DreamStatusOriginalView: UIImageView {
         }
         
     }
+    
+    
+    func showUserInfo(recognizer:UITapGestureRecognizer){
+        let userName = (recognizer.view as UILabel).text
+        
+        if userName != nil {
+            
+            let dic = NSMutableDictionary()
+            dic["DreamLinkText"] = userName
+        NSNotificationCenter.defaultCenter().postNotificationName("DreamDidSelectTitleNameNotionfication", object: nil, userInfo: dic )
+            
+            
+        }
+        
+    }
+    
 }

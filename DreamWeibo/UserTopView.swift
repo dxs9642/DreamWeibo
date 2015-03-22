@@ -13,6 +13,9 @@ class UserTopView: UIImageView {
     
     var profile:UIImageView!
     var nameLabel:UILabel!
+    var infoLabelLeft:UILabel!
+    var infoLabelRight:UILabel!
+    var infoLabelCenter:UILabel!
     var vipView:UIImageView?
 
     override init(){
@@ -51,7 +54,21 @@ class UserTopView: UIImageView {
         self.nameLabel = UILabel()
         nameLabel.text = "正在加载用户信息。。。。。"
         self.addSubview(nameLabel)
+        
+        self.infoLabelLeft = UILabel()
+        infoLabelLeft.text = ""
+        infoLabelLeft.textColor = UIColor.whiteColor()
+        self.addSubview(infoLabelLeft)
 
+        self.infoLabelRight = UILabel()
+        infoLabelRight.text = ""
+        infoLabelRight.textColor = UIColor.whiteColor()
+        self.addSubview(infoLabelRight)
+        
+        self.infoLabelCenter = UILabel()
+        infoLabelCenter.text = ""
+        infoLabelCenter.textColor = UIColor.whiteColor()
+        self.addSubview(infoLabelCenter)
         
     }
     
@@ -128,18 +145,49 @@ class UserTopView: UIImageView {
         }
         
         let font = DreamFont()
-        self.nameLabel.font = font.DreamStatusOrginalNameFont
         
+        self.nameLabel.font = font.DreamStatusOrginalNameFont
         let boundingSize = CGSizeMake(self.frame.size.width, CGFloat.max)
         var attr = NSMutableDictionary()
-
         attr[NSFontAttributeName] = font.DreamStatusOrginalNameFont
         let theName:NSString = userInfo.name
         let nameSize = theName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
         self.nameLabel.size = nameSize.size
-        
         self.nameLabel.centerX = self.centerX
         self.nameLabel.y = CGRectGetMaxY(self.profile.frame) + 10
+        
+        
+        self.infoLabelLeft.font = font.DreamStatusOrginalSourceFont
+        let infoLeftString = "关注  " + dealWithCount(userInfo.friends_count)
+         attr[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
+        let infoLeftSize = infoLeftString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        self.infoLabelLeft.size = infoLeftSize.size
+        self.infoLabelLeft.text = infoLeftString
+        
+        self.infoLabelRight.font = font.DreamStatusOrginalSourceFont
+        let infoRightString = "私信  " + dealWithCount(userInfo.followers_count)
+        attr[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
+        let infoRightSize = infoRightString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        self.infoLabelRight.size = infoRightSize.size
+        self.infoLabelRight.text = infoRightString
+        
+        self.infoLabelCenter.font = font.DreamStatusOrginalSourceFont
+        let infoCenterString = "  |  "
+        attr[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
+        let infoCenterSize = infoCenterString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        self.infoLabelCenter.size = infoCenterSize.size
+        self.infoLabelCenter.text = infoCenterString
+        
+        self.infoLabelCenter.centerX = self.centerX
+        self.infoLabelCenter.y = CGRectGetMaxY(self.nameLabel.frame) + 10
+        
+        self.infoLabelLeft.x = self.infoLabelCenter.centerX - self.infoLabelCenter.width / 2 - self.infoLabelLeft.width
+        
+        self.infoLabelLeft.y = self.infoLabelCenter.y
+        
+        self.infoLabelRight.x = self.infoLabelCenter.centerX + self.infoLabelCenter.width / 2
+        self.infoLabelRight.y = self.infoLabelCenter.y
+
         
         let vipX = CGRectGetMaxX(self.nameLabel.frame) + 10
         let vipY = nameLabel.y
@@ -161,5 +209,28 @@ class UserTopView: UIImageView {
         }
 
     }
+    
+    
+    
+    func dealWithCount(count:Int32)->NSString{
+
+        var title = ""
+        
+        if count>10000 {
+            if count / 1000 % 10 == 0 {
+                title = "\(count / 10000)万"
+            }else{
+                title = "\(count / 10000).\(count / 1000 % 10)万"
+            }
+            
+        }else{
+            title = "\(count)"
+        }
+        
+       return title
+
+        
+    }
+    
     
 }

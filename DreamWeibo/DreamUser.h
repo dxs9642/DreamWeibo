@@ -17,6 +17,13 @@
 /** 会员等级 */
 @property (nonatomic, assign) int mbrank;
 
+/** 粉丝数量 */
+@property (nonatomic,assign) int followers_count;
+
+/** 关注数量 */
+@property (nonatomic,assign) int friends_count;
+
+
 @property (nonatomic, assign, getter = isVip, readonly) BOOL vip;
 
 @end

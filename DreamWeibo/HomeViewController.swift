@@ -29,6 +29,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "linkDidSelect:", name: "DreamDidSelectTextNotionfication", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "linkDidSelect:", name: "DreamDidSelectTitleNameNotionfication", object: nil)
+        
 
 //        dic["DreamLinkText"] = touchLink?.text
 //        NSNotificationCenter.defaultCenter().postNotificationName("DreamDidSelectTextNotionfication", object: nil, userInfo: dic)
@@ -61,6 +63,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             //push到新的View中区
             let userView = DreamUserViewController()
             userView.userName = linkText.substringFromIndex(1);
+            self.navigationController?.pushViewController(userView, animated: true)
+        }else{
+            let userView = DreamUserViewController()
+            userView.userName = linkText
             self.navigationController?.pushViewController(userView, animated: true)
         }
         
