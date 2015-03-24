@@ -189,15 +189,31 @@ static NSMutableArray *_recentEmotions;
             // 匹配#话题#
             NSString *trendRegex = @"#[a-zA-Z0-9\\u4e00-\\u9fa5]+#";
             [result.string enumerateStringsMatchedByRegex:trendRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+                
                 [substr addAttribute:NSForegroundColorAttributeName value:DreamStatusHighTextColor range:*capturedRanges];
                 [substr addAttribute:DreamLinkText value:*capturedStrings range:*capturedRanges];
+                
 
+                
+                
             }];
             
             
             // 匹配@提到
             NSString *mentionRegex = @"@[a-zA-Z0-9\\u4e00-\\u9fa5\\-_]+";
             [result.string enumerateStringsMatchedByRegex:mentionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+                
+                if (_statusDetail) {
+                    _statusDetail = false;
+                    
+                    NSRange deleteRanges = NSMakeRange(capturedRanges->location, capturedRanges->length + 3);
+                    
+                    
+                    [substr deleteCharactersInRange: deleteRanges];
+                    
+                    return;
+                }
+                
                 [substr addAttribute:NSForegroundColorAttributeName value:DreamStatusHighTextColor range:*capturedRanges];
                 [substr addAttribute:DreamLinkText value:*capturedStrings range:*capturedRanges];
 

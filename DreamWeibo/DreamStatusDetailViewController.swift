@@ -17,6 +17,7 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
     var comments = NSMutableArray()
     var reposts = NSMutableArray()
     var showComment = true
+    var isFromRetweet = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,7 +72,13 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         if self.status.retweeted_status != nil {
             self.status.retweeted_status.detail = true
         }
+        self.status.statusDetail = isFromRetweet
+        self.status.text = self.status.text
+        
+        
         frame.status = self.status
+        
+        
         detailView.setupDetailFrame(frame)
         detailView.height = frame.frame.size.height
         totalView.height = detailView.height + 25
@@ -81,7 +88,7 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         totalView.addSubview(emptyView)
         self.tableView.tableHeaderView = totalView
         
-        
+    
         
     }
     

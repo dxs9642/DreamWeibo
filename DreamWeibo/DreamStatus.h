@@ -38,6 +38,7 @@
 @property (nonatomic, assign, getter = isRetweeted) BOOL retweeted;
 /** 这个数据是否展示在微博正文页面*/
 @property (nonatomic, assign) BOOL detail;
-
+/** 这个用来去掉statusDetailView中的@中的一些选项的*/
+@property (nonatomic, assign) BOOL statusDetail;
 
 @end
