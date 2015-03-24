@@ -81,7 +81,7 @@ class ButtonsView: UIView,UIAlertViewDelegate {
         selfMessage.height = 25
         selfMessage.width = 80
         selfMessage.x = (self.frame.width - 2 * selfMessage.width - 10) / 2
-        selfMessage.y = 0
+        selfMessage.centerY = self.height / 2
         
         selfMessage.layer.masksToBounds = true
         selfMessage.layer.cornerRadius = 3
@@ -93,7 +93,7 @@ class ButtonsView: UIView,UIAlertViewDelegate {
         addFriend.height = selfMessage.height
         addFriend.width = selfMessage.width
         addFriend.x = CGRectGetMaxX(selfMessage.frame) + 10
-        addFriend.y = 0
+        addFriend.centerY = selfMessage.centerY
         
         
         addFriend.layer.masksToBounds = true

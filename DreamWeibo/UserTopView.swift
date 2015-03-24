@@ -207,6 +207,8 @@ class UserTopView: UIImageView {
             self.vipView?.hidden = true
             self.nameLabel?.textColor = UIColor.blackColor()
         }
+        
+        
 
     }
     
