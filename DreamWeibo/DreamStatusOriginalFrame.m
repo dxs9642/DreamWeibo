@@ -47,7 +47,7 @@
     
     // 删掉最前面的昵称
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:status.attributedText];
-    if (status.isRetweeted) {
+    if (status.isRetweeted&&!status.isFromRetweeted) {
         int len = status.user.name.length + 4;
         [text deleteCharactersInRange:NSMakeRange(0, len)];
     }

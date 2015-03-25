@@ -38,4 +38,8 @@
 @property (nonatomic, assign, getter = isRetweeted) BOOL retweeted;
 /** 这个数据是否展示在微博正文页面*/
 @property (nonatomic, assign) BOOL detail;
+/** 这个数据表示是否是加载的retweet的内容，如果是要去掉@后面的内容*/
+@property (nonatomic, assign) BOOL isFromRetweeted;
+
+
 @end

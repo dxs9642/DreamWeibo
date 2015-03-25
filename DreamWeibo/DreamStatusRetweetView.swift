@@ -99,7 +99,7 @@ class DreamStatusRetweetView: UIImageView {
         let nav = tabbarVc.selectedViewController as UINavigationController
         let detailVc = DreamStatusDetailViewController()
         detailVc.status = self.reweetFrame?.retweetedStatus
-        detailVc.isFromRetweet = true
+        detailVc.status.isFromRetweeted = true
         
         nav.pushViewController(detailVc, animated: true)
         

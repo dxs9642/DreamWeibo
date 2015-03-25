@@ -259,7 +259,7 @@ static NSMutableArray *_recentEmotions;
 {
     if (self.text == nil || self.user == nil) return;
     
-    if (self.retweeted) {
+    if (self.retweeted&&!self.isFromRetweeted) {
         NSString *totalText = [NSString stringWithFormat:@"@%@ : %@", self.user.name, self.text];
         NSAttributedString *attributedString = [self attributedStringWithText:totalText];
         self.attributedText = attributedString;

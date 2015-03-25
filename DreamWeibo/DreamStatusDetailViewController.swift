@@ -17,7 +17,6 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
     var comments = NSMutableArray()
     var reposts = NSMutableArray()
     var showComment = true
-    var isFromRetweet = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,8 +71,8 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         if self.status.retweeted_status != nil {
             self.status.retweeted_status.detail = true
         }
-        self.status.retweeted =  !self.isFromRetweet
-        self.isFromRetweet = !self.isFromRetweet
+        
+        
         self.status.text = self.status.text
         
         
