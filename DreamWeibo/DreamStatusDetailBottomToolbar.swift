@@ -8,28 +8,23 @@
 
 import UIKit
 
-class DreamStatusDetailBottomToolbar: UIView {
+class DreamStatusDetailBottomToolbar: DreamBaseToolbar {
 
-    var repostButton:UIButton?
-    var commentButton:UIButton?
-    var attitudesButton:UIButton?
 
     
     override init() {
         super.init()
+        self.image = UIImage.resizeImage("timeline_card_bottom_background")
+
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
-        self.repostButton = setupButtonWithIcon("timeline_icon_retweet", title: "转发")
-        self.commentButton = setupButtonWithIcon("timeline_icon_comment", title: "评论")
-        self.attitudesButton = setupButtonWithIcon("timeline_icon_unlike", title: "赞")
+
 
     }
     
-    func setupButtonWithIcon(icon:NSString,title:NSString) -> UIButton{
+    override func setupButtonWithIcon(icon:NSString,title:NSString) -> UIButton{
         var button = UIButton()
         button.setImage(UIImage(named: icon), forState: UIControlState.Normal)
         button.setTitle(title, forState: UIControlState.Normal)

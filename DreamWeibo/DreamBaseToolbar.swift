@@ -40,8 +40,13 @@ class DreamBaseToolbar: UIImageView {
         self.userInteractionEnabled = true
         
         self.repostButton = setupButtonWithIcon("timeline_icon_retweet", title: "转发")
+        self.repostButton?.addTarget(self, action: "repost", forControlEvents: UIControlEvents.TouchUpInside)
+        
         self.commentButton = setupButtonWithIcon("timeline_icon_comment", title: "评论")
+        self.commentButton?.addTarget(self, action: "comments", forControlEvents: UIControlEvents.TouchUpInside)
+        
         self.attitudesButton = setupButtonWithIcon("timeline_icon_unlike", title: "赞")
+        self.attitudesButton?.addTarget(self, action: "like", forControlEvents: UIControlEvents.TouchUpInside)
         
 
         
@@ -51,6 +56,26 @@ class DreamBaseToolbar: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func repost(){
+        print("repost")
+    }
+    
+    func comments(){
+        
+        var compose = ComposeViewController()
+        compose.view.backgroundColor = UIColor.whiteColor()
+        var nav = DreamNavigationViewController(rootViewController: compose)
+        
+        
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        mainVc.presentViewController(nav, animated: true,nil)
+        
+        
+    }
+    
+    func like(){
+        print("like")
+    }
     
     func setupBtnTitle(button:UIButton,count:Int,defaultTitle:NSString){
         var title = ""

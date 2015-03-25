@@ -72,7 +72,8 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         if self.status.retweeted_status != nil {
             self.status.retweeted_status.detail = true
         }
-        self.status.statusDetail = isFromRetweet
+        self.status.retweeted =  !self.isFromRetweet
+        self.isFromRetweet = !self.isFromRetweet
         self.status.text = self.status.text
         
         
