@@ -13,15 +13,25 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     var textView:DreamTextView?
     var toolbar:DreamComposeToolbar?
     var photosView:DreamComposePhotosView?
+    var retweetView:DreamRetweetSimpleView?
     var isChangingKeyboard = false
     lazy var keyboard = DreamEmotionKeyboard()
+    var titleContent = "发微博"
+    var isCompose = true
+    var isComment = false
+    var isRetweet = false
+    var status:DreamStatus?
+    var retweetAttr:NSAttributedString?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTitle()
+        setupTitle(titleContent)
         setupTextView()
         setupToolbar()
         setupPhotosView()
+        if isRetweet {
+            setupRetweetView()
+        }
         
         keyboard.setHeight(216)
         keyboard.setWidth(UIScreen.mainScreen().bounds.width)
@@ -39,7 +49,17 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         self.textView?.deleteBackward()
     }
 
-    
+    func setupRetweetView(){
+        
+        if self.status == nil {return}
+        self.retweetView = DreamRetweetSimpleView(status: self.status!)
+        
+        let space:CGFloat = 15
+        
+        retweetView?.frame = CGRectMake(space, 100, self.view.width-space*2, 80)
+        self.textView?.addSubview(self.retweetView!)
+        
+    }
     
     func emotionDidSelect(note:NSNotification){
         let emotion = note.userInfo!["emotion"] as DreamEmotion
@@ -64,7 +84,9 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     }
     
     func setupToolbar(){
-        var toolbar = DreamComposeToolbar()
+        
+
+        var toolbar = DreamComposeToolbar(type: isCompose ? 1 : 0)
         self.toolbar = toolbar
         toolbar.delegate = self
         toolbar.setWidth(self.view.width())
@@ -165,15 +187,15 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
 
     
     
-    func setupTitle(){
+    func setupTitle(str:NSString){
         
         let name = Account.getName()
-        let prefix = "发微博"
+        let prefix = str
         if name==nil {
             self.title = prefix
         }else{
             
-            let text:NSString = "发微博\n\(name!)"
+            let text:NSString = "\(str)\n\(name!)"
             var string = NSMutableAttributedString(string: text)
             string.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(15), range: text.rangeOfString(prefix))
             string.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: text.rangeOfString(name!))
@@ -218,6 +240,11 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         textView.alwaysBounceVertical = true
         self.view.addSubview(textView)
         textView.becomeFirstResponder()
+        
+        if isRetweet&&self.retweetAttr != nil {
+            textView.attributedText = self.retweetAttr
+            self.textViewDidChange(textView)
+        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyBoardWillShow:", name: "UIKeyboardWillShowNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: "UIKeyboardWillHideNotification", object: nil)
@@ -270,16 +297,82 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     }
     
     func send(){
-        
-        let imgs = photosView?.images()
-        
-        if  imgs?.count == 0 {
-            sendStatusWithoutImage()
+        if isCompose {
+            let imgs = photosView?.images()
+            
+            if  imgs?.count == 0 {
+                sendStatusWithoutImage()
+            }else{
+                sendStatusWithImage(imgs!)
+            }
         }else{
-            sendStatusWithImage(imgs!)
+            
+            if isComment{
+                sendComment()
+            }else if isRetweet{
+                sendRetweet()
+            }
+            
         }
         self.dismissViewControllerAnimated(true, completion: nil)
 
+    }
+    
+    func sendComment(){
+        let account = Account.getAccount()
+        if account == nil {
+            Account.expiredAndReAuth()
+        }
+        if self.status == nil {
+            return
+        }
+        
+        
+        var params = NSMutableDictionary()
+        params["access_token"] = account!.access_token
+        params["id"] = self.status?.idstr
+        params["comment"] = textView!.realText()
+        
+        DreamHttpTool.post("https://api.weibo.com/2/comments/create.json", params: params, success: { (obj:AnyObject!) -> Void in
+            MBProgressHUD.showSuccess("评论成功")
+            
+            }) { () -> Void in
+                
+                MBProgressHUD.showSuccess("评论失败")
+                
+        }
+    }
+    
+    func sendRetweet(){
+        let account = Account.getAccount()
+        if account == nil {
+            Account.expiredAndReAuth()
+        }
+        if self.status == nil {
+            return
+        }
+        
+        
+        var params = NSMutableDictionary()
+        params["access_token"] = account!.access_token
+        
+        if self.status?.retweeted_status != nil {
+            params["id"] = self.status?.retweeted_status.idstr
+        }else{
+            params["id"] = self.status?.idstr
+
+        }
+        params["status"] = textView!.realText()
+        
+        DreamHttpTool.post("https://api.weibo.com/2/statuses/repost.json", params: params, success: { (obj:AnyObject!) -> Void in
+            MBProgressHUD.showSuccess("转发成功")
+            
+            }) { () -> Void in
+                
+                MBProgressHUD.showSuccess("转发失败")
+                
+        }
+        
     }
     
     

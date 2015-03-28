@@ -81,6 +81,7 @@
 		D2546DD11ABE531700E7EB6E /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2546DD01ABE531700E7EB6E /* ButtonsView.swift */; };
 		D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */; };
 		D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */; };
+		D28074C51AC449260038A430 /* DreamRetweetSimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28074C41AC449260038A430 /* DreamRetweetSimpleView.swift */; };
 		D286984B1A7E4525002E9BE7 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D28698421A7E4525002E9BE7 /* FMDatabase.m */; };
 		D286984C1A7E4525002E9BE7 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D28698441A7E4525002E9BE7 /* FMDatabaseAdditions.m */; };
 		D286984D1A7E4525002E9BE7 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D28698461A7E4525002E9BE7 /* FMDatabasePool.m */; };
@@ -353,6 +354,7 @@
 		D26687ED1A6F14C7002AF7C0 /* Dream-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dream-Prefix.pch"; sourceTree = "<group>"; };
 		D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLoadMoreFooter.swift; sourceTree = "<group>"; };
 		D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamLoadMoreFooter.xib; sourceTree = "<group>"; };
+		D28074C41AC449260038A430 /* DreamRetweetSimpleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamRetweetSimpleView.swift; sourceTree = "<group>"; };
 		D28698401A7E4525002E9BE7 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		D28698411A7E4525002E9BE7 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		D28698421A7E4525002E9BE7 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				D2BAFE361A6CE7520081C4D5 /* DreamTextView.swift */,
 				D2BAFE371A6CE7520081C4D5 /* DreamComposeToolbar.swift */,
 				D2BAFE3C1A6CFC3E0081C4D5 /* DreamComposePhotosView.swift */,
+				D28074C41AC449260038A430 /* DreamRetweetSimpleView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1540,6 +1543,7 @@
 				D20BA51A1A68FF6400EFBE4A /* DreamSearchBar.swift in Sources */,
 				D20BA5181A68EDBF00EFBE4A /* UIView+Extension.swift in Sources */,
 				D20401871A78628F00E7ADE6 /* DreamEmotionTool.swift in Sources */,
+				D28074C51AC449260038A430 /* DreamRetweetSimpleView.swift in Sources */,
 				D29436761A6A03AD001CE8BE /* NewFeatureViewController.swift in Sources */,
 				D21545111A761B0F00AB19F3 /* UIImage+GIF.m in Sources */,
 				D2432B301A7A067100FD7CFC /* DreamCommonItem.m in Sources */,

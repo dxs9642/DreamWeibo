@@ -57,12 +57,34 @@ class DreamBaseToolbar: UIImageView {
     }
 
     func repost(){
-        print("repost")
+        var compose = ComposeViewController()
+        compose.titleContent = "转发微博"
+        compose.isCompose = false
+        compose.isRetweet = true
+        compose.status = self.status
+        if compose.status?.retweeted_status != nil {
+            let str = "//@\(self.status.user.name):\(self.status.text)"
+            let attr = NSMutableAttributedString(string: str)
+            let color = UIColor(red: 88/255, green: 161/255, blue: 253/255, alpha: 1.0)
+            let range = NSMakeRange(2, (self.status.user.name as NSString).length+1)
+            attr.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+            compose.retweetAttr = attr
+        }
+        compose.view.backgroundColor = UIColor.whiteColor()
+        var nav = DreamNavigationViewController(rootViewController: compose)
+        
+        
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        mainVc.presentViewController(nav, animated: true,nil)
     }
     
     func comments(){
         
         var compose = ComposeViewController()
+        compose.titleContent = "写评论"
+        compose.isCompose = false
+        compose.isComment = true
+        compose.status = self.status
         compose.view.backgroundColor = UIColor.whiteColor()
         var nav = DreamNavigationViewController(rootViewController: compose)
         

@@ -27,16 +27,42 @@ class DreamComposeToolbar: UIView {
     var emotionButton:UIButton?
     
     var isEmotionButton = false
+    
+    var isCompose = true
 
-    override init() {
-        super.init()
+    convenience init(type:NSInteger){
+        self.init()
+        switch(type){
+        case 0:
+            isCompose = false
+        case 1:
+            self.isCompose = true
+        default:
+            self.isCompose = true
+            
+        }
+        
         self.backgroundColor = UIColor(patternImage: UIImage(named: "compose_toolbar_background_os7")!)
         
-        self.addButtonWithIcon("compose_camerabutton_background_os7", highIcon: "compose_camerabutton_background_highlighted_os7", tag:type.Camera)
-        self.addButtonWithIcon("compose_toolbar_picture_os7", highIcon: "compose_toolbar_picture_highlighted_os7", tag:type.Picture)
-        self.addButtonWithIcon("compose_mentionbutton_background_os7", highIcon: "compose_mentionbutton_background_highlighted_os7", tag: type.Mention)
-        self.addButtonWithIcon("compose_trendbutton_background_os7", highIcon: "compose_trendbutton_background_highlighted_os7",tag:type.Trend)
-        self.emotionButton = self.addButtonWithIcon("compose_emoticonbutton_background_os7", highIcon: "compose_emoticonbutton_background_highlighted_os7", tag:type.Emotion)
+        let ButtonType = DreamComposeToolbarButtonType()
+        if isCompose == true{
+            self.addButtonWithIcon("compose_camerabutton_background_os7", highIcon: "compose_camerabutton_background_highlighted_os7", tag:ButtonType.Camera)
+            self.addButtonWithIcon("compose_toolbar_picture_os7", highIcon: "compose_toolbar_picture_highlighted_os7", tag:ButtonType.Picture)
+            self.addButtonWithIcon("compose_mentionbutton_background_os7", highIcon: "compose_mentionbutton_background_highlighted_os7", tag: ButtonType.Mention)
+            self.addButtonWithIcon("compose_trendbutton_background_os7", highIcon: "compose_trendbutton_background_highlighted_os7",tag:ButtonType.Trend)
+            self.emotionButton = self.addButtonWithIcon("compose_emoticonbutton_background_os7", highIcon: "compose_emoticonbutton_background_highlighted_os7", tag:ButtonType.Emotion)
+        }else{
+            self.addButtonWithIcon("compose_mentionbutton_background_os7", highIcon: "compose_mentionbutton_background_highlighted_os7", tag: ButtonType.Mention)
+            self.addButtonWithIcon("compose_trendbutton_background_os7", highIcon: "compose_trendbutton_background_highlighted_os7",tag:ButtonType.Trend)
+            self.emotionButton = self.addButtonWithIcon("compose_emoticonbutton_background_os7", highIcon: "compose_emoticonbutton_background_highlighted_os7", tag:ButtonType.Emotion)
+        }
+        
+        
+    }
+    
+    override init() {
+        super.init()
+
         
 
     }
@@ -79,7 +105,7 @@ class DreamComposeToolbar: UIView {
         super.layoutSubviews()
         
         
-        let count = 5
+        let count = self.subviews.count
         
         
         let buttonW = self.width()/CGFloat(Float(count))
