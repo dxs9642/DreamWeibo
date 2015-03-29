@@ -14,8 +14,7 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
     var tableView:UITableView!
     var bottomToolbar:DreamStatusDetailBottomToolbar!
     lazy var toolbar = DreamStatusDetailTopToolbar.toolbar
-    var comments = NSMutableArray()
-    var reposts = NSMutableArray()
+    var simplesFrame = NSMutableArray()
     var showComment = true
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,8 +110,6 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
     
     func loadComments(){
         
-        
-        
         let account = Account.getAccount()
         if account == nil {
             Account.expiredAndReAuth()
@@ -121,30 +118,21 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
-        if comments.count != 0 {
-            params["since_id"] = (comments.firstObject as DreamComment).idstr
-        }
         params["id"] = self.status.idstr
         
         DreamHttpTool.get("https://api.weibo.com/2/comments/show.json", params: params, success: { (obj:AnyObject!) -> Void in
             
             let result = obj as NSDictionary
-            
-            let oldComments = DreamCommentsResult(keyValues: result).comments
-            let set = NSIndexSet(indexesInRange: NSMakeRange(0, oldComments.count))
-            
-            self.comments.insertObjects(oldComments, atIndexes: set)
-            self.toolbar.reloadCommentData(self.comments.count)
 
-            self.tableView.reloadData()
+            let comments = result["comments"] as NSArray
+            self.doWithNewResults(comments)
             
             }) { () -> Void in
                 MBProgressHUD.showError("网络未知错误")
-                
         }
-        
-        
     }
+    
+    
     func loadRepost(){
         
         let account = Account.getAccount()
@@ -155,23 +143,13 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
-        if reposts.count != 0 {
-            params["since_id"] = (reposts.firstObject as DreamStatus).idstr
-        }
-        
         params["id"] = self.status.idstr
         
         DreamHttpTool.get("https://api.weibo.com/2/statuses/repost_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
             
             let result = obj as NSDictionary
-            
-            let oldReposts = DreamRepostResult(keyValues: result).reposts
-            let set = NSIndexSet(indexesInRange: NSMakeRange(0, oldReposts.count))
-            
-            self.reposts.insertObjects(oldReposts, atIndexes: set)
-            self.toolbar.reloadRepostData(self.reposts.count)
-            
-            self.tableView.reloadData()
+            let reports = result["reposts"] as NSArray
+            self.doWithNewResults(reports)
             
             }) { () -> Void in
                 MBProgressHUD.showError("网络未知错误")
@@ -185,31 +163,57 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if showComment {
-            return comments.count
-        }else {
-            return reposts.count
-        }
+            return self.simplesFrame.count
     }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let ID = "cell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as? DreamSimpleCell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
+            cell = DreamSimpleCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
         }
-        if comments.count != 0 && showComment {
-            cell!.textLabel?.text = (comments[indexPath.row] as DreamComment).text
 
-        }else{
-            cell!.textLabel?.text = (reposts[indexPath.row] as DreamStatus).text
-
-        }
+        cell?.setupSimpleFrame(self.simplesFrame[indexPath.row] as DreamSimpleFrame)
+    
         return cell!
         
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let frame = self.simplesFrame[indexPath.row] as DreamSimpleFrame
+        return frame.cellHeight - 2
+    }
+    
+    
+    func simpleFramesWithSimples(simples:NSArray) -> NSArray{
+        var frames =  NSMutableArray()
+        for simple in simples {
+            let simpleM = simple as DreamSimple
+            var frame = DreamSimpleFrame()
+            frame.simple = simpleM
+            frames.addObject(frame)
+        }
+        return frames
+    }
+    
+    func doWithNewResults(simples:NSArray){
+        let newSimples = DreamSimple.objectArrayWithKeyValuesArray(simples)
+        let newFrames = self.simpleFramesWithSimples(newSimples)
+        self.simplesFrame.removeAllObjects()
+        self.simplesFrame.addObjectsFromArray(newFrames)
+        if simplesFrame.count != 0 {
+            self.tableView.reloadData()
+            if showComment{
+                self.toolbar.reloadCommentData(simplesFrame.count)
+            }else{
+                self.toolbar.reloadRepostData(simplesFrame.count)
+            }
+        }
+
+    }
+    
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.toolbar
@@ -219,5 +223,6 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         return self.toolbar.height
     }
     
+
 
 }

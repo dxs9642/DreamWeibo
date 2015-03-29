@@ -96,7 +96,14 @@ class DreamBaseToolbar: UIImageView {
     }
     
     func like(){
-        print("like")
+        
+                
+        MBProgressHUD.showError("这个接口新浪官方没有提供")
+                
+
+
+        
+        
     }
     
     func setupBtnTitle(button:UIButton,count:Int,defaultTitle:NSString){

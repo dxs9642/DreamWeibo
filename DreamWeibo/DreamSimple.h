@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class DreamUser, DreamStatus;
+@class DreamUser;
 
-@interface DreamComment : NSObject
+@interface DreamSimple : NSObject
 // {"name" : "jack", "age":10}
 /** 	string 	微博创建时间*/
 @property (nonatomic, copy) NSString *created_at;
@@ -20,13 +20,9 @@
 
 /** 	string 	微博信息内容*/
 @property (nonatomic, copy) NSString *text;
-
-/** 	string 	微博来源*/
-@property (nonatomic, copy) NSString *source;
+@property (nonatomic, copy) NSAttributedString *attributedText;
 
 /** 	object 	评论作者的用户信息字段 详细*/
 @property (nonatomic, strong) DreamUser *user;
 
-/** 	object	评论的微博信息字段 详细*/
-@property (nonatomic, strong) DreamStatus *status;
 @end

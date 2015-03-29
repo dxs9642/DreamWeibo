@@ -96,10 +96,6 @@ class DreamStatusOriginalView: UIImageView {
         
         let status = originalFrame.status
         let user = status.user
-        
-        self.originalFrame = originalFrame
-        
-        
         self.iconView?.frame = originalFrame.iconFrame
         self.iconView?.sd_setImageWithURL(NSURL(string: user.profile_image_url!), placeholderImage: UIImage(named: "avatar_default_small"))
         

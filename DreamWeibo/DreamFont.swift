@@ -16,6 +16,8 @@ class DreamFont {
     let DreamStatusOrginalTextFont = UIFont.systemFontOfSize(15)
     let DreamStatusRetweetedNameFont = UIFont.systemFontOfSize(14)
     let DreamStatusRetweetedTextFont = UIFont.systemFontOfSize(15)
+    let DreamSimpleNameFont = UIFont.systemFontOfSize(12)
+    let DreamSimpleTimeFont = UIFont.systemFontOfSize(10)
     
 }
 

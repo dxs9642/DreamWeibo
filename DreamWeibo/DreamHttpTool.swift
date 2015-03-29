@@ -61,7 +61,7 @@ class DreamHttpTool: NSObject {
             success(obj)
             
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                
+                print(error)
                 errors()
                 
         }
