@@ -205,11 +205,6 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         self.simplesFrame.addObjectsFromArray(newFrames)
         if simplesFrame.count != 0 {
             self.tableView.reloadData()
-            if showComment{
-                self.toolbar.reloadCommentData(simplesFrame.count)
-            }else{
-                self.toolbar.reloadRepostData(simplesFrame.count)
-            }
         }
 
     }
