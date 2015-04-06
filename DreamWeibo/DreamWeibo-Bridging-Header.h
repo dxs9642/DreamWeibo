@@ -32,6 +32,7 @@
 #import "DreamCommonArrowItem.h"
 #import "DreamCommonSwitchItem.h"
 #import "DreamSimple.h"
+#import "DreamMessage.h"
 #import "FMDB.h"
 #import "NSString+File.h"
 #import "BMKMapView.h"

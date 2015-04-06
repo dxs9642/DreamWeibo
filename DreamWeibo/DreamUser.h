@@ -2,6 +2,9 @@
 #import <Foundation/Foundation.h>
 
 @interface DreamUser : NSObject
+
+@property (nonatomic, copy) NSString *idstr;
+
 /** string 	友好显示名称 */
 @property (nonatomic, copy) NSString *name;
 

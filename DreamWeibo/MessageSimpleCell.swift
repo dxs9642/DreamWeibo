@@ -14,6 +14,8 @@ class MessageSimpleCell: UITableViewCell {
     var userSimple:MessageSimpleView!
     let bgView = UIImageView()
     let selectedBgView = UIImageView()
+    var message:NSArray?
+    var user:DreamUser?
     
     convenience init(style: UITableViewCellStyle, reuseIdentifier: String?,type:NSInteger){
         
@@ -71,5 +73,17 @@ class MessageSimpleCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func setupUserAndMessage(user:DreamUser,msg:NSArray){
+        
+        self.user = user
+        self.message = msg
+        self.userSimple.user = self.user
+        self.userSimple.lastMessage = (self.message?.lastObject as DreamMessage).text
+        self.userSimple.setupFromURL()
+        self.userSimple.reloadInputViews()
+        
+    }
+    
 
 }
