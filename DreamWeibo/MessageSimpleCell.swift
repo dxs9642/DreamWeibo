@@ -80,8 +80,9 @@ class MessageSimpleCell: UITableViewCell {
         self.message = msg
         self.userSimple.user = self.user
         self.userSimple.lastMessage = (self.message?.lastObject as DreamMessage).text
+        self.userSimple.lastTime = (self.message?.lastObject as DreamMessage).created_at
+        self.userSimple.badgView.badgeValue = "\(self.message!.count)"
         self.userSimple.setupFromURL()
-        self.userSimple.reloadInputViews()
         
     }
     

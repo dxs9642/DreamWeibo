@@ -59,9 +59,14 @@ class MessageViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var newView = UIViewController()
-        newView.view.backgroundColor = UIColor.purpleColor()
-        newView.title = "微博正文"
+        var newView = DreamMsgDetailViewController()
+        let num = indexPath.row
+        newView.index = num
+        if num >= 3 {
+            newView.user = self.userInfo[num - 3] as? DreamUser
+            newView.messages = self.msg[newView.user!.idstr] as? NSArray
+        }
+        
         self.navigationController?.pushViewController(newView, animated: true)
     }
     

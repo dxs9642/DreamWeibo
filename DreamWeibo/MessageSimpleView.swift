@@ -14,19 +14,27 @@ class MessageSimpleView: UIImageView {
     var userImage:UIImageView!
     var userTitle:UILabel!
     var detailInfo:UILabel!
+    var timeLabel:UILabel!
     var type = -1
     var user:DreamUser?
     var lastMessage:NSString?
-
+    var badgView = DreamBadgeView()
+    var lastTime:NSString?
     
     convenience init(type:NSInteger){
         self.init()
         self.type = type
         self.userInteractionEnabled = true
-
+        
         setupUserImage(type)
         setupUserTitle(type)
-            
+        
+        badgView.hidden = true
+        self.addSubview(badgView)
+        
+        timeLabel = UILabel()
+        self.addSubview(timeLabel)
+        
     }
         
     
@@ -131,9 +139,14 @@ class MessageSimpleView: UIImageView {
         getUserImage(self.user!.avatar_large)
         self.userTitle.text = self.user?.name
         self.detailInfo.text = self.lastMessage
+        self.timeLabel.text = TimeTool.dealwithTime(lastTime)
         
     }
     
+    
+    func showTimes(){
+        
+    }
 
     
     override func layoutSubviews() {
@@ -165,7 +178,7 @@ class MessageSimpleView: UIImageView {
             
             detailInfo.font = font.DreamStatusOrginalTimeFont
             detailInfo.textColor = UIColor.lightGrayColor()
-            let boundingSize = CGSizeMake(self.frame.size.width - 100, CGFloat.max)
+            let boundingSize = CGSizeMake(self.frame.size.width - 150, CGFloat.max)
             var attr = NSMutableDictionary()
             attr[NSFontAttributeName] = font.DreamStatusOrginalTimeFont
             
@@ -176,9 +189,29 @@ class MessageSimpleView: UIImageView {
             userTitle.y = userImage.centerY - 2 - userTitle.height
             detailInfo.y = userImage.centerY + 2
             
+            timeLabel.font = font.DreamStatusOrginalTimeFont
+            timeLabel.textColor = UIColor.lightGrayColor()
+            attr = NSMutableDictionary()
+            attr[NSFontAttributeName] = font.DreamStatusOrginalTimeFont
+            
+            let timeName = timeLabel.text!
+            let timeSize = timeName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+            timeLabel.size = timeSize.size
+            timeLabel.x = self.width - 10 - timeLabel.width
+            timeLabel.y = userImage.centerY - 5 - timeLabel.height
+            
+            
             
         }else{
             userTitle.centerY = userImage.centerY
+        }
+        
+        if badgView.badgeValue != nil {
+            
+            badgView.hidden = false
+            badgView.x = self.width - 5 - badgView.width
+            badgView.y = userImage.centerY + 5
+            
         }
         
     }

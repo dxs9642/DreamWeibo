@@ -16,7 +16,7 @@
 
 @property (nonatomic,copy) NSString *sender_id;
 
-@property (nonatomic,copy) NSString *create_at;
+@property (nonatomic,copy) NSString *created_at;
 
 @property (nonatomic,copy) NSString *text;
 
