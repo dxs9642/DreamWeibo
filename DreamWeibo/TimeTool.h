@@ -12,4 +12,6 @@
 
 + (NSString *)dealwithTime:(NSString *)time;
 
++ (BOOL)showTime:(NSString *)timeOne anotherTime:(NSString *)timeTwo;
+
 @end

@@ -47,6 +47,7 @@
 		D2154BC71A67C4560043CD8A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC61A67C4560043CD8A /* ProfileViewController.swift */; };
 		D2154BC91A67C4840043CD8A /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154BC81A67C4840043CD8A /* DiscoverViewController.swift */; };
 		D2173F161AD352AB00C2EE9D /* TimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D2173F151AD352AB00C2EE9D /* TimeTool.m */; };
+		D2173F1B1AD3DFDB00C2EE9D /* DreamMsgToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2173F1A1AD3DFDB00C2EE9D /* DreamMsgToolbar.swift */; };
 		D2290B951A79045D004B0EA2 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2290B941A79045D004B0EA2 /* libicucore.dylib */; };
 		D23130071A673E8900B83A3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23130061A673E8900B83A3A /* AppDelegate.swift */; };
 		D231300E1A673E8900B83A3A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231300D1A673E8900B83A3A /* Images.xcassets */; };
@@ -83,7 +84,7 @@
 		D2546DD11ABE531700E7EB6E /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2546DD01ABE531700E7EB6E /* ButtonsView.swift */; };
 		D26B03951A6BE16D00212343 /* DreamLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */; };
 		D26B03971A6BE18E00212343 /* DreamLoadMoreFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */; };
-		D26D3E531AD2AD610072230A /* MessageDetailCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D3E521AD2AD610072230A /* MessageDetailCellTableViewCell.swift */; };
+		D26D3E531AD2AD610072230A /* MessageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D3E521AD2AD610072230A /* MessageDetailCell.swift */; };
 		D26D3E551AD2AE730072230A /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26D3E541AD2AE730072230A /* MessageDetailView.swift */; };
 		D28074C51AC449260038A430 /* DreamRetweetSimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28074C41AC449260038A430 /* DreamRetweetSimpleView.swift */; };
 		D286984B1A7E4525002E9BE7 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D28698421A7E4525002E9BE7 /* FMDatabase.m */; };
@@ -249,6 +250,7 @@
 		D2154BC81A67C4840043CD8A /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		D2173F141AD352AB00C2EE9D /* TimeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTool.h; sourceTree = "<group>"; };
 		D2173F151AD352AB00C2EE9D /* TimeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTool.m; sourceTree = "<group>"; };
+		D2173F1A1AD3DFDB00C2EE9D /* DreamMsgToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamMsgToolbar.swift; sourceTree = "<group>"; };
 		D2290B941A79045D004B0EA2 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		D23130011A673E8900B83A3A /* DreamWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23130051A673E8900B83A3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -364,7 +366,7 @@
 		D26687ED1A6F14C7002AF7C0 /* Dream-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dream-Prefix.pch"; sourceTree = "<group>"; };
 		D26B03941A6BE16D00212343 /* DreamLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLoadMoreFooter.swift; sourceTree = "<group>"; };
 		D26B03961A6BE18E00212343 /* DreamLoadMoreFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DreamLoadMoreFooter.xib; sourceTree = "<group>"; };
-		D26D3E521AD2AD610072230A /* MessageDetailCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailCellTableViewCell.swift; sourceTree = "<group>"; };
+		D26D3E521AD2AD610072230A /* MessageDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailCell.swift; sourceTree = "<group>"; };
 		D26D3E541AD2AE730072230A /* MessageDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
 		D28074C41AC449260038A430 /* DreamRetweetSimpleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamRetweetSimpleView.swift; sourceTree = "<group>"; };
 		D28698401A7E4525002E9BE7 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
@@ -638,6 +640,7 @@
 			isa = PBXGroup;
 			children = (
 				D2DB1F7F1ACD89CC00AA3C35 /* Cell */,
+				D2173F1A1AD3DFDB00C2EE9D /* DreamMsgToolbar.swift */,
 			);
 			name = VIew;
 			sourceTree = "<group>";
@@ -1156,7 +1159,7 @@
 			children = (
 				D2DB1F7D1ACD89B600AA3C35 /* MessageSimpleCell.swift */,
 				D2DB1F801ACD8BC800AA3C35 /* MessageSimpleView.swift */,
-				D26D3E521AD2AD610072230A /* MessageDetailCellTableViewCell.swift */,
+				D26D3E521AD2AD610072230A /* MessageDetailCell.swift */,
 				D26D3E541AD2AE730072230A /* MessageDetailView.swift */,
 			);
 			name = Cell;
@@ -1474,7 +1477,7 @@
 				D2FE75931A6B981300A13FFF /* MJType.m in Sources */,
 				D2FE75BC1A6BD10600A13FFF /* AFSecurityPolicy.m in Sources */,
 				D2C636F61A7F7A1B00F3C0E0 /* DreamLeftMenu.swift in Sources */,
-				D26D3E531AD2AD610072230A /* MessageDetailCellTableViewCell.swift in Sources */,
+				D26D3E531AD2AD610072230A /* MessageDetailCell.swift in Sources */,
 				D2432B2B1A79CBB900FD7CFC /* DreamLink.m in Sources */,
 				D2E5FB2D1A6E72BA004812D3 /* DreamStatusFrame.m in Sources */,
 				D21544DA1A761A6600AB19F3 /* MJPhotoBrowser.m in Sources */,
@@ -1493,6 +1496,7 @@
 				D286984F1A7E4525002E9BE7 /* FMResultSet.m in Sources */,
 				D2FB935F1A67F22500DB5535 /* UIBarButtonItem+Extension.swift in Sources */,
 				D2E5FB211A6E6702004812D3 /* DreamStatusRetweetView.swift in Sources */,
+				D2173F1B1AD3DFDB00C2EE9D /* DreamMsgToolbar.swift in Sources */,
 				D2FE75941A6B981300A13FFF /* MJTypeEncoding.m in Sources */,
 				D2154BC71A67C4560043CD8A /* ProfileViewController.swift in Sources */,
 				D26D3E551AD2AE730072230A /* MessageDetailView.swift in Sources */,
