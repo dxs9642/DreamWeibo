@@ -12,14 +12,10 @@ class DreamStatusToolBar: DreamBaseToolbar {
 
     var dividers = NSMutableArray()
 
-    override init() {
-        super.init()
-        
-        self.image = UIImage.resizeImage("timeline_card_bottom_background")
-        
-        setupDivider()
-        setupDivider()
-        
+    
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
     }
     
     func setupDivider(){
@@ -37,6 +33,11 @@ class DreamStatusToolBar: DreamBaseToolbar {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.image = UIImage.resizeImage("timeline_card_bottom_background")
+        
+        setupDivider()
+        setupDivider()
+
     }
     
     
@@ -49,16 +50,16 @@ class DreamStatusToolBar: DreamBaseToolbar {
         super.layoutSubviews()
         
         let buttonNum = self.buttons.count
-        let buttonW = self.width() / CGFloat(Float(buttonNum))
-        let buttonH = self.height()
+        let buttonW = self.width / CGFloat(Float(buttonNum))
+        let buttonH = self.height
         
         let dividerNum = self.dividers.count
         let dividerH = buttonH
         for  var i=0 ; i<dividerNum ; i++ {
-            var div = self.dividers[i] as UIImageView
+            var div = self.dividers[i] as! UIImageView
 
-            div.setWidth(4)
-            div.setHeight(dividerH)
+            div.width = 4
+            div.height = dividerH
             div.center.x = CGFloat(Float(i+1))*buttonW
             div.center = CGPointMake( CGFloat(Float(i+1))*buttonW, buttonH*0.5)
         }

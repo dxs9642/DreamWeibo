@@ -80,9 +80,9 @@ class DreamWebViewController: UIViewController,UIWebViewDelegate{
     func setupButton(imageSource:NSString,disableImageSource:NSString)->UIButton{
         let button = UIButton()
         let imageSize = CGSizeMake(38, 38)
-        let image = UIImage(named: imageSource)!.imageByScalingToSize(imageSize)
+        let image = UIImage(named: imageSource as String)!.imageByScalingToSize(imageSize)
 
-        let disableImage = UIImage(named: disableImageSource)!.imageByScalingToSize(imageSize)
+        let disableImage = UIImage(named: disableImageSource as String)!.imageByScalingToSize(imageSize)
 
         button.setImage(image,forState: UIControlState.Normal)
         button.setImage(disableImage, forState: UIControlState.Disabled)
@@ -130,7 +130,7 @@ class DreamWebViewController: UIViewController,UIWebViewDelegate{
         titleLabel = UILabel()
         titleLabel.text = "正在加载。。。"
         titleLabel.font = UIFont.systemFontOfSize(13)
-        let urlAddress = NSURL(string: loadURL)
+        let urlAddress = NSURL(string: loadURL as String)
         let urlRequest = NSURLRequest(URL: urlAddress!)
         webPage.loadRequest(urlRequest)
     }

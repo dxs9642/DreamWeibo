@@ -14,4 +14,7 @@
 
 + (BOOL)showTime:(NSString *)timeOne anotherTime:(NSString *)timeTwo;
 
++ (NSComparisonResult)ifOneAboveTwo:(NSString *)timeOne anotherTime:(NSString *)timeTwo;
+
+
 @end

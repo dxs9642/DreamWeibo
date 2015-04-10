@@ -25,7 +25,7 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         
-        let url = request.URL.absoluteString! as NSString
+        let url = request.URL!.absoluteString! as NSString
         
         
         let range = url.rangeOfString("http://www.dream.net/?code=")
@@ -67,7 +67,7 @@ class OauthViewController: UIViewController,UIWebViewDelegate {
         
         
         DreamHttpTool.post("https://api.weibo.com/oauth2/access_token", params: params, success: { (obj:AnyObject!) -> Void in
-            let result = obj as NSDictionary
+            let result = obj as! NSDictionary
             
             let account = Account()
             account.setWithDictionary(result)

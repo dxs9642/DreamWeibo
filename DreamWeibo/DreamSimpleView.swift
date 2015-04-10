@@ -18,8 +18,8 @@ class DreamSimpleView: UIImageView {
     var vipView:UIImageView?
     var simpleFrame:DreamSimpleFrame?
     
-    override init(){
-        super.init()
+    convenience init(){
+        self.init()
         self.userInteractionEnabled = true
         let font = DreamFont()
         
@@ -105,9 +105,9 @@ class DreamSimpleView: UIImageView {
         var dic = NSMutableDictionary()
         let font = DreamFont()
         dic[NSFontAttributeName] = font.DreamSimpleTimeFont
-        let timeSize = time.sizeWithAttributes(dic)
+        let timeSize = time.sizeWithAttributes(dic as [NSObject : AnyObject])
         self.timeLabel?.frame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height)
-        self.timeLabel?.text = time
+        self.timeLabel?.text = time as String
         
         
 
@@ -116,13 +116,13 @@ class DreamSimpleView: UIImageView {
     
     
     func showUserInfo(recognizer:UITapGestureRecognizer){
-        let userName = (recognizer.view as UILabel).text
+        let userName = (recognizer.view as! UILabel).text
         
         if userName != nil {
             
             let dic = NSMutableDictionary()
             dic["DreamLinkText"] = userName
-            NSNotificationCenter.defaultCenter().postNotificationName("DreamDidSelectTitleNameNotionfication", object: nil, userInfo: dic )
+            NSNotificationCenter.defaultCenter().postNotificationName("DreamDidSelectTitleNameNotionfication", object: nil, userInfo: dic as [NSObject : AnyObject] )
             
             
         }

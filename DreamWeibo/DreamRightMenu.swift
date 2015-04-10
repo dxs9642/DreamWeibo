@@ -17,10 +17,13 @@ class DreamRightMenu: UIView {
     var userImage:UIImage!
     
     
-    override init() {
-        super.init()
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
+        
     }
-
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupTopView()
@@ -73,12 +76,18 @@ class DreamRightMenu: UIView {
     
     override func layoutSubviews() {
     
+        if  userInfo.titleLabel?.text == nil {
+            return
+        }
+        
         profile.x = ( 200 - profile.width ) / 2 + 75
         userInfo.center.x = profile.center.x
         userInfo.y = profile.height + 20
+        
+
         let count = (userInfo.titleLabel!.text! as NSString).length
         let length = count*20 + 30
-        userInfo.setWidth(CGFloat(Float(length)))
+        userInfo.width = CGFloat(Float(length))
         userInfo.height = 30
 
     

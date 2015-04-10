@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
         
         
         var defaults = NSUserDefaults()
-        let lastVersion = defaults.objectForKey("last_version") as NSString?
+        let lastVersion = defaults.objectForKey("last_version") as? String
         let dictionary =  NSBundle.mainBundle().infoDictionary! as NSDictionary
-        let currentVersion = dictionary[String(kCFBundleVersionKey)] as NSString
-        let accessToken = defaults.objectForKey("accessToken") as NSString?
+        let currentVersion = dictionary[String(kCFBundleVersionKey)] as? String
+        let accessToken = defaults.objectForKey("accessToken") as! String?
         
         
         
@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
         textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(20)
         //        textAttrs[NSShadowAttributeName] = NSValue(UIOffset: UIOffsetZero)
         //          这个方法不能在这里设置，设置程序崩溃，不知道为啥，不管了
-        apperance.titleTextAttributes = textAttrs
+        apperance.titleTextAttributes = textAttrs as [NSObject : AnyObject]
         
     }
     
@@ -125,18 +125,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
         var disableTextAttrs = NSMutableDictionary()
         disableTextAttrs[NSForegroundColorAttributeName] = UIColor.lightGrayColor()
         disableTextAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
-        apperance.setTitleTextAttributes(disableTextAttrs, forState: UIControlState.Disabled)
+        apperance.setTitleTextAttributes(disableTextAttrs as [NSObject : AnyObject], forState: UIControlState.Disabled)
         
         var helightTextAttrs = NSMutableDictionary()
         helightTextAttrs[NSForegroundColorAttributeName] = UIColor.blackColor()
         helightTextAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
-        apperance.setTitleTextAttributes(helightTextAttrs, forState: UIControlState.Highlighted)
+        apperance.setTitleTextAttributes(helightTextAttrs as [NSObject : AnyObject], forState: UIControlState.Highlighted)
         
         
         var textAttrs = NSMutableDictionary()
         //        textAttrs[NSForegroundColorAttributeName] = UIColor.orangeColor()
         textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
-        apperance.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
+        apperance.setTitleTextAttributes(textAttrs as [NSObject : AnyObject], forState: UIControlState.Normal)
         
         
     }

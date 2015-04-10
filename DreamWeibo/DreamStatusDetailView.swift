@@ -16,19 +16,20 @@ class DreamStatusDetailView: UIImageView {
     var originalView:DreamStatusOriginalView?
     var retweetView:DreamStatusRetweetView?
     
-    override init(){
-        super.init()
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
+    }
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.userInteractionEnabled = true
         self.image = UIImage.resizeImage("timeline_card_top_background")
         self.highlightedImage = UIImage.resizeImage("timeline_card_top_background_highlighted")
         
         setupOriginalView()
         setupRetweetView()
-        
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
     }
 
     required init(coder aDecoder: NSCoder) {

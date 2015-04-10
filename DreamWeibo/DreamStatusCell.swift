@@ -17,19 +17,13 @@ class DreamStatusCell: UITableViewCell {
     var toolbar:DreamStatusToolBar?
     
     
-    override init() {
-        super.init()
-        self.userInteractionEnabled = true
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
+
     
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        self.userInteractionEnabled = true
+
         setupStatusDetailView()
         setupToolBar()
         self.backgroundColor = UIColor.clearColor()

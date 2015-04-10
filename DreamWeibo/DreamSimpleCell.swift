@@ -13,19 +13,12 @@ class DreamSimpleCell: UITableViewCell {
     var simpleView:DreamSimpleView?
     var toolbar:DreamStatusToolBar?
     
-    
-    override init() {
-        super.init()
-        self.userInteractionEnabled = true
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
+
     
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.userInteractionEnabled = true
         self.selectionStyle = UITableViewCellSelectionStyle.None
         setupSimpleView()
         self.backgroundColor = UIColor.clearColor()

@@ -38,5 +38,6 @@
 #import "BMKMapView.h"
 #import "BMapKit.h"
 #import "UIImage+UIImageExtras.h"
+#import "DreamStringTool.h"
 #import "TimeTool.h"
 

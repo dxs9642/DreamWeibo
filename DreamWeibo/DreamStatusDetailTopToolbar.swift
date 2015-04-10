@@ -38,7 +38,7 @@ class DreamStatusDetailTopToolbar: UIView {
         
         get{
             
-            return (NSBundle.mainBundle().loadNibNamed("DreamStatusDetailTopToolbar", owner: nil, options: nil) as NSArray ).lastObject as DreamStatusDetailTopToolbar
+            return (NSBundle.mainBundle().loadNibNamed("DreamStatusDetailTopToolbar", owner: nil, options: nil) as NSArray ).lastObject as! DreamStatusDetailTopToolbar
 
         }
     }
@@ -111,7 +111,7 @@ class DreamStatusDetailTopToolbar: UIView {
             title = "\(count)"
         }
         
-        button.setTitle(defaultTitle + " " + title, forState: UIControlState.Normal)
+        button.setTitle((defaultTitle as String) + " " + title, forState: UIControlState.Normal)
         
         
     }

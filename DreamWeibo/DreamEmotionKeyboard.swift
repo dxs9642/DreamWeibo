@@ -18,10 +18,6 @@ class DreamEmotionKeyboard: UIView ,DreamEmotionToolbarProtocol{
 
     
     
-    override init() {
-        super.init()
-
-    }
 
 
     override init(frame: CGRect) {
@@ -48,7 +44,7 @@ class DreamEmotionKeyboard: UIView ,DreamEmotionToolbarProtocol{
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.listView?.frame = CGRectMake(0, 0, self.width(), self.height()-35)
+        self.listView?.frame = CGRectMake(0, 0, self.width, self.height-35)
     }
 
     

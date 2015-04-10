@@ -12,11 +12,11 @@ extension UIBarButtonItem{
     
     class func initBarButtonItem(image:NSString,imageHighlight:NSString,target:UIViewController,action:NSString) -> UIBarButtonItem{
         var button = UIButton()
-        button.setBackgroundImage(UIImage(named: image), forState: UIControlState.Normal)
-        button.setBackgroundImage(UIImage(named: imageHighlight), forState: UIControlState.Highlighted)
+        button.setBackgroundImage(UIImage(named: image as String), forState: UIControlState.Normal)
+        button.setBackgroundImage(UIImage(named: imageHighlight as String), forState: UIControlState.Highlighted)
         let size = button.currentBackgroundImage!.size
         button.frame = CGRectMake(0, 0, size.width, size.height)
-        button.addTarget(target, action: Selector(action), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(target, action: Selector(action as String), forControlEvents: UIControlEvents.TouchUpInside)
         
         return UIBarButtonItem(customView: button)
     }

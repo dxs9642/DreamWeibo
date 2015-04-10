@@ -24,7 +24,7 @@ class DreamLoadMoreFooter: UIView {
     */
     
     class func footer() -> DreamLoadMoreFooter {
-        return (NSBundle.mainBundle().loadNibNamed("DreamLoadMoreFooter", owner: nil, options: nil) as NSArray).lastObject as DreamLoadMoreFooter
+        return (NSBundle.mainBundle().loadNibNamed("DreamLoadMoreFooter", owner: nil, options: nil) as NSArray).lastObject as! DreamLoadMoreFooter
     }
     
     

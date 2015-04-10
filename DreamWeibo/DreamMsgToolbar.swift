@@ -18,11 +18,17 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
     var textHeight:CGFloat = 0
     
     
-     override init() {
-        super.init()
-        
-        self.userInteractionEnabled = true
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
+    }
+    
 
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.userInteractionEnabled = true
+        
         
         voiceButton.setBackgroundImage(UIImage(named: "message_voice_background"), forState: UIControlState.Normal)
         voiceButton.setBackgroundImage(UIImage(named: "message_voice_background_highlighted"), forState: UIControlState.Highlighted)
@@ -41,14 +47,6 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
         textContent.delegate = self
         
         self.addSubview(textContent)
-        
-    }
-
-
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
         
         
     }
@@ -102,7 +100,7 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
         let font = DreamFont()
         var attr = NSMutableDictionary()
         attr[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
-        let textSize = text.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        let textSize = text.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
         
         if !textChange {
             textChange = true

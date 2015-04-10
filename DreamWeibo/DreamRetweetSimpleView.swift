@@ -27,10 +27,10 @@ class DreamRetweetSimpleView: UIView {
         self.icon.clipsToBounds = true
         self.addSubview(icon)
         if status.pic_urls.count > 0{
-            let imageStr = (status.pic_urls[0] as DreamPhoto).thumbnail_pic
+            let imageStr = (status.pic_urls[0] as! DreamPhoto).thumbnail_pic
             icon.sd_setImageWithURL(NSURL(string: imageStr), placeholderImage: UIImage(named: "avatar_default_small"))
         }else if status.retweeted_status != nil && status.retweeted_status.pic_urls.count > 0{
-            let imageStr = (status.retweeted_status.pic_urls[0] as DreamPhoto).thumbnail_pic
+            let imageStr = (status.retweeted_status.pic_urls[0] as! DreamPhoto).thumbnail_pic
             icon.sd_setImageWithURL(NSURL(string: imageStr), placeholderImage: UIImage(named: "avatar_default_small"))
         }else{
             icon.sd_setImageWithURL(NSURL(string: status.user.avatar_large), placeholderImage: UIImage(named: "avatar_default_small"))
@@ -62,9 +62,7 @@ class DreamRetweetSimpleView: UIView {
         
     }
     
-    override init(){
-        super.init()
-    }
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -89,7 +87,7 @@ class DreamRetweetSimpleView: UIView {
         var attr = NSMutableDictionary()
         attr[NSFontAttributeName] = font.DreamStatusOrginalNameFont
         let theName:NSString = nameLabel!.text!
-        let nameSize = theName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        let nameSize = theName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
         self.nameLabel.size = nameSize.size
         self.nameLabel.x = CGRectGetMaxX(self.icon.frame) + 5
         self.nameLabel.y = 5

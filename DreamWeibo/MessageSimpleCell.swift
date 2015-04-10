@@ -17,6 +17,18 @@ class MessageSimpleCell: UITableViewCell {
     var message:NSArray?
     var user:DreamUser?
     
+
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    
     convenience init(style: UITableViewCellStyle, reuseIdentifier: String?,type:NSInteger){
         
         self.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,29 +48,6 @@ class MessageSimpleCell: UITableViewCell {
         
     }
     
-    
-    
-    override init() {
-        super.init()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -75,8 +64,8 @@ class MessageSimpleCell: UITableViewCell {
         self.user = user
         self.message = msg
         self.userSimple.user = self.user
-        self.userSimple.lastMessage = (self.message?.lastObject as DreamMessage).text
-        self.userSimple.lastTime = (self.message?.lastObject as DreamMessage).created_at
+        self.userSimple.lastMessage = DreamStringTool.removeSpaceChar((self.message?.lastObject as! DreamMessage).text)
+        self.userSimple.lastTime = (self.message?.lastObject as! DreamMessage).created_at
         self.userSimple.badgView.badgeValue = "\(self.message!.count)"
         self.userSimple.setupFromURL()
         

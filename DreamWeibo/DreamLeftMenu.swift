@@ -12,9 +12,6 @@ class DreamLeftMenu: UIView,UITabBarDelegate {
 
 
     
-    override init() {
-        super.init()
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,8 +27,8 @@ class DreamLeftMenu: UIView,UITabBarDelegate {
     func setupButtonWithIcon(icon:NSString,title:NSString,tag:NSInteger) -> UIButton{
         var button = UIButton()
         button.tag = tag
-        button.setTitle(title, forState: UIControlState.Normal)
-        button.setImage(UIImage(named: icon), forState: UIControlState.Normal)
+        button.setTitle(title as String, forState: UIControlState.Normal)
+        button.setImage(UIImage(named: icon as String), forState: UIControlState.Normal)
         button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         button.titleLabel?.font = UIFont.systemFontOfSize(13)
         
@@ -51,18 +48,18 @@ class DreamLeftMenu: UIView,UITabBarDelegate {
     }
     
     func itemClick(button:UIButton){
-        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
         let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
         
         switch button.tag {
         case 800:
-            tabbarVc.selectedViewController = tabbarVc.childViewControllers[0] as UINavigationController
+            tabbarVc.selectedViewController = tabbarVc.childViewControllers[0] as! UINavigationController
         case 801:
-             tabbarVc.selectedViewController = tabbarVc.childViewControllers[1] as UINavigationController
+             tabbarVc.selectedViewController = tabbarVc.childViewControllers[1] as! UINavigationController
         case 802:
-             tabbarVc.selectedViewController = tabbarVc.childViewControllers[2] as UINavigationController
+             tabbarVc.selectedViewController = tabbarVc.childViewControllers[2] as! UINavigationController
         case 803:
-             tabbarVc.selectedViewController = tabbarVc.childViewControllers[3] as UINavigationController
+             tabbarVc.selectedViewController = tabbarVc.childViewControllers[3] as! UINavigationController
         default:
             break
         }
@@ -100,7 +97,7 @@ class DreamLeftMenu: UIView,UITabBarDelegate {
         var i = 0
         for  i=0 ; i<buttonNum ; i++ {
             
-            var btn = self.subviews[i] as UIButton
+            var btn = self.subviews[i] as! UIButton
             btn.frame = CGRectMake(0, buttonH*CGFloat(Float(i)), buttonW, buttonH)
             
         }

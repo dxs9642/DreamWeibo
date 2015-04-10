@@ -30,7 +30,7 @@ class DreamComposePhotosView: UIView {
         let maxColsPerRow = 4
         let margin:CGFloat = 10
         
-        let imageViewW = (self.width() - margin * CGFloat(Float(count + 1))) / CGFloat(Float(maxColsPerRow))
+        let imageViewW = (self.width - margin * CGFloat(Float(count + 1))) / CGFloat(Float(maxColsPerRow))
         let imageViewH = imageViewW
         var i = 0
         for i=0 ; i<count ; i++ {
@@ -38,7 +38,7 @@ class DreamComposePhotosView: UIView {
             
             let col = CGFloat(Float(i % maxColsPerRow))
             
-            var imageView = self.subviews[i] as UIImageView
+            var imageView = self.subviews[i] as! UIImageView
             
             imageView.frame = CGRectMake(margin+(imageViewW+margin)*col, (imageViewW+margin)*row, imageViewW, imageViewH)
             
@@ -49,7 +49,7 @@ class DreamComposePhotosView: UIView {
     func images() -> NSArray {
         let arr = NSMutableArray()
         for img in self.subviews {
-            let imageView = img as UIImageView
+            let imageView = img as! UIImageView
             arr.addObject(imageView.image!)
         }
         return NSArray(array: arr)

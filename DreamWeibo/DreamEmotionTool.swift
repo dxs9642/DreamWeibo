@@ -23,7 +23,7 @@ class DreamEmotionTool: NSObject {
     var emojiEmotions:NSArray?
     var lxhEmotions:NSArray?
     var recentEmotions = NSMutableArray()
-    let recentFilePath =     ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/recentEmotions.data"
+    let recentFilePath =     (((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as! NSString) as String)+"/recentEmotions.data"
     
     
     func setDefaultEmotions(){
@@ -31,7 +31,7 @@ class DreamEmotionTool: NSObject {
         self.defaultEmotions = DreamEmotion.objectArrayWithFile(plist)
         
         for emotion in self.defaultEmotions! {
-            let emotiont = emotion as DreamEmotion
+            let emotiont = emotion as! DreamEmotion
             emotiont.directory = "EmotionIcons/default/"
         }
         
@@ -42,7 +42,7 @@ class DreamEmotionTool: NSObject {
         self.emojiEmotions = DreamEmotion.objectArrayWithFile(plist)
         
         for emotion in self.emojiEmotions! {
-            let emotiont = emotion as DreamEmotion
+            let emotiont = emotion as! DreamEmotion
             emotiont.directory = "EmotionIcons/emoji/"
         }
         
@@ -53,7 +53,7 @@ class DreamEmotionTool: NSObject {
         self.lxhEmotions = DreamEmotion.objectArrayWithFile(plist)
         
         for emotion in self.lxhEmotions! {
-            let emotiont = emotion as DreamEmotion
+            let emotiont = emotion as! DreamEmotion
             emotiont.directory = "EmotionIcons/lxh/"
         }
         
@@ -63,7 +63,7 @@ class DreamEmotionTool: NSObject {
         
         let result: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithFile(recentFilePath) as AnyObject?
         if result != nil {
-            recentEmotions = result as NSMutableArray
+            recentEmotions = result as! NSMutableArray
         }
         
         

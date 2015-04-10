@@ -19,8 +19,6 @@ class DreamBaseToolbar: UIImageView {
     var status:DreamStatus!{
         didSet{
             
-
-            
             let reposts_count = Int(status.reposts_count)
             setupBtnTitle(repostButton!, count: reposts_count, defaultTitle: "转发")
             let comment_count = Int(status.comments_count)
@@ -31,9 +29,6 @@ class DreamBaseToolbar: UIImageView {
         }
     }
     
-    override init() {
-        super.init()
-    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,8 +69,8 @@ class DreamBaseToolbar: UIImageView {
         var nav = DreamNavigationViewController(rootViewController: compose)
         
         
-        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
-        mainVc.presentViewController(nav, animated: true,nil)
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
+        mainVc.presentViewController(nav, animated: true,completion: nil)
     }
     
     func comments(){
@@ -89,8 +84,8 @@ class DreamBaseToolbar: UIImageView {
         var nav = DreamNavigationViewController(rootViewController: compose)
         
         
-        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
-        mainVc.presentViewController(nav, animated: true,nil)
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
+        mainVc.presentViewController(nav, animated: true,completion: nil)
         
         
     }
@@ -110,7 +105,7 @@ class DreamBaseToolbar: UIImageView {
         var title = ""
         
         if count == 0 {
-            title = defaultTitle
+            title = defaultTitle as String
         }else if count>10000 {
             if count / 1000 % 10 == 0 {
                 title = "\(count / 10000)万"
@@ -131,7 +126,7 @@ class DreamBaseToolbar: UIImageView {
 
     func setupButtonWithIcon(icon:NSString,title:NSString) -> UIButton{
         var button = UIButton()
-        button.setImage(UIImage(named: icon), forState: UIControlState.Normal)
+        button.setImage(UIImage(named: icon as String), forState: UIControlState.Normal)
         button.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         button.titleLabel?.font = UIFont.systemFontOfSize(13)
         
@@ -148,12 +143,12 @@ class DreamBaseToolbar: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
         let buttonNum = self.buttons.count
-        let buttonW = self.width() / CGFloat(Float(buttonNum))
-        let buttonH = self.height()
+        let buttonW = self.width / CGFloat(Float(buttonNum))
+        let buttonH = self.height
         var i = 0
         for  i=0 ; i<buttonNum ; i++ {
             
-            var btn = self.buttons[i] as UIButton
+            var btn = self.buttons[i] as! UIButton
             btn.frame = CGRectMake(CGFloat(Float(i))*buttonW, 0, buttonW, buttonH)
             
         }

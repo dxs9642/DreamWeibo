@@ -12,14 +12,16 @@ class DreamStatusPhotoView: UIImageView {
 
     var photo:DreamPhoto?
     var gifView:UIImageView?
+
     
-    override init() {
-        super.init()
-        self.userInteractionEnabled = true
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.userInteractionEnabled = true
         self.contentMode = UIViewContentMode.ScaleAspectFill
         self.clipsToBounds = true
         
@@ -37,8 +39,8 @@ class DreamStatusPhotoView: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let x = self.width() - self.gifView!.width()
-        let y = self.height() - self.gifView!.height()
+        let x = self.width - self.gifView!.width
+        let y = self.height - self.gifView!.height
         
         gifView!.frame.origin = CGPointMake(x, y)
         

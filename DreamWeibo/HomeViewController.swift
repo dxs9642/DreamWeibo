@@ -51,7 +51,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     func linkDidSelect(note:NSNotification){
         
         
-        let linkText = note.userInfo!["DreamLinkText"] as NSString
+        let linkText = note.userInfo!["DreamLinkText"] as! NSString
         
         if linkText.hasPrefix("http"){
             
@@ -88,17 +88,17 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
             DreamHttpTool.get("https://api.weibo.com/2/users/show.json", params: params, success: { (obj:AnyObject!) -> Void in
                 
-                let result = obj as NSDictionary
+                let result = obj as! NSDictionary
                 
                 
-                let userInfo = DreamUser(keyValues: result)
+                let userInfo = DreamUser(keyValues: result as [NSObject : AnyObject])
                 
                 Account.setName(userInfo.name)
                 
                 self.titleButton?.setTitle(userInfo.name , forState: UIControlState.Normal)
                 
-                let length = countElements(userInfo.name)*20 + 30
-                self.titleButton?.setWidth(CGFloat(Float(length)))
+                let length = count(userInfo.name)*20 + 30
+                self.titleButton?.width = CGFloat(Float(length))
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
 
@@ -141,7 +141,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
         
-        let firstStatusFrame = self.statusFrame.firstObject as DreamStatusFrame?
+        let firstStatusFrame = self.statusFrame.firstObject as! DreamStatusFrame?
         let firstStatus = firstStatusFrame?.status
         
         if firstStatus != nil {
@@ -155,10 +155,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         }
         
         DreamHttpTool.get("https://api.weibo.com/2/statuses/home_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
-            let result = obj as NSDictionary
+            let result = obj as! NSDictionary
             
             
-            let statusDictArray = result["statuses"] as NSArray
+            let statusDictArray = result["statuses"] as! NSArray
             
             self.AddStatusInToSqlite(statusDictArray)
 
@@ -177,9 +177,9 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         let db = DreamHttpTool.db
 
         for statue in statues {
-            let statueDic = statue as NSDictionary
+            let statueDic = statue as! NSDictionary
             let data = NSKeyedArchiver.archivedDataWithRootObject(statueDic)
-            let status_idstr = statueDic["idstr"] as NSString
+            let status_idstr = statueDic["idstr"] as! NSString
             db.executeUpdate("INSERT INTO t_home_status (status_idstr,status_dict) VALUES(?,?);",withArgumentsInArray: [status_idstr,data])
             
         }
@@ -213,8 +213,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         var statuses = NSMutableArray()
         
         while resultSet.next() {
-            let data =  resultSet.objectForColumnName("status_dict") as NSData
-            let statusDic = NSKeyedUnarchiver.unarchiveObjectWithData(data) as NSDictionary
+            let data =  resultSet.objectForColumnName("status_dict") as! NSData
+            let statusDic = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
             
             statuses.addObject(statusDic)
             
@@ -237,14 +237,14 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     func doWithNewResults(status:NSArray,fromSqlite:Bool){
         
         
-        let newStatus =  DreamStatus.objectArrayWithKeyValuesArray(status)
+        let newStatus =  DreamStatus.objectArrayWithKeyValuesArray(status as [AnyObject])
 
         let newFrames = self.statusesFramesWithStatuses(newStatus)
         
         
         
         for tmp in newFrames {
-            let frame = tmp as DreamStatusFrame
+            let frame = tmp as! DreamStatusFrame
             
             if frame.detailFrame.retweetedFrame != nil {
                 
@@ -260,7 +260,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
             
             
             let range = NSMakeRange(0, newStatus.count)
-            self.statusFrame.insertObjects(newFrames, atIndexes:NSIndexSet(indexesInRange:range))
+            self.statusFrame.insertObjects(newFrames as [AnyObject], atIndexes:NSIndexSet(indexesInRange:range))
             
             
             
@@ -285,7 +285,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     func statusesFramesWithStatuses(statuses:NSArray) -> NSArray{
         var frames =  NSMutableArray()
         for statuss in statuses {
-            let status = statuss as DreamStatus
+            let status = statuss as! DreamStatus
             var frame = DreamStatusFrame()
             frame.status = status
             frames.addObject(frame)
@@ -305,7 +305,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         var params = NSMutableDictionary()
         params["access_token"] = account!.access_token
         
-        let lastStatusFrame = self.statusFrame.lastObject as DreamStatusFrame?
+        let lastStatusFrame = self.statusFrame.lastObject as! DreamStatusFrame?
         let lastStatus = lastStatusFrame?.status
         
         if lastStatus != nil {
@@ -318,10 +318,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         DreamHttpTool.get("https://api.weibo.com/2/statuses/home_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
             
-            let result = obj as NSDictionary
+            let result = obj as! NSDictionary
             
             
-            let statusDictArray = result["statuses"] as NSArray
+            let statusDictArray = result["statuses"] as! NSArray
             
             
             self.AddStatusInToSqlite(statusDictArray)
@@ -339,12 +339,12 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     
 
     func doWithMoreResults(status:NSArray,fromSqlite:Bool){
-        let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(status))
+        let newStatus = NSMutableArray( array: DreamStatus.objectArrayWithKeyValuesArray(status as [AnyObject]))
         let newFrames = self.statusesFramesWithStatuses(newStatus)
         
         
         if newFrames.count != 0 {
-            self.statusFrame.addObjectsFromArray(newFrames)
+            self.statusFrame.addObjectsFromArray(newFrames as [AnyObject])
             self.tableView.reloadData()
         }
         
@@ -363,8 +363,8 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         label.backgroundColor = UIColor(patternImage: UIImage(named: "timeline_new_status_background")!)
         label.textAlignment = NSTextAlignment.Center
         label.textColor = UIColor.whiteColor()
-        label.setHeight(30)
-        label.frame = CGRectMake(0, 63-label.height(), self.view.width(), 30)
+        label.height = 30
+        label.frame = CGRectMake(0, 63-label.height, self.view.width, 30)
         self.navigationController?.view.insertSubview(label, belowSubview: self.navigationController!.navigationBar)
         
         let duration:NSTimeInterval = 1.0
@@ -372,7 +372,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
  
         
         UIView.animateWithDuration(duration, animations: { () -> Void in
-            label.transform = CGAffineTransformMakeTranslation(0, label.height())
+            label.transform = CGAffineTransformMakeTranslation(0, label.height)
             label.alpha = 1.0
         }) { (isFinish:Bool) -> Void in
             let delay:NSTimeInterval = 1.0
@@ -415,10 +415,10 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         titleButton.tag = 100
         titleButton.addTarget(self, action: "titleClick:", forControlEvents: UIControlEvents.TouchUpInside)
         //        titleButton.setBackgroundImage(UIImage(named: "navigationbar_background"), forState: UIControlState.Selected)  这句话没效果。。。。
-        titleButton.setHeight(30)
+        titleButton.height = 30
         let str = titleButton.titleLabel?.text
-        let length = countElements(str!)*20 + 30
-        titleButton.setWidth(CGFloat(Float(length)))
+        let length = count(str!)*20 + 30
+        titleButton.width = CGFloat(Float(length))
         self.navigationItem.titleView = titleButton
 
     }
@@ -437,14 +437,14 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         var menu = DreamPopMenu().initPopMenu(button)
         menu.delegate = self
         menu.showInRect(CGRectMake(100, 100, 200, 100))
-        menu.setDimBackground(true)
+        menu.setTheDimBackground(true)
         menu.setArrowPosition(DreamMenuArrorPosition.HMPopMenuArrowPositionCenter )
     }
     
 
     
     func friendSearch(){
-        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
         let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
 
         mainVc.rightMenu.hidden = true
@@ -465,7 +465,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
 
     func pop(){
-        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
         let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
         
         mainVc.leftMenu.hidden = true
@@ -489,7 +489,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
     
     func coverClick(){
-        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
         let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
          UIView.animateWithDuration(0.5, animations: { () -> Void in
             tabbarVc.view.transform = CGAffineTransformIdentity
@@ -524,13 +524,13 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as DreamStatusCell?
+        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as! DreamStatusCell?
         
         if cell == nil{
             cell = DreamStatusCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
         }
         
-        cell!.setupStatusFrame(self.statusFrame[indexPath.row] as DreamStatusFrame)
+        cell!.setupStatusFrame(self.statusFrame[indexPath.row] as! DreamStatusFrame)
 
         
         return cell!
@@ -541,7 +541,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         let detail = DreamStatusDetailViewController()
-        let frame = self.statusFrame[indexPath.row] as DreamStatusFrame
+        let frame = self.statusFrame[indexPath.row] as! DreamStatusFrame
         detail.status = frame.status
         self.navigationController?.pushViewController(detail, animated: true)
     
@@ -566,7 +566,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
         
         var delta = scrollView.contentSize.height - scrollView.contentOffset.y
         
-        var sawFooterH = self.view.height() - self.tabBarController!.tabBar.height()
+        var sawFooterH = self.view.height - self.tabBarController!.tabBar.height
         
         if delta <= sawFooterH {
             self.footer?.beginRefreshing()
@@ -575,7 +575,7 @@ class HomeViewController: UITableViewController,DreamMenuProtocol{
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let frame = self.statusFrame[indexPath.row] as DreamStatusFrame
+        let frame = self.statusFrame[indexPath.row] as! DreamStatusFrame
         return frame.cellHeight
     }
     

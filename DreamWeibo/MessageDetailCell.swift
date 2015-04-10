@@ -10,24 +10,12 @@ import UIKit
 
 class MessageDetailCell: UITableViewCell {
 
-    
-    var message:DreamMessage!
-    var senderImageFilePath:NSString!
-    var showTime = true
-    
-    override init() {
-        super.init()
-        
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
+    var msgDetailView:MessageDetailView!
+
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+                
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -35,21 +23,17 @@ class MessageDetailCell: UITableViewCell {
     }
     
     
-    convenience init(style: UITableViewCellStyle, reuseIdentifier: String?,type:NSInteger){
+    convenience init(style: UITableViewCellStyle, reuseIdentifier: String?,message:DreamMessage,showTime:Bool,senderImageFilePath:NSString){
         
         self.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        
-        
+//        self.selectionStyle = UITableViewCellSelectionStyle.None
         self.userInteractionEnabled = true
         self.backgroundColor = UIColor.clearColor()
-        let msgDetailView = MessageDetailView()
-        msgDetailView.message = self.message
-        msgDetailView.senderImageFilePath = self.senderImageFilePath
-        msgDetailView.showTime = self.showTime
+        msgDetailView = MessageDetailView(senderImageFilePath: senderImageFilePath)
+        msgDetailView.message = message
+        msgDetailView.showTime = showTime
         self.contentView.addSubview(msgDetailView)
         self.backgroundColor = UIColor.clearColor()
-
         
     }
     
@@ -68,7 +52,11 @@ class MessageDetailCell: UITableViewCell {
     }
     
 
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
+    }
     
 
     

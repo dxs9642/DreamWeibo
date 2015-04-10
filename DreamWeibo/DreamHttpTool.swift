@@ -13,7 +13,7 @@ class DreamHttpTool: NSObject {
     
     class var db:FMDatabase{
         get{
-            let doc = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString
+            let doc = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as! NSString
             let filename = doc.stringByAppendingPathComponent("status.sqlite")
             let db = FMDatabase(path: filename)
             
@@ -38,7 +38,7 @@ class DreamHttpTool: NSObject {
         var mgr = AFHTTPRequestOperationManager()
         
         
-        mgr.GET(url, parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+        mgr.GET(url as String, parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
             
             success(obj)
             
@@ -56,7 +56,7 @@ class DreamHttpTool: NSObject {
         var mgr = AFHTTPRequestOperationManager()
         
         
-        mgr.POST(url, parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
+        mgr.POST(url as String, parameters: params, success: { (operation:AFHTTPRequestOperation! , obj:AnyObject!) -> Void in
             
             success(obj)
             

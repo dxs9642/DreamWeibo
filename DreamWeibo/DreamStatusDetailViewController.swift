@@ -122,9 +122,9 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         
         DreamHttpTool.get("https://api.weibo.com/2/comments/show.json", params: params, success: { (obj:AnyObject!) -> Void in
             
-            let result = obj as NSDictionary
+            let result = obj as! NSDictionary
 
-            let comments = result["comments"] as NSArray
+            let comments = result["comments"] as! NSArray
             self.doWithNewResults(comments)
             
             }) { () -> Void in
@@ -147,8 +147,8 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
         
         DreamHttpTool.get("https://api.weibo.com/2/statuses/repost_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
             
-            let result = obj as NSDictionary
-            let reports = result["reposts"] as NSArray
+            let result = obj as! NSDictionary
+            let reports = result["reposts"] as! NSArray
             self.doWithNewResults(reports)
             
             }) { () -> Void in
@@ -175,14 +175,14 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
             cell = DreamSimpleCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
         }
 
-        cell?.setupSimpleFrame(self.simplesFrame[indexPath.row] as DreamSimpleFrame)
+        cell?.setupSimpleFrame(self.simplesFrame[indexPath.row] as! DreamSimpleFrame)
     
         return cell!
         
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let frame = self.simplesFrame[indexPath.row] as DreamSimpleFrame
+        let frame = self.simplesFrame[indexPath.row] as! DreamSimpleFrame
         return frame.cellHeight - 2
     }
     
@@ -190,7 +190,7 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
     func simpleFramesWithSimples(simples:NSArray) -> NSArray{
         var frames =  NSMutableArray()
         for simple in simples {
-            let simpleM = simple as DreamSimple
+            let simpleM = simple as! DreamSimple
             var frame = DreamSimpleFrame()
             frame.simple = simpleM
             frames.addObject(frame)
@@ -199,10 +199,10 @@ class DreamStatusDetailViewController: UIViewController,UITableViewDataSource,UI
     }
     
     func doWithNewResults(simples:NSArray){
-        let newSimples = DreamSimple.objectArrayWithKeyValuesArray(simples)
+        let newSimples = DreamSimple.objectArrayWithKeyValuesArray(simples as [AnyObject])
         let newFrames = self.simpleFramesWithSimples(newSimples)
         self.simplesFrame.removeAllObjects()
-        self.simplesFrame.addObjectsFromArray(newFrames)
+        self.simplesFrame.addObjectsFromArray(newFrames as [AnyObject])
         if simplesFrame.count != 0 {
             self.tableView.reloadData()
         }

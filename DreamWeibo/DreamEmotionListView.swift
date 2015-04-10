@@ -20,11 +20,7 @@ class DreamEmotionListView: UIView,UIScrollViewDelegate {
     var pageControl:UIPageControl?
     
 
-    
-    override init() {
-        super.init()
-        
-    }
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,17 +46,17 @@ class DreamEmotionListView: UIView,UIScrollViewDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.pageControl?.frame = CGRectMake(0, self.height()-35, self.width(), 35)
-        self.scrollView?.frame = CGRectMake(0, 0, self.width(), self.height()-35)
+        self.pageControl?.frame = CGRectMake(0, self.height-35, self.width, 35)
+        self.scrollView?.frame = CGRectMake(0, 0, self.width, self.height-35)
         self.scrollView?.showsHorizontalScrollIndicator = false
         self.scrollView?.showsVerticalScrollIndicator = false
         self.scrollView?.pagingEnabled = true
-        self.scrollView?.contentSize = CGSizeMake(self.scrollView!.width() * CGFloat(Float(pageControl!.numberOfPages)), 0)
+        self.scrollView?.contentSize = CGSizeMake(self.scrollView!.width * CGFloat(Float(pageControl!.numberOfPages)), 0)
         let count = self.pageControl!.numberOfPages
         
         for var i=0;i<count;i++ {
-            let gridView = self.scrollView?.subviews[i] as DreamEmotionGridView
-            gridView.frame = CGRectMake( CGFloat(Float(i)) * self.width(), 0, self.width(), self.scrollView!.height())
+            let gridView = self.scrollView?.subviews[i] as! DreamEmotionGridView
+            gridView.frame = CGRectMake( CGFloat(Float(i)) * self.width, 0, self.width, self.scrollView!.height)
         }
         
     }
@@ -93,7 +89,7 @@ class DreamEmotionListView: UIView,UIScrollViewDelegate {
             
             let gridViewEmotionsRange = NSMakeRange(start, length)
             let gridViewEmotions = emotions.subarrayWithRange(gridViewEmotionsRange)
-            gridView!.setEmotions(gridViewEmotions)
+            gridView!.setTheEmotions(gridViewEmotions)
             
         }
         
@@ -110,7 +106,7 @@ class DreamEmotionListView: UIView,UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.pageControl?.currentPage = Int(scrollView.contentOffset.x / scrollView.width() + 0.5)
+        self.pageControl?.currentPage = Int(scrollView.contentOffset.x / scrollView.width + 0.5)
     }
     
 }

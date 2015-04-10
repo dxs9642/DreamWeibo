@@ -12,22 +12,24 @@ class DreamStatusDetailBottomToolbar: DreamBaseToolbar {
 
 
     
-    override init() {
-        super.init()
-        self.image = UIImage.resizeImage("timeline_card_bottom_background")
-
+    convenience init() {
+        
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
+        
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.image = UIImage.resizeImage("timeline_card_bottom_background")
 
 
     }
     
     override func setupButtonWithIcon(icon:NSString,title:NSString) -> UIButton{
         var button = UIButton()
-        button.setImage(UIImage(named: icon), forState: UIControlState.Normal)
-        button.setTitle(title, forState: UIControlState.Normal)
+        button.setImage(UIImage(named: icon as String), forState: UIControlState.Normal)
+        button.setTitle(title as String, forState: UIControlState.Normal)
         button.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         button.titleLabel?.font = UIFont.systemFontOfSize(13)
         
@@ -59,7 +61,7 @@ class DreamStatusDetailBottomToolbar: DreamBaseToolbar {
         var i = 0
         for  i=0 ; i<buttonNum ; i++ {
             
-            var btn = self.subviews[i] as UIButton
+            var btn = self.subviews[i] as! UIButton
             btn.frame = CGRectMake(CGFloat(Float(i))*buttonW + CGFloat(Float(margin * (i+1))), 5, buttonW, buttonH)
             
         }

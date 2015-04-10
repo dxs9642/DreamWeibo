@@ -10,13 +10,13 @@ import UIKit
 
 class DreamBadgeView: UIButton {
 
-    var badgeValue:NSString!{
+    var badgeValue:String!{
         didSet{
             self.setTitle(badgeValue, forState: UIControlState.Normal)
             var attr = NSMutableDictionary()
             attr[NSFontAttributeName] = self.titleLabel?.font
             
-            let titleSize = badgeValue.sizeWithAttributes(attr)
+            let titleSize = badgeValue.sizeWithAttributes(attr as [NSObject : AnyObject])
             let bgw = self.currentBackgroundImage!.size.width
             if titleSize.width < bgw {
                 self.width = bgw
@@ -28,9 +28,6 @@ class DreamBadgeView: UIButton {
     }
     
     
-    override init() {
-        super.init()
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

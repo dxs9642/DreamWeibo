@@ -88,22 +88,18 @@ class DreamCommonCell: UITableViewCell {
             }else if item.isKindOfClass(DreamCommonSwitchItem){
                 self.accessoryView = self.rightSwitch
             }else if item.isKindOfClass(DreamCommonLabelItem){
-                let labelItem = item as DreamCommonLabelItem
+                let labelItem = item as! DreamCommonLabelItem
                 self.rightLabel.text = labelItem.text
                 var attr = NSMutableDictionary()
                 attr[NSFontAttributeName] = self.rightLabel.font
 
-                self.rightLabel.size = (labelItem.text as NSString).sizeWithAttributes(attr)
+                self.rightLabel.size = (labelItem.text as NSString).sizeWithAttributes(attr as [NSObject : AnyObject])
                 self.accessoryView = self.rightLabel
             }else{
                 self.accessoryView = nil
             }
             
         }
-    }
-    
-    override init() {
-        super.init()
     }
     
     

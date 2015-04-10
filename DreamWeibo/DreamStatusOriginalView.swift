@@ -27,8 +27,15 @@ class DreamStatusOriginalView: UIImageView {
     var photosView:DreamStatusPhotosView?
     var originalFrame:DreamStatusOriginalFrame?
     
-    override init(){
-        super.init()
+ 
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
+    }
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.userInteractionEnabled = true
         let font = DreamFont()
         
@@ -65,7 +72,7 @@ class DreamStatusOriginalView: UIImageView {
         
         
         iconView = UIImageView()
-    
+        
         
         
         self.addSubview(iconView!)
@@ -77,12 +84,7 @@ class DreamStatusOriginalView: UIImageView {
         photosView = DreamStatusPhotosView()
         
         self.addSubview(photosView!)
-        
-        
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -121,16 +123,16 @@ class DreamStatusOriginalView: UIImageView {
         var dic = NSMutableDictionary()
         let font = DreamFont()
         dic[NSFontAttributeName] = font.DreamStatusOrginalTimeFont
-        let timeSize = time.sizeWithAttributes(dic)
+        let timeSize = time.sizeWithAttributes(dic as [NSObject : AnyObject])
         self.timeLabel?.frame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height)
-        self.timeLabel?.text = time
+        self.timeLabel?.text = time as String
         
         let source = status.source
         if source != nil {
             let sourceX = CGRectGetMaxX(self.timeLabel!.frame) + 10
             let sourceY = timeY
             dic[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
-            let sourceSize = source.sizeWithAttributes(dic)
+            let sourceSize = source.sizeWithAttributes(dic as [NSObject : AnyObject])
             self.sourceLabel?.frame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height)
             self.sourceLabel?.text = source
         }
@@ -147,13 +149,13 @@ class DreamStatusOriginalView: UIImageView {
     
     
     func showUserInfo(recognizer:UITapGestureRecognizer){
-        let userName = (recognizer.view as UILabel).text
+        let userName = (recognizer.view as! UILabel).text
         
         if userName != nil {
             
             let dic = NSMutableDictionary()
             dic["DreamLinkText"] = userName
-        NSNotificationCenter.defaultCenter().postNotificationName("DreamDidSelectTitleNameNotionfication", object: nil, userInfo: dic )
+        NSNotificationCenter.defaultCenter().postNotificationName("DreamDidSelectTitleNameNotionfication", object: nil, userInfo: dic as [NSObject : AnyObject] )
             
             
         }

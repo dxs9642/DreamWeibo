@@ -33,8 +33,8 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
             setupRetweetView()
         }
         
-        keyboard.setHeight(216)
-        keyboard.setWidth(UIScreen.mainScreen().bounds.width)
+        keyboard.height = 216
+        keyboard.width = UIScreen.mainScreen().bounds.width
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "emotionDidSelect:", name: "DreamEmotionDidSelectedNotification", object: nil)
         
@@ -62,7 +62,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     }
     
     func emotionDidSelect(note:NSNotification){
-        let emotion = note.userInfo!["emotion"] as DreamEmotion
+        let emotion = note.userInfo!["emotion"] as! DreamEmotion
         
         self.textView?.appendEmotion(emotion)
         
@@ -76,7 +76,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         var photosView = DreamComposePhotosView()
         self.photosView = photosView
 
-        photosView.frame = CGRectMake(0, 100, self.view.width(), self.view.height())
+        photosView.frame = CGRectMake(0, 100, self.view.width, self.view.height)
         
         self.textView?.addSubview(photosView)
         
@@ -89,10 +89,10 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         var toolbar = DreamComposeToolbar(type: isCompose ? 1 : 0)
         self.toolbar = toolbar
         toolbar.delegate = self
-        toolbar.setWidth(self.view.width())
-        toolbar.setHeight(44)
+        toolbar.width = self.view.width
+        toolbar.height = 44
 //        self.textView?.inputAccessoryView = toolbar
-        toolbar.frame.origin.y = self.view.height() - toolbar.height()
+        toolbar.frame.origin.y = self.view.height - toolbar.height
         self.view.addSubview(toolbar)
         
         
@@ -149,10 +149,10 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         if self.textView?.inputView == nil {
 
             self.textView?.inputView = self.keyboard
-            self.toolbar?.setEmotionButton(false)
+            self.toolbar?.setTheEmotionButton(false)
         }else{
             self.textView?.inputView = nil
-            self.toolbar?.setEmotionButton(true)
+            self.toolbar?.setTheEmotionButton(true)
             
         }
         
@@ -192,20 +192,20 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         let name = Account.getName()
         let prefix = str
         if name==nil {
-            self.title = prefix
+            self.title = prefix as String
         }else{
             
             let text:NSString = "\(str)\n\(name!)"
-            var string = NSMutableAttributedString(string: text)
-            string.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(15), range: text.rangeOfString(prefix))
+            var string = NSMutableAttributedString(string: text as String)
+            string.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFontOfSize(15), range: text.rangeOfString(prefix as String))
             string.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: text.rangeOfString(name!))
             
             var titleLabel = UILabel()
             titleLabel.attributedText = string
             titleLabel.textAlignment = NSTextAlignment.Center
             titleLabel.numberOfLines = 0
-            titleLabel.setWidth(100)
-            titleLabel.setHeight(44)
+            titleLabel.width = 100
+            titleLabel.height = 44
             self.navigationItem.titleView = titleLabel
         }
         
@@ -218,10 +218,10 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         var textAttrs = NSMutableDictionary()
         textAttrs[NSForegroundColorAttributeName] = UIColor.orangeColor()
         textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
-        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(textAttrs as [NSObject : AnyObject], forState: UIControlState.Normal)
         
         textAttrs[NSForegroundColorAttributeName] = UIColor.lightGrayColor()
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs, forState: UIControlState.Disabled)
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs as [NSObject : AnyObject], forState: UIControlState.Disabled)
 
         if(textView != nil && !textView!.text.isEmpty ){
             self.navigationItem.rightBarButtonItem?.enabled = true
@@ -258,11 +258,11 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         
         let dic = note.userInfo!
 
-        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as Double
+        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as! Double
         
         UIView.animateWithDuration(duration, animations: { () -> Void in
 
-            let keyboardF = (dic[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+            let keyboardF = (dic[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
             let keyboardH = keyboardF.size.height
             
             self.toolbar?.transform = CGAffineTransformMakeTranslation(0, -keyboardH)
@@ -280,7 +280,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         
         let dic = note.userInfo!
         
-        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as Double
+        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as! Double
         UIView.animateWithDuration(duration, animations: { () -> Void in
             self.toolbar!.transform = CGAffineTransformIdentity;
             
@@ -437,7 +437,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
             
 
             
-            let image = images.lastObject as UIImage
+            let image = images.lastObject as! UIImage
             
             let data = UIImageJPEGRepresentation(image, 1.0)
             
@@ -494,21 +494,21 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
             textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
             
             textAttrs[NSForegroundColorAttributeName] = UIColor.orangeColor()
-            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
+            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs as [NSObject : AnyObject], forState: UIControlState.Normal)
             self.navigationItem.rightBarButtonItem?.enabled = true
         }else{
             self.textView?.placehoderLabel.hidden = false
             textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
             
             textAttrs[NSForegroundColorAttributeName] = UIColor.lightGrayColor()
-            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs, forState: UIControlState.Normal)
+            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs as [NSObject : AnyObject], forState: UIControlState.Normal)
             self.navigationItem.rightBarButtonItem?.enabled = false
         }
         
     }
     
     
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.photosView?.addImage(image)

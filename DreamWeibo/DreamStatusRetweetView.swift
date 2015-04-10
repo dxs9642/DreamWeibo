@@ -15,11 +15,12 @@ class DreamStatusRetweetView: UIImageView {
     var reweetFrame:DreamStatusRetweetedFrame?
     var toolbar:DreamBaseToolbar?
     
-    override init(){
-        super.init()
-        
-        
+    
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,27 +88,31 @@ class DreamStatusRetweetView: UIImageView {
     }
     
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         
     }
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
         
     }
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-       let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
-         let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
-        let nav = tabbarVc.selectedViewController as UINavigationController
+    
+
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
+        let tabbarVc = mainVc.initViewController as WeiboTabBarViewController
+        let nav = tabbarVc.selectedViewController as! UINavigationController
         let detailVc = DreamStatusDetailViewController()
         detailVc.status = self.reweetFrame?.retweetedStatus
         detailVc.status.isFromRetweeted = true
         
         nav.pushViewController(detailVc, animated: true)
+    }
+    
+    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
         
     }
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-        
-    }
-
     
     
 }

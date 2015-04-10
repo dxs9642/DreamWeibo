@@ -44,7 +44,7 @@ class DreamGeneralSettingViewController: DreamCommonViewController {
         let clearCache = DreamCommonLabelItem(title: "清除缓存")
         clearCache.text = "null"
         let imageCachePath = SDImageCache.sharedImageCache().diskCachePath()
-        let textDataPath =   ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/status.sqlite"
+        let textDataPath =   (((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as! NSString) as String)+"/status.sqlite"
         
         let imageCacheSize = imageCachePath.fileSize()
         let textDataSize = textDataPath.fileSize()

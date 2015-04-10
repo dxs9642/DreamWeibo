@@ -14,7 +14,7 @@ class DreamEmotionView: UIButton {
     
     
     
-    func setEmotion(emotion:DreamEmotion){
+    func setTheEmotion(emotion:DreamEmotion){
         self.emotion = emotion
         if emotion.code == nil {
             let icon = "\(emotion.directory)\(emotion.png)"

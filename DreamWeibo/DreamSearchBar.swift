@@ -18,8 +18,8 @@ class DreamSearchBar: UITextField {
         searchBar.background = UIImage.resizeImage("searchbar_textfield_background")
         var imageVeiw = UIImageView(image: UIImage(named: "searchbar_textfield_search_icon"))
         
-        imageVeiw.setWidth(searchBar.height())
-        imageVeiw.setHeight(searchBar.height())
+        imageVeiw.width = searchBar.height
+        imageVeiw.height = searchBar.height
         imageVeiw.contentMode = UIViewContentMode.Center
         
         searchBar.leftView = imageVeiw

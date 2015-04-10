@@ -73,16 +73,59 @@
                 return YES;
     }else if (firstCmps.hour != secondCmps.hour) {
                     return  YES;
-    }else if (abs(firstCmps.minute - secondCmps.minute) < 5){
+    }else if (abs(firstCmps.minute - secondCmps.minute) > 5){
         return YES;
     }else{
         return NO;
     }
                     
+    
+}
+
++ (NSComparisonResult)ifOneAboveTwo:(NSString *)timeOne anotherTime:(NSString *)timeTwo{
+
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
 
     
+    [fmt setDateFormat:@"EEE MMM dd HH:mm:ss z yyyy"];
+    [fmt setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
     
+    NSDate *firstTime = [fmt dateFromString:timeOne];
+    NSDate *secondTime = [fmt dateFromString:timeTwo];
     
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    int unit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear;
+    
+    NSDateComponents *firstCmps = [calendar components:unit fromDate:firstTime];
+    NSDateComponents *secondCmps = [calendar components:unit fromDate:secondTime];
+    
+    if (firstCmps.year > secondCmps.year) {
+        return NSOrderedDescending;
+    }else if (firstCmps.year < secondCmps.year){
+        return NSOrderedAscending;
+    }else if (firstCmps.month > secondCmps.month) {
+        return NSOrderedDescending;
+    }else if (firstCmps.month < secondCmps.month) {
+        return NSOrderedAscending;
+    }else if (firstCmps.day > secondCmps.day) {
+        return NSOrderedDescending;
+    }else if (firstCmps.day < secondCmps.day) {
+        return NSOrderedAscending;
+    }else if (firstCmps.hour > secondCmps.hour) {
+        return  NSOrderedDescending;
+    }else if (firstCmps.hour < secondCmps.hour) {
+        return  NSOrderedAscending;
+    }else if (firstCmps.minute > secondCmps.minute){
+        return NSOrderedDescending;
+    }else if (firstCmps.minute < secondCmps.minute){
+        return NSOrderedAscending;
+    }else if (firstCmps.second > secondCmps.second){
+        return NSOrderedDescending;
+    }else if (firstCmps.second < secondCmps.second){
+        return NSOrderedAscending;
+    }else{
+        return NSOrderedSame;
+    }
     
 }
 

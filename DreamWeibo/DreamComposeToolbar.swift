@@ -60,12 +60,6 @@ class DreamComposeToolbar: UIView {
         
     }
     
-    override init() {
-        super.init()
-
-        
-
-    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -78,7 +72,7 @@ class DreamComposeToolbar: UIView {
 
     
     
-    func setEmotionButton(isEmotionButton:Bool){
+    func setTheEmotionButton(isEmotionButton:Bool){
         
         if isEmotionButton {
             self.emotionButton!.setImage(UIImage(named: "compose_emoticonbutton_background_os7"), forState: UIControlState.Normal)
@@ -108,11 +102,11 @@ class DreamComposeToolbar: UIView {
         let count = self.subviews.count
         
         
-        let buttonW = self.width()/CGFloat(Float(count))
-        let buttonH = self.height()
+        let buttonW = self.width/CGFloat(Float(count))
+        let buttonH = self.height
         
         for i in 0...count-1 {
-            var button = self.subviews[i] as UIButton
+            var button = self.subviews[i] as! UIButton
             button.frame = CGRectMake(CGFloat(Float(i))*buttonW, 0, buttonW, buttonH)
         }
         
@@ -126,7 +120,7 @@ class DreamComposeToolbar: UIView {
         button.tag = tag
         button.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         button.setImage(UIImage(named: icon), forState: UIControlState.Normal)
-        button.setImage(UIImage(named: highIcon), forState: UIControlState.Highlighted)
+        button.setImage(UIImage(named: highIcon as String), forState: UIControlState.Highlighted)
         self.addSubview(button)
         return button
     }

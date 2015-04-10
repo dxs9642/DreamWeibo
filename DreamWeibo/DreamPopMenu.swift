@@ -28,8 +28,9 @@ class DreamPopMenu: UIView {
     var dimBackground = false
     var arrowPosition:DreamMenuArrorPosition?
     
-    override init() {
-        super.init()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         var cover = UIButton()
         cover.backgroundColor = UIColor.clearColor()
         cover.addTarget(self, action: "coverClick", forControlEvents: UIControlEvents.TouchUpInside)
@@ -41,10 +42,6 @@ class DreamPopMenu: UIView {
         container.image = UIImage.resizeImage("popover_background")
         self.addSubview(container)
         self.container = container
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -79,7 +76,7 @@ class DreamPopMenu: UIView {
         self.container?.image = image
     }
     
-    func setDimBackground(dimBackground:Bool){
+    func setTheDimBackground(dimBackground:Bool){
         self.dimBackground = dimBackground
         if dimBackground {
             self.cover?.backgroundColor = UIColor.blackColor()
@@ -114,7 +111,7 @@ class DreamPopMenu: UIView {
         let rightMargin:CGFloat = 5;
         let bottomMargin:CGFloat = 8;
         
-        self.contentView?.frame = CGRectMake(leftMargin, topMargin, self.container!.width() - leftMargin - rightMargin, container!.height() - topMargin - bottomMargin)
+        self.contentView?.frame = CGRectMake(leftMargin, topMargin, self.container!.width - leftMargin - rightMargin, container!.height - topMargin - bottomMargin)
         
         self.container?.addSubview(self.contentView!)
     }

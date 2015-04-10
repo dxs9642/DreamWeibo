@@ -11,32 +11,23 @@ import UIKit
 class DreamTextView: UITextView {
     
     
-    let placehoder:NSString!
+    var placehoder:NSString!
     var placehoderLabel:UILabel!
 
     
-    override init() {
-        super.init()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
         placehoder = "请输入文字"
         placehoderLabel = UILabel()
-        
     }
+    
+
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        super.init(frame: frame, textContainer: textContainer)
-    }
-    
-
-
 
     
     override func layoutSubviews() {
@@ -48,16 +39,16 @@ class DreamTextView: UITextView {
         placehoderLabel.font = self.font
         self.addSubview(placehoderLabel)
         
-        self.placehoderLabel.frame = CGRectMake(5, 8, self.width()-2*5, 100)
-        self.placehoderLabel.text = placehoder
+        self.placehoderLabel.frame = CGRectMake(5, 8, self.width-2*5, 100)
+        self.placehoderLabel.text = placehoder as String
         
-        let maximumLabelSize = CGSizeMake(self.placehoderLabel.width(), CGFloat(MAXFLOAT))
+        let maximumLabelSize = CGSizeMake(self.placehoderLabel.width, CGFloat(MAXFLOAT))
         
         var option = NSStringDrawingOptions.UsesLineFragmentOrigin
         var attr = NSMutableDictionary()
         attr[NSFontAttributeName] = self.placehoderLabel.font
-        let rect =  self.placehoder.boundingRectWithSize(maximumLabelSize, options: option, attributes: attr, context: nil)
-        self.placehoderLabel.setHeight(rect.size.height)
+        let rect =  self.placehoder.boundingRectWithSize(maximumLabelSize, options: option, attributes: attr as [NSObject : AnyObject], context: nil)
+        self.placehoderLabel.height = rect.size.height
     }
     
     

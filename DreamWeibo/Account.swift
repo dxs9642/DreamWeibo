@@ -22,7 +22,7 @@ class Account: NSObject , NSCoding {
     
     class var path:NSString {
         get{
-           return  ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/account.data"
+           return  (((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as! NSString) as String)+"/account.data"
         }
     }
 
@@ -31,17 +31,17 @@ class Account: NSObject , NSCoding {
     
     func setWithDictionary(dic:NSDictionary){
         let nf = NSNumberFormatter()
-        access_token = dic["access_token"] as NSString?
-        expires_in = nf.stringFromNumber( dic["expires_in"] as Float)?
-        uid = dic["uid"] as NSString?
+        access_token = dic["access_token"] as! NSString?
+        expires_in = nf.stringFromNumber( dic["expires_in"] as! Float)
+        uid = dic["uid"] as! NSString?
     }
     
      required init(coder aDecoder: NSCoder) {
 
-        self.expires_time = aDecoder.decodeObjectForKey("expires_time") as NSDate?
-        self.access_token = aDecoder.decodeObjectForKey("access_token") as NSString?
-        self.expires_in = aDecoder.decodeObjectForKey("expires_in") as NSString?
-        self.uid = aDecoder.decodeObjectForKey("uid") as NSString?
+        self.expires_time = aDecoder.decodeObjectForKey("expires_time") as! NSDate?
+        self.access_token = aDecoder.decodeObjectForKey("access_token") as! NSString?
+        self.expires_in = aDecoder.decodeObjectForKey("expires_in") as! NSString?
+        self.uid = aDecoder.decodeObjectForKey("uid") as! NSString?
         
 
     }
@@ -58,8 +58,7 @@ class Account: NSObject , NSCoding {
     class func getName() -> String?{
         
         var defaults = NSUserDefaults()
-        return defaults.valueForKey("userInfo") as String?
-
+        return defaults.valueForKey("userInfo") as? String
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -74,14 +73,14 @@ class Account: NSObject , NSCoding {
     
     class func save(account:Account){
         
-        NSKeyedArchiver.archiveRootObject(account, toFile:path )
+        NSKeyedArchiver.archiveRootObject(account, toFile:path as String )
         
     }
     
     
     
     class func getAccount() -> Account?{
-        let account = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as Account
+        let account = NSKeyedUnarchiver.unarchiveObjectWithFile(path as String) as! Account
         let now = NSDate()
         if now.compare(account.expires_time!) == NSComparisonResult.OrderedDescending {
             return nil
@@ -98,7 +97,7 @@ class Account: NSObject , NSCoding {
     
     func getUserImage()->UIImage?{
         
-        let filePath = ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/account.jpg"
+        let filePath = (((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as! NSString) as String)+"/account.jpg"
         
         let fm = NSFileManager.defaultManager()
         
@@ -116,10 +115,10 @@ class Account: NSObject , NSCoding {
         params["uid"] = self.uid
         DreamHttpTool.get("https://api.weibo.com/2/users/show.json", params: params, success: { (obj:AnyObject!) -> Void in
             
-            let result = obj as NSDictionary
+            let result = obj as! NSDictionary
             
             
-            let userInfo = DreamUser(keyValues: result)
+            let userInfo = DreamUser(keyValues: result as [NSObject : AnyObject])
             
 
             self.saveImage(userInfo.avatar_large)
@@ -135,7 +134,7 @@ class Account: NSObject , NSCoding {
     
     func saveImage(url:NSString){
         
-        let imageUrl = NSURL(string: url)
+        let imageUrl = NSURL(string: url as String)
         let request = NSURLRequest(URL: imageUrl!)
 
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{
@@ -145,7 +144,7 @@ class Account: NSObject , NSCoding {
             
             let image = UIImage(data: data)
             
-            let filePath = ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/account.jpg"
+            let filePath = (((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as! NSString) as String)+"/account.jpg"
 
             UIImageJPEGRepresentation(image, 1.0).writeToFile(filePath, atomically: true)
 

@@ -73,9 +73,9 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
         var attr = NSMutableDictionary()
         attr[NSFontAttributeName] = font.DreamStatusOrginalNameFont
         let theDescript:NSString = "微博信息"
-        let descriptSize = theDescript.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        let descriptSize = theDescript.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
         tableDescript.size = descriptSize.size
-        tableDescript.text = theDescript
+        tableDescript.text = theDescript as String
         
         
         tableTopView.width = self.view.width
@@ -137,10 +137,10 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
         
         DreamHttpTool.get("https://api.weibo.com/2/users/show.json", params: params, success: { (obj:AnyObject!) -> Void in
             
-            let result = obj as NSDictionary
+            let result = obj as! NSDictionary
             
             
-            self.userInfo = DreamUser(keyValues: result)
+            self.userInfo = DreamUser(keyValues: result as [NSObject : AnyObject])
             
             
             if self.userInfo == nil {
@@ -150,7 +150,7 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
 //            self.changeTableViews()
             
             
-            self.uid = result["id"] as Int
+            self.uid = result["id"] as! Int
             
             self.getUserOtherInfo("\(self.uid)")
             self.getUserIsFollowMe(self.uid)
@@ -180,13 +180,13 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
         
         DreamHttpTool.get("https://api.weibo.com/2/users/counts.json", params: params, success: { (obj:AnyObject!) -> Void in
             
-            let result = obj as NSArray
+            let result = obj as! NSArray
             
-            let followers_count = (result[0] as NSDictionary)["followers_count"] as Int
+            let followers_count = (result[0] as! NSDictionary)["followers_count"] as! Int
             
             self.userInfo?.followers_count = Int32(followers_count)
             
-            let friends_count = (result[0] as NSDictionary)["friends_count"] as Int
+            let friends_count = (result[0] as! NSDictionary)["friends_count"] as! Int
             
             self.userInfo?.friends_count = Int32(friends_count)
             
@@ -221,9 +221,9 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
         
         DreamHttpTool.get("https://api.weibo.com/2/friendships/show.json", params: params, success: { (obj:AnyObject!) -> Void in
             
-            let result = obj as NSDictionary
+            let result = obj as! NSDictionary
             
-            let isFollowed = (result["source"] as NSDictionary)["following"] as Int
+            let isFollowed = (result["source"] as! NSDictionary)["following"] as! Int
             
             if isFollowed == 1 {
                 
@@ -312,9 +312,9 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
         
         
         DreamHttpTool.get("https://api.weibo.com/2/statuses/user_timeline.json", params: params, success: { (obj:AnyObject!) -> Void in
-            let result = obj as NSDictionary
+            let result = obj as! NSDictionary
             
-            let statusDictArray = result["statuses"] as NSArray
+            let statusDictArray = result["statuses"] as! NSArray
             
             self.doWithNewResults(statusDictArray)
             
@@ -329,7 +329,7 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
     func statusesFramesWithStatuses(statuses:NSArray) -> NSArray{
         var frames =  NSMutableArray()
         for statuss in statuses {
-            let status = statuss as DreamStatus
+            let status = statuss as! DreamStatus
             var frame = DreamStatusFrame()
             frame.status = status
             frames.addObject(frame)
@@ -340,7 +340,7 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
     func doWithNewResults(status:NSArray){
         
         
-        let newStatus =  DreamStatus.objectArrayWithKeyValuesArray(status)
+        let newStatus =  DreamStatus.objectArrayWithKeyValuesArray(status as [AnyObject])
         
         let newFrames = self.statusesFramesWithStatuses(newStatus)
         
@@ -349,7 +349,7 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
             
             
             let range = NSMakeRange(0, newStatus.count)
-            self.statusFrame.insertObjects(newFrames, atIndexes:NSIndexSet(indexesInRange:range))
+            self.statusFrame.insertObjects(newFrames as [AnyObject], atIndexes:NSIndexSet(indexesInRange:range))
             
             self.tableView.reloadData()
         }
@@ -374,13 +374,13 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
         
         
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as DreamStatusCell?
+        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as! DreamStatusCell?
         
         if cell == nil{
             cell = DreamStatusCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
         }
         
-        cell!.setupStatusFrame(self.statusFrame[indexPath.row] as DreamStatusFrame)
+        cell!.setupStatusFrame(self.statusFrame[indexPath.row] as! DreamStatusFrame)
         
         
         return cell!
@@ -389,14 +389,14 @@ class DreamUserViewController: UIViewController, UITableViewDataSource,UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let detail = DreamStatusDetailViewController()
-        let frame = self.statusFrame[indexPath.row] as DreamStatusFrame
+        let frame = self.statusFrame[indexPath.row] as! DreamStatusFrame
         detail.status = frame.status
         self.navigationController?.pushViewController(detail, animated: true)
         
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let frame = self.statusFrame[indexPath.row] as DreamStatusFrame
+        let frame = self.statusFrame[indexPath.row] as! DreamStatusFrame
         return frame.cellHeight
     }
     

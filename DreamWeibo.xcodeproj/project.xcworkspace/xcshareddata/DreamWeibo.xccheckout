@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DE26296CB69DF175FC86A1DDEF37F3247EC48B3C</key>
-		<string>github.com:dxs9642/DreamWeibo.git</string>
+		<string>https://github.com/dxs9642/DreamWeibo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>DreamWeibo.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:dxs9642/DreamWeibo.git</string>
+	<string>https://github.com/dxs9642/DreamWeibo.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

@@ -10,17 +10,18 @@ import UIKit
 
 class DreamTitleButton: UIButton {
     
-    override init() {
-        super.init()
+    convenience init() {
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.imageView?.contentMode = UIViewContentMode.Center
         self.titleLabel?.textAlignment = NSTextAlignment.Right
         self.titleLabel?.font = UIFont.systemFontOfSize(20)
         self.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.adjustsImageWhenHighlighted = false
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -28,11 +29,11 @@ class DreamTitleButton: UIButton {
     }
 
     override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
-        return CGRectMake(self.width()-self.height(), 0, self.height(), self.height())
+        return CGRectMake(self.width-self.height, 0, self.height, self.height)
     }
     
     override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
-        return CGRectMake(0, 0, self.width()-self.height(), self.height())
+        return CGRectMake(0, 0, self.width-self.height, self.height)
     }
     
     

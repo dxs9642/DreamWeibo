@@ -17,35 +17,33 @@ protocol FriendProtocol{
 class ButtonsView: UIView,UIAlertViewDelegate {
 
 
-    let selfMessage:UIButton!
-    let addFriend:UIButton!
+    let selfMessage:UIButton = UIButton()
+    let addFriend:UIButton = UIButton()
     var userInfo:DreamUser?
     var buttonSelected = false
     var delegate:FriendProtocol?
     
-    override init() {
-        super.init()
-        
+    
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
+    }
+    
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        selfMessage = UIButton()
         selfMessage.setTitle("私信", forState: UIControlState.Normal)
         selfMessage.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         selfMessage.titleLabel?.font = UIFont.systemFontOfSize(12)
         self.addSubview(selfMessage)
         
-        addFriend = UIButton()
         addFriend.setTitle("关注", forState: UIControlState.Normal)
         addFriend.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
         addFriend.titleLabel?.font = UIFont.systemFontOfSize(12)
         addFriend.addTarget(self, action: "addOrRemoveFriend", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(addFriend)
-        
-        
-    }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
     }
 
     required init(coder aDecoder: NSCoder) {

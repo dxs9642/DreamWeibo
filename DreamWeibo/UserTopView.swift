@@ -18,18 +18,19 @@ class UserTopView: UIImageView {
     var infoLabelCenter:UILabel!
     var vipView:UIImageView?
 
-    override init(){
-        super.init()
-        
-        self.image = UIImage(named: "user_info_background")
-        
-        setupTopSubviews()
-   
+    
+    
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
     }
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.image = UIImage(named: "user_info_background")
+        
+        setupTopSubviews()
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -88,9 +89,9 @@ class UserTopView: UIImageView {
         
         var arr = urlString.componentsSeparatedByString("/")
         
-        let userId:NSString = arr[3] as NSString
+        let userId:NSString = arr[3] as! NSString
         
-        let filePath = ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/"+userId+".jpg"
+        let filePath = (((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as! NSString) as String)+"/"+(userId as String)+".jpg"
         
         let fm = NSFileManager.defaultManager()
         
@@ -101,7 +102,7 @@ class UserTopView: UIImageView {
         }else{
             
                 
-            let imageUrl = NSURL(string: urlString)
+            let imageUrl = NSURL(string: urlString as String)
             let request = NSURLRequest(URL: imageUrl!)
             
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{
@@ -151,30 +152,30 @@ class UserTopView: UIImageView {
         var attr = NSMutableDictionary()
         attr[NSFontAttributeName] = font.DreamStatusOrginalNameFont
         let theName:NSString = userInfo.name
-        let nameSize = theName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        let nameSize = theName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
         self.nameLabel.size = nameSize.size
         self.nameLabel.centerX = self.centerX
         self.nameLabel.y = CGRectGetMaxY(self.profile.frame) + 10
         
         
         self.infoLabelLeft.font = font.DreamStatusOrginalSourceFont
-        let infoLeftString = "关注  " + dealWithCount(userInfo.friends_count)
+        let infoLeftString = "关注  " + (dealWithCount(userInfo.friends_count) as String)
          attr[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
-        let infoLeftSize = infoLeftString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        let infoLeftSize = infoLeftString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
         self.infoLabelLeft.size = infoLeftSize.size
         self.infoLabelLeft.text = infoLeftString
         
         self.infoLabelRight.font = font.DreamStatusOrginalSourceFont
-        let infoRightString = "私信  " + dealWithCount(userInfo.followers_count)
+        let infoRightString = "私信  " + (dealWithCount(userInfo.followers_count) as String)
         attr[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
-        let infoRightSize = infoRightString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        let infoRightSize = infoRightString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
         self.infoLabelRight.size = infoRightSize.size
         self.infoLabelRight.text = infoRightString
         
         self.infoLabelCenter.font = font.DreamStatusOrginalSourceFont
         let infoCenterString = "  |  "
         attr[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
-        let infoCenterSize = infoCenterString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+        let infoCenterSize = infoCenterString.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
         self.infoLabelCenter.size = infoCenterSize.size
         self.infoLabelCenter.text = infoCenterString
         

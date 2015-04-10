@@ -17,10 +17,13 @@ class DreamTabBar: UITabBar {
     var plusButton:UIButton?
     var plusDelegate:PlusButtonProtocol?
     
-    override init() {
-        super.init()
-        setupPlusButton()
+    
+    
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
     }
+    
     
     func setupPlusButton(){
         var plusButton = UIButton()
@@ -40,6 +43,7 @@ class DreamTabBar: UITabBar {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupPlusButton()
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -55,8 +59,8 @@ class DreamTabBar: UITabBar {
     }
     
     func setupPlusButtonFrame(){
-        self.plusButton!.setSize(self.plusButton!.currentBackgroundImage!.size)
-        self.plusButton!.center = CGPointMake(self.width()*0.5, self.height()*0.5)
+        self.plusButton!.size = self.plusButton!.currentBackgroundImage!.size
+        self.plusButton!.center = CGPointMake(self.width*0.5, self.height*0.5)
     
     }
     
@@ -68,11 +72,11 @@ class DreamTabBar: UITabBar {
         
         for tabbarButton in self.subviews {
             if tabbarButton.isKindOfClass(NSClassFromString("UITabBarButton")){
-                let tabbar = tabbarButton as UIView
+                let tabbar = tabbarButton as! UIView
                 if index<2 {
-                    tabbar.frame = CGRectMake(self.width()/count*CGFloat(Float(index)), 0, self.width()/count, self.height())
+                    tabbar.frame = CGRectMake(self.width/count*CGFloat(Float(index)), 0, self.width/count, self.height)
                 }else{
-                    tabbar.frame = CGRectMake(self.width()/count*CGFloat(Float(index+1)), 0, self.width()/count, self.height())
+                    tabbar.frame = CGRectMake(self.width/count*CGFloat(Float(index+1)), 0, self.width/count, self.height)
                 }
                 index++
                 

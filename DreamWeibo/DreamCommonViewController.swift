@@ -12,7 +12,7 @@ class DreamCommonViewController: UITableViewController {
 
     var groups:NSMutableArray!
     
-    override init() {
+    init() {
         super.init(style:
             UITableViewStyle.Grouped)
     }
@@ -44,14 +44,14 @@ class DreamCommonViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.groups[section] as DreamCommonGroup).items.count
+        return (self.groups[section] as! DreamCommonGroup).items.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = DreamCommonCell.cellWithTableView(tableView)
-        let items = (self.groups[indexPath.section] as DreamCommonGroup).items
-        cell.item = items[indexPath.row] as DreamCommonItem
+        let items = (self.groups[indexPath.section] as! DreamCommonGroup).items
+        cell.item = items[indexPath.row] as! DreamCommonItem
         cell.numberOfSections = items.count
         cell.indexPath = indexPath
         
@@ -59,22 +59,22 @@ class DreamCommonViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        let group = self.groups[section] as DreamCommonGroup
+        let group = self.groups[section] as! DreamCommonGroup
         return group.footer
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let group = self.groups[section] as DreamCommonGroup
+        let group = self.groups[section] as! DreamCommonGroup
         return group.header
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let items = (self.groups[indexPath.section] as DreamCommonGroup).items
-        let item = items[indexPath.row] as DreamCommonItem
+        let items = (self.groups[indexPath.section] as! DreamCommonGroup).items
+        let item = items[indexPath.row] as! DreamCommonItem
 
         
         if item.destVcClass != nil {
-            let destVc = item.destVcClass.alloc() as UIViewController
+            let destVc = item.destVcClass.alloc() as! UIViewController
             destVc.title = item.title
             self.navigationController?.pushViewController(destVc, animated: true)
         }

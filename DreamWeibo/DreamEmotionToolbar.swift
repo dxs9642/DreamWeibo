@@ -18,11 +18,7 @@ class DreamEmotionToolbar: UIView {
     
     var selectedButton:UIButton?
     var delegate:DreamEmotionToolbarProtocol?
-    
-    override init() {
-        super.init()
-        
-    }
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,7 +38,7 @@ class DreamEmotionToolbar: UIView {
         
         var button = UIButton()
         
-        button.setTitle(title, forState: UIControlState.Normal)
+        button.setTitle(title as String, forState: UIControlState.Normal)
         button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         button.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Selected)
         button.titleLabel?.font = UIFont.systemFontOfSize(13)
@@ -91,11 +87,11 @@ class DreamEmotionToolbar: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.frame = CGRectMake(0, superview!.height()-35, superview!.width(), 35)
-        let buttonW  = superview!.width() / 4
+        self.frame = CGRectMake(0, superview!.height-35, superview!.width, 35)
+        let buttonW  = superview!.width / 4
         for var i=0;i<4;i++ {
-            var button = self.subviews[i] as UIButton
-            button.frame = CGRectMake(CGFloat(Float(i))*buttonW, 0, buttonW, self.height())
+            var button = self.subviews[i] as! UIButton
+            button.frame = CGRectMake(CGFloat(Float(i))*buttonW, 0, buttonW, self.height)
             
         }
         

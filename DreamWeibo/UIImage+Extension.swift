@@ -10,15 +10,17 @@ import UIKit
 
 extension UIImage{
     class func resizeImage(name:NSString) ->UIImage {
-        var image = UIImage(named: name)
+        var image = UIImage(named: name as String)
         
         
         return image!.stretchableImageWithLeftCapWidth(Int(Float(image!.size.width*0.5)) , topCapHeight:Int(Float(image!.size.height*0.5)))
+    }
+    
+    class func resizeparticularImage(name:NSString) ->UIImage {
+        var image = UIImage(named: name as String)
         
-
         
-        
-        
+        return image!.stretchableImageWithLeftCapWidth(Int(Float(image!.size.width*0.5)) , topCapHeight:Int(Float(image!.size.height*0.7)))
     }
     
     class func createImageWithColor(color:UIColor) -> UIImage{

@@ -42,7 +42,7 @@ class MessageViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let ID = "message"
-        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as MessageSimpleCell?
+        var cell = tableView.dequeueReusableCellWithIdentifier(ID) as! MessageSimpleCell?
         
         if cell == nil{
             cell = MessageSimpleCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID,type: indexPath.row)
@@ -50,8 +50,8 @@ class MessageViewController: UITableViewController {
         
         let num = indexPath.row
         if num >= 3 {
-            let user = self.userInfo[num - 3] as DreamUser
-            cell?.setupUserAndMessage(user, msg: self.msg[user.idstr] as NSArray)
+            let user = self.userInfo[num - 3] as! DreamUser
+            cell?.setupUserAndMessage(user, msg: self.msg[user.idstr] as! NSArray)
         }
         
         return cell!
@@ -82,8 +82,8 @@ class MessageViewController: UITableViewController {
         if initial {
             DreamHttpTool.post("http://weidreambo.sinaapp.com/getInfo.php", params: params, success: { (obj:AnyObject!) -> Void in
             
-                let result = obj as NSArray
-                let messages = DreamMessage.objectArrayWithKeyValuesArray(result)
+                let result = obj as! NSArray
+                let messages = DreamMessage.objectArrayWithKeyValuesArray(result as [AnyObject])
                 self.dealWithMessages(messages)
                 self.getUserData()
             }) { () -> Void in
@@ -105,14 +105,14 @@ class MessageViewController: UITableViewController {
         
         for message in messages {
             
-            let msg = message as DreamMessage
+            let msg = message as! DreamMessage
             let id = message.sender_id
             if group[id] == nil {
                 var arr = NSMutableArray()
                 arr.addObject(message)
                 group[id] = arr
             }else{
-                var arr = group[id] as NSMutableArray
+                var arr = group[id] as! NSMutableArray
                 arr.addObject(message)
                 group[id] = arr
             }
@@ -133,7 +133,7 @@ class MessageViewController: UITableViewController {
         
         for (key,value) in msg {
             
-            let userId = key as NSString
+            let userId = key as! NSString
             
             var params = NSMutableDictionary()
             params["access_token"] = account!.access_token
@@ -141,8 +141,8 @@ class MessageViewController: UITableViewController {
             
             DreamHttpTool.get("https://api.weibo.com/2/users/show.json", params: params, success: { (obj:AnyObject!) -> Void in
                 
-                let result = obj as NSDictionary
-                let user = DreamUser(keyValues: result)
+                let result = obj as! NSDictionary
+                let user = DreamUser(keyValues: result as [NSObject : AnyObject])
                 self.userInfo.addObject(user)
                 self.finish()
                 

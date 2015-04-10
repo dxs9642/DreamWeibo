@@ -12,9 +12,13 @@ class DreamStatusPhotosView: UIView {
 
     var pic_urls:NSArray?
 
-    override init() {
-        super.init()
+
+    
+    convenience init(){
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,16 +44,16 @@ class DreamStatusPhotosView: UIView {
         
         for var i=0;i<count;i++ {
             
-            var pic = pic_urls![i] as DreamPhoto
+            var pic = pic_urls![i] as! DreamPhoto
             var photo = MJPhoto()
             photo.url = NSURL(string: pic.bmiddle_pic)
-            photo.srcImageView = self.subviews[i] as UIImageView
+            photo.srcImageView = self.subviews[i] as! UIImageView
             
             photos.addObject(photo)
         }
         
         
-        browser.photos = photos
+        browser.photos = photos as [AnyObject]
         
         
         browser.currentPhotoIndex = UInt(recognizer.view!.tag)
@@ -70,9 +74,9 @@ class DreamStatusPhotosView: UIView {
         super.layoutSubviews()
         let count = self.pic_urls?.count
         for var i=0;i<count;i++ {
-            var photoView = self.subviews[i] as DreamStatusPhotoView
-            photoView.setWidth(70)
-            photoView.setHeight(70)
+            var photoView = self.subviews[i] as! DreamStatusPhotoView
+            photoView.width = 70
+            photoView.height = 70
             let maxCols = count==4 ? 2 : 3
             let x = CGFloat(Float(i % maxCols * (70+10)))
             let y = CGFloat(Float(i / maxCols * (70+10)))
@@ -87,12 +91,12 @@ class DreamStatusPhotosView: UIView {
         self.pic_urls = pic_urls
 
         for var i=0;i<pic_urls.count;i++ {
-            var photoView = self.subviews[i] as DreamStatusPhotoView
-            photoView.setupPhoto(pic_urls[i] as DreamPhoto)
+            var photoView = self.subviews[i] as! DreamStatusPhotoView
+            photoView.setupPhoto(pic_urls[i] as! DreamPhoto)
             photoView.hidden = false
         }
         for var i=pic_urls.count;i<9;i++ {
-            var photoView = self.subviews[i] as DreamStatusPhotoView
+            var photoView = self.subviews[i] as! DreamStatusPhotoView
             photoView.hidden = true
         }
 

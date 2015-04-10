@@ -16,11 +16,7 @@ class DreamEmotionGridView: UIView {
     var popView = DreamEmotionPopView.popView()
     var movedEmotionView:DreamEmotionView?
     
-    override init() {
-        super.init()
-        
-    }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -85,7 +81,7 @@ class DreamEmotionGridView: UIView {
         
         self.emotionViews?.enumerateObjectsUsingBlock({ (obj, idx, stop) -> Void in
             
-            let emotionView = obj as DreamEmotionView
+            let emotionView = obj as! DreamEmotionView
             if CGRectContainsPoint(emotionView.frame, point) && emotionView.hidden == false {
                 resultEmotionView = emotionView
                 self.movedEmotionView = emotionView
@@ -100,14 +96,14 @@ class DreamEmotionGridView: UIView {
     func finishSelectEmotion(emotion:DreamEmotion){
         let userInfo = NSMutableDictionary()
         userInfo["emotion"] = emotion
-        NSNotificationCenter.defaultCenter().postNotificationName("DreamEmotionDidSelectedNotification", object: nil, userInfo: userInfo)
+        NSNotificationCenter.defaultCenter().postNotificationName("DreamEmotionDidSelectedNotification", object: nil, userInfo: userInfo as [NSObject : AnyObject])
         let tool = DreamEmotionTool()
         tool.addRecentEmotion(emotion)
         
     }
     
     
-    func setEmotions(emotions:NSArray){
+    func setTheEmotions(emotions:NSArray){
         self.emotions = emotions
         let count = emotions.count
         
@@ -125,8 +121,8 @@ class DreamEmotionGridView: UIView {
                 emotionView = emotionViews![i] as? DreamEmotionView
             }
             emotionView.adjustsImageWhenHighlighted = false
-            let emotion = emotions[i] as DreamEmotion
-            emotionView.setEmotion(emotion)
+            let emotion = emotions[i] as! DreamEmotion
+            emotionView.setTheEmotion(emotion)
             emotionView.hidden = false
 
         }
@@ -160,11 +156,11 @@ class DreamEmotionGridView: UIView {
         let count = self.emotions?.count
         let properties = DreamEmotionProperty()
         
-        let emotionViewW = ( self.width() - CGFloat(Float(2 * leftInset)) ) / CGFloat(Float(properties.maxCols))
-        let emotionViewH = ( self.height() - CGFloat(Float(topInset)) ) / CGFloat(Float(properties.maxRows))
+        let emotionViewW = ( self.width - CGFloat(Float(2 * leftInset)) ) / CGFloat(Float(properties.maxCols))
+        let emotionViewH = ( self.height - CGFloat(Float(topInset)) ) / CGFloat(Float(properties.maxRows))
         
         for var i=0;i<count;i++ {
-            let button = emotionViews![i] as DreamEmotionView
+            let button = emotionViews![i] as! DreamEmotionView
             let x = leftInset + CGFloat(Float(i % properties.maxCols)) * emotionViewW
             let y = topInset + CGFloat(Float(i / properties.maxCols)) * emotionViewH
             button.frame = CGRectMake(x, y, emotionViewW, emotionViewH)

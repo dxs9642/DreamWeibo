@@ -34,7 +34,7 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBar
     }
 
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-        let vc = ((viewController as UINavigationController).viewControllers as NSArray).firstObject as UIViewController
+        let vc = ((viewController as! UINavigationController).viewControllers as NSArray).firstObject as! UIViewController
         if vc.isKindOfClass(HomeViewController) {
             if changeFlag {
                 changeFlag = false
@@ -62,9 +62,9 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBar
         
         DreamHttpTool.get("https://rm.api.weibo.com/2/remind/unread_count.json", params: params, success: { (obj:AnyObject!) -> Void in
             
-                let result = obj as NSDictionary
+                let result = obj as! NSDictionary
             
-                let counts = DreamUnreadCountResult(keyValues: result) as DreamUnreadCountResult
+                let counts = DreamUnreadCountResult(keyValues: result as [NSObject : AnyObject]) as DreamUnreadCountResult
             
                 self.home?.tabBarItem.badgeValue = counts.status==0 ? nil: "\(counts.status)"
                 self.message?.tabBarItem.badgeValue = counts.messageCount()==0 ? nil: "\(counts.messageCount())"
@@ -96,8 +96,8 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBar
         var nav = DreamNavigationViewController(rootViewController: compose)
         
         
-        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as MainViewController
-        mainVc.presentViewController(nav, animated: true,nil)
+        let mainVc = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
+        mainVc.presentViewController(nav, animated: true,completion: nil)
     }
 
 
@@ -122,9 +122,9 @@ class WeiboTabBarViewController: UITabBarController ,PlusButtonProtocol,UITabBar
     func addChildVC(vc:UIViewController,title:NSString,image:NSString,select_image:NSString){
         
         //下面的所有代码都没有调用viewDidLoad()，因为没有加载view
-        vc.title = title
-        vc.tabBarItem.image = UIImage(named: image)
-        var selectImage = UIImage(named: select_image)
+        vc.title = title as String
+        vc.tabBarItem.image = UIImage(named: image as String)
+        var selectImage = UIImage(named: select_image as String)
         selectImage = selectImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         
         vc.tabBarItem.selectedImage = selectImage

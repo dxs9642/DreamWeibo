@@ -13,7 +13,21 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     
     var index = 0
     var user:DreamUser?
-    var messages:NSArray?
+    var messages:NSArray?{
+        didSet{
+            
+            self.messages = messages?.sortedArrayUsingComparator({ (messageA, messageB) -> NSComparisonResult in
+                
+                let a = messageA as! DreamMessage
+                let b = messageB as! DreamMessage
+                
+                let result =  TimeTool.ifOneAboveTwo(a.created_at, anotherTime: b.created_at)
+                return result
+                
+            })
+            
+        }
+    }
     var tableView:UITableView!
     var toolbar:DreamMsgToolbar!
     
@@ -89,11 +103,11 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
         
         let dic = note.userInfo!
         
-        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as Double
+        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as! Double
         
         UIView.animateWithDuration(duration, animations: { () -> Void in
             
-            let keyboardF = (dic[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+            let keyboardF = (dic[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
             let keyboardH = keyboardF.size.height
             
             self.toolbar?.transform = CGAffineTransformMakeTranslation(0, -keyboardH)
@@ -107,7 +121,7 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
         
         let dic = note.userInfo!
         
-        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as Double
+        let duration = dic[UIKeyboardAnimationDurationUserInfoKey] as! Double
         UIView.animateWithDuration(duration, animations: { () -> Void in
             self.toolbar!.transform = CGAffineTransformIdentity;
             
@@ -127,16 +141,16 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let ID = "cell"
+        let ID = "msgCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(ID) as? MessageDetailCell
         if cell == nil {
-            cell = MessageDetailCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID)
-        }
-        cell?.message = messages![indexPath.row] as DreamMessage
-        cell?.senderImageFilePath = self.user!.avatar_large
-        if indexPath.row - 1 > 0 {
-            let nextMessage = messages![indexPath.row - 1] as DreamMessage
-            cell?.showTime = TimeTool.showTime(cell!.message.created_at, anotherTime: nextMessage.created_at)
+            let message = messages![indexPath.row] as! DreamMessage
+            var showTime = true
+            if indexPath.row - 1 > 0 {
+                let nextMessage = messages![indexPath.row - 1] as! DreamMessage
+                showTime = TimeTool.showTime(message.created_at, anotherTime: nextMessage.created_at)
+            }
+            cell = MessageDetailCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID,message: message,showTime: showTime,senderImageFilePath: self.user!.avatar_large)
         }
         
         return cell!
@@ -149,6 +163,10 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.view.endEditing(true)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
     }
 
 }

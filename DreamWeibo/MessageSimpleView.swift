@@ -38,18 +38,6 @@ class MessageSimpleView: UIImageView {
     }
         
     
-    override init(){
-        super.init()
-        
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     
     func setupUserImage(type:NSInteger){
@@ -100,9 +88,9 @@ class MessageSimpleView: UIImageView {
         
         var arr = urlString.componentsSeparatedByString("/")
         
-        let userId:NSString = arr[3] as NSString
+        let userId:NSString = arr[3] as! NSString
         
-        let filePath = ((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as NSString)+"/"+userId+".jpg"
+        let filePath = (((NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true) as NSArray).lastObject as! NSString) as String)+"/"+(userId as String)+".jpg"
         
         let fm = NSFileManager.defaultManager()
         
@@ -114,7 +102,7 @@ class MessageSimpleView: UIImageView {
         }else{
             
             
-            let imageUrl = NSURL(string: urlString)
+            let imageUrl = NSURL(string: urlString as String)
             let request = NSURLRequest(URL: imageUrl!)
             
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{
@@ -138,8 +126,8 @@ class MessageSimpleView: UIImageView {
         
         getUserImage(self.user!.avatar_large)
         self.userTitle.text = self.user?.name
-        self.detailInfo.text = self.lastMessage
-        self.timeLabel.text = TimeTool.dealwithTime(lastTime)
+        self.detailInfo.text = self.lastMessage as? String
+        let str = TimeTool.dealwithTime(lastTime! as String) as NSString
         
     }
     
@@ -165,38 +153,31 @@ class MessageSimpleView: UIImageView {
         
         let font = DreamFont()
         userTitle.font = font.DreamStatusOrginalNameFont
-        let boundingSize = CGSizeMake(self.frame.size.width, CGFloat.max)
-        var attr = NSMutableDictionary()
-        attr[NSFontAttributeName] = font.DreamStatusOrginalNameFont
-        
-        let theName:NSString = userTitle.text!
-        let nameSize = theName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
-        userTitle.size = nameSize.size
+        userTitle.width = self.width - 150
+        userTitle.height = self.height / 2 - 15
         userTitle.x = CGRectGetMaxX(userImage.frame) + 10
         
         if detailInfo.text != nil {
-            
+                        
             detailInfo.font = font.DreamStatusOrginalTimeFont
             detailInfo.textColor = UIColor.lightGrayColor()
-            let boundingSize = CGSizeMake(self.frame.size.width - 150, CGFloat.max)
-            var attr = NSMutableDictionary()
-            attr[NSFontAttributeName] = font.DreamStatusOrginalTimeFont
-            
-            let theName:NSString = detailInfo.text!
-            let nameSize = theName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
-            detailInfo.size = nameSize.size
+            detailInfo.width = self.width - 150
+            detailInfo.height = self.height / 2 - 15
             detailInfo.x = CGRectGetMaxX(userImage.frame) + 10
             userTitle.y = userImage.centerY - 2 - userTitle.height
             detailInfo.y = userImage.centerY + 2
             
             timeLabel.font = font.DreamStatusOrginalTimeFont
             timeLabel.textColor = UIColor.lightGrayColor()
-            attr = NSMutableDictionary()
+            let attr = NSMutableDictionary()
             attr[NSFontAttributeName] = font.DreamStatusOrginalTimeFont
+            let boundingSize = CGSizeMake(self.width, CGFloat.max)
+            let timeName = timeLabel.text
+            let timeSize = timeName?.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
+            if timeSize != nil {
+                timeLabel.size = timeSize!.size
+            }
             
-            let timeName = timeLabel.text!
-            let timeSize = timeName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
-            timeLabel.size = timeSize.size
             timeLabel.x = self.width - 10 - timeLabel.width
             timeLabel.y = userImage.centerY - 5 - timeLabel.height
             
