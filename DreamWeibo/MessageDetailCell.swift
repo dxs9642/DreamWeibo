@@ -23,21 +23,24 @@ class MessageDetailCell: UITableViewCell {
     }
     
     
-    convenience init(style: UITableViewCellStyle, reuseIdentifier: String?,messageFrame:MessageDetailViewFrame,senderImageFilePath:NSString){
-        
-        self.init(style: style, reuseIdentifier: reuseIdentifier)
-//        self.selectionStyle = UITableViewCellSelectionStyle.None
+    
+
+    func setupDetailContent(messageFrame:MessageDetailViewFrame,senderImageFilePath:NSString){
+        self.selectionStyle = UITableViewCellSelectionStyle.None
         self.userInteractionEnabled = true
         self.backgroundColor = UIColor.clearColor()
         msgDetailView = MessageDetailView(senderImageFilePath: senderImageFilePath)
         msgDetailView.msgFrame = messageFrame
+
+        for content in self.contentView.subviews {
+            let contentView = content as! UIView
+            contentView.removeFromSuperview()
+        }
+        
         self.contentView.addSubview(msgDetailView)
         self.backgroundColor = UIColor.clearColor()
-        
-    }
-    
 
-    
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

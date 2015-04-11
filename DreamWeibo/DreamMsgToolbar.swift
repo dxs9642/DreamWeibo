@@ -8,6 +8,17 @@
 
 import UIKit
 
+protocol MsgToolbarButtonClickProtocol{
+    func msgToolbarButtonClick(tag:Int)
+    func sendMessage()
+}
+
+struct MsgToolbarButtonType{
+    let voice = 1001
+    let emotion = 1002
+    let add = 1003
+}
+
 class DreamMsgToolbar: UIImageView,UITextViewDelegate {
 
     let voiceButton = UIButton()
@@ -16,7 +27,8 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
     let addButton = UIButton()
     var textChange = false
     var textHeight:CGFloat = 0
-    
+    var delegate:MsgToolbarButtonClickProtocol?
+
     
     convenience init(){
         let frame = CGRectMake(0, 0, 0, 0)
@@ -29,25 +41,36 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
         super.init(frame: frame)
         self.userInteractionEnabled = true
         
+        let type = MsgToolbarButtonType()
         
         voiceButton.setBackgroundImage(UIImage(named: "message_voice_background"), forState: UIControlState.Normal)
         voiceButton.setBackgroundImage(UIImage(named: "message_voice_background_highlighted"), forState: UIControlState.Highlighted)
+        voiceButton.tag = type.voice
+        voiceButton.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(voiceButton)
         
-        emotionButton.setBackgroundImage(UIImage(named: "message_emotion_background"), forState: UIControlState.Normal)
-        emotionButton.setBackgroundImage(UIImage(named: "message_emotion_background_highlighted"), forState: UIControlState.Highlighted)
+        emotionButton.setImage(UIImage(named: "message_emotion_background"), forState: UIControlState.Normal)
+        emotionButton.setImage(UIImage(named: "message_emotion_background_highlighted"), forState: UIControlState.Highlighted)
+        emotionButton.tag = type.emotion
+        emotionButton.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(emotionButton)
         
         addButton.setBackgroundImage(UIImage(named: "message_add_background"), forState: UIControlState.Normal)
         addButton.setBackgroundImage(UIImage(named: "message_add_background_highlighted"), forState: UIControlState.Highlighted)
+        addButton.tag = type.add
+        addButton.addTarget(self, action: "buttonClick:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(addButton)
         
         textContent.scrollEnabled = false
         textContent.alwaysBounceVertical = true
         textContent.delegate = self
-        
+        textContent.returnKeyType = UIReturnKeyType.Send
+        textContent.delegate = self
         self.addSubview(textContent)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "emotionDidSelect:", name: "DreamEmotionDidSelectedNotification", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "emotionDidDeleted:", name: "DreamEmotionDidDeletedNotification", object: nil)
         
     }
     
@@ -94,13 +117,12 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
         }else{
             textContent.placehoderLabel.hidden = false
         }
-        let text = textView.text;
+        let text = textView.attributedText;
         
-        let boundingSize = CGSizeMake(textView.width - 47.24, CGFloat.max)
+        let boundingSize = CGSizeMake(textView.width - 10, CGFloat.max)
         let font = DreamFont()
-        var attr = NSMutableDictionary()
-        attr[NSFontAttributeName] = font.DreamStatusOrginalSourceFont
-        let textSize = text.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
+        let textSize = text.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
+
         
         if !textChange {
             textChange = true
@@ -109,7 +131,7 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
         
         if(textHeight < textSize.height){
             
-            let distance = textSize.height - textHeight + 3.1
+            let distance = textSize.height - textHeight + 0.8
             
             textView.height += distance
             self.y -= distance
@@ -117,7 +139,7 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
             
             textHeight = textSize.height
         }else if(textHeight > textSize.height){
-            let distance = textHeight - textSize.height  + 3.1
+            let distance = textHeight - textSize.height  + 0.8
 
             textView.height -= distance
             self.y += distance
@@ -127,5 +149,50 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
         
     
     }
+    
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        if text=="\n" {
+            self.delegate?.sendMessage()
+            return false
+        }
+        return true
+    }
+    
+    func buttonClick(button:UIButton){
+        self.delegate?.msgToolbarButtonClick(button.tag)
+    }
 
+    
+    func setTheEmotionButton(isEmotionButton:Bool){
+        
+        if isEmotionButton {
+            self.emotionButton.setImage(UIImage(named: "message_emotion_background"), forState: UIControlState.Normal)
+            self.emotionButton.setImage(UIImage(named: "message_emotion_background_highlighted"), forState: UIControlState.Highlighted)
+            
+        }else{
+            
+            self.emotionButton.setImage(UIImage(named: "message_keyboard_background"), forState: UIControlState.Normal)
+            self.emotionButton.setImage(UIImage(named: "message_keyboard_background_highlighted"), forState: UIControlState.Highlighted)
+            
+        }
+    }
+    
+    func emotionDidDeleted(note:NSNotification){
+        
+        self.textContent.deleteBackward()
+    }
+    
+    func emotionDidSelect(note:NSNotification){
+        let emotion = note.userInfo!["emotion"] as! DreamEmotion
+        
+        self.textContent.appendEmotion(emotion)
+        
+        self.textViewDidChange(self.textContent)
+        
+        
+    }
+    
+    
 }
