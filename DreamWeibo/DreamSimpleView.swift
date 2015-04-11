@@ -19,13 +19,22 @@ class DreamSimpleView: UIImageView {
     var simpleFrame:DreamSimpleFrame?
     
     convenience init(){
-        self.init()
+        let frame = CGRectMake(0, 0, 0, 0)
+        self.init(frame:frame)
+
+
+        
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.userInteractionEnabled = true
         let font = DreamFont()
         
         self.image = UIImage.resizeImage("timeline_card_top_background")
         self.highlightedImage = UIImage.resizeImage("timeline_card_top_background_highlighted")
-
+        
         
         nameLabel = UILabel()
         nameLabel?.font = font.DreamSimpleNameFont
@@ -56,13 +65,6 @@ class DreamSimpleView: UIImageView {
         vipView = UIImageView()
         vipView?.contentMode = UIViewContentMode.Center
         self.addSubview(vipView!)
-
-        
-        
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
     }
     
     required init(coder aDecoder: NSCoder) {

@@ -119,6 +119,7 @@
 		D2C636F01A7F587A00F3C0E0 /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */; };
 		D2C636F21A7F6EA000F3C0E0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C636F11A7F6EA000F3C0E0 /* MainViewController.swift */; };
 		D2C636F61A7F7A1B00F3C0E0 /* DreamLeftMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C636F51A7F7A1B00F3C0E0 /* DreamLeftMenu.swift */; };
+		D2CB02F71AD7980F000E8924 /* MessageDetailViewFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CB02F61AD7980F000E8924 /* MessageDetailViewFrame.m */; };
 		D2D691181AD29EA3008F12B9 /* DreamMsgDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D691171AD29EA3008F12B9 /* DreamMsgDetailViewController.swift */; };
 		D2DB1F7E1ACD89B600AA3C35 /* MessageSimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DB1F7D1ACD89B600AA3C35 /* MessageSimpleCell.swift */; };
 		D2DB1F811ACD8BC800AA3C35 /* MessageSimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DB1F801ACD8BC800AA3C35 /* MessageSimpleView.swift */; };
@@ -415,6 +416,8 @@
 		D2C636EF1A7F587A00F3C0E0 /* NSString+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+File.m"; sourceTree = "<group>"; };
 		D2C636F11A7F6EA000F3C0E0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D2C636F51A7F7A1B00F3C0E0 /* DreamLeftMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamLeftMenu.swift; sourceTree = "<group>"; };
+		D2CB02F51AD7980F000E8924 /* MessageDetailViewFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewFrame.h; sourceTree = "<group>"; };
+		D2CB02F61AD7980F000E8924 /* MessageDetailViewFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewFrame.m; sourceTree = "<group>"; };
 		D2D691171AD29EA3008F12B9 /* DreamMsgDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamMsgDetailViewController.swift; sourceTree = "<group>"; };
 		D2DB1F7D1ACD89B600AA3C35 /* MessageSimpleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSimpleCell.swift; sourceTree = "<group>"; };
 		D2DB1F801ACD8BC800AA3C35 /* MessageSimpleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSimpleView.swift; sourceTree = "<group>"; };
@@ -701,6 +704,7 @@
 		D2154BD21A67C66C0043CD8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D2CB02F81AD79864000E8924 /* Cell */,
 				D2AAE5EF1AD1754900BEB819 /* DreamMessage.h */,
 				D2AAE5F01AD1754A00BEB819 /* DreamMessage.m */,
 			);
@@ -1155,6 +1159,15 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		D2CB02F81AD79864000E8924 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D2CB02F51AD7980F000E8924 /* MessageDetailViewFrame.h */,
+				D2CB02F61AD7980F000E8924 /* MessageDetailViewFrame.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		D2DB1F7F1ACD89CC00AA3C35 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1594,6 +1607,7 @@
 				D21544DE1A761A6600AB19F3 /* MJPhotoView.m in Sources */,
 				D2154BC51A67C43C0043CD8A /* MessageViewController.swift in Sources */,
 				D2FE75BA1A6BD10600A13FFF /* AFHTTPSessionManager.m in Sources */,
+				D2CB02F71AD7980F000E8924 /* MessageDetailViewFrame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,4 +40,6 @@
 #import "UIImage+UIImageExtras.h"
 #import "DreamStringTool.h"
 #import "TimeTool.h"
+#import "MessageDetailViewFrame.h"
+
 

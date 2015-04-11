@@ -23,11 +23,28 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
                 
                 let result =  TimeTool.ifOneAboveTwo(a.created_at, anotherTime: b.created_at)
                 return result
-                
+            
             })
             
+            messagesFrame = NSMutableArray()
+            var num = 0;
+            for message in messages! {
+                let msg = message as! DreamMessage
+                var frame = MessageDetailViewFrame()
+                
+                var showTime = true
+                if num - 1 > 0 {
+                    let nextMessage = messages![num - 1] as! DreamMessage
+                    showTime = TimeTool.showTime(message.created_at, anotherTime: nextMessage.created_at)
+                }
+                frame.showTime = showTime
+                frame.message = msg
+                messagesFrame?.addObject(frame)
+                num++;
+            }
         }
     }
+    var messagesFrame:NSMutableArray?
     var tableView:UITableView!
     var toolbar:DreamMsgToolbar!
     
@@ -145,12 +162,9 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
         var cell = tableView.dequeueReusableCellWithIdentifier(ID) as? MessageDetailCell
         if cell == nil {
             let message = messages![indexPath.row] as! DreamMessage
-            var showTime = true
-            if indexPath.row - 1 > 0 {
-                let nextMessage = messages![indexPath.row - 1] as! DreamMessage
-                showTime = TimeTool.showTime(message.created_at, anotherTime: nextMessage.created_at)
-            }
-            cell = MessageDetailCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID,message: message,showTime: showTime,senderImageFilePath: self.user!.avatar_large)
+            let messageFrame = messagesFrame![indexPath.row] as! MessageDetailViewFrame
+            
+            cell = MessageDetailCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: ID,messageFrame: messageFrame,senderImageFilePath: self.user!.avatar_large)
         }
         
         return cell!
@@ -166,7 +180,10 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        if  messagesFrame != nil {
+            return (messagesFrame![indexPath.row] as! MessageDetailViewFrame).frame.height
+        }
+        return 0
     }
 
 }

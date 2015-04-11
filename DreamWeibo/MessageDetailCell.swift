@@ -23,15 +23,14 @@ class MessageDetailCell: UITableViewCell {
     }
     
     
-    convenience init(style: UITableViewCellStyle, reuseIdentifier: String?,message:DreamMessage,showTime:Bool,senderImageFilePath:NSString){
+    convenience init(style: UITableViewCellStyle, reuseIdentifier: String?,messageFrame:MessageDetailViewFrame,senderImageFilePath:NSString){
         
         self.init(style: style, reuseIdentifier: reuseIdentifier)
 //        self.selectionStyle = UITableViewCellSelectionStyle.None
         self.userInteractionEnabled = true
         self.backgroundColor = UIColor.clearColor()
         msgDetailView = MessageDetailView(senderImageFilePath: senderImageFilePath)
-        msgDetailView.message = message
-        msgDetailView.showTime = showTime
+        msgDetailView.msgFrame = messageFrame
         self.contentView.addSubview(msgDetailView)
         self.backgroundColor = UIColor.clearColor()
         

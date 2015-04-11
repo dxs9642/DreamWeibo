@@ -12,18 +12,22 @@ class MessageDetailView: UIImageView {
 
     
     
-    var message:DreamMessage!
+
+    var msgFrame:MessageDetailViewFrame?{
+        didSet{
+            if msgFrame!.showTime {
+                timeLabel.text = TimeTool.dealwithTime(msgFrame!.message.created_at)
+            }
+            
+            msgButton.setTitle(msgFrame!.message.text, forState: UIControlState.Normal)
+            msgButton.setTitle(msgFrame!.message.text, forState: UIControlState.Highlighted)
+            
+        }
+    }
     let timeLabel = UILabel()
     let userImage = UIImageView()
     let msgButton = UIButton()
     var senderImageFilePath:NSString!
-    var showTime:Bool!{
-        didSet{
-            if showTime! {
-                timeLabel.text = TimeTool.dealwithTime(message.created_at)
-            }
-        }
-    }
     var isSender = false
     
 
@@ -62,8 +66,18 @@ class MessageDetailView: UIImageView {
         timeLabel.textColor = UIColor.lightGrayColor()
         self.addSubview(timeLabel)
         
-        
+        msgButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.addSubview(msgButton)
+        
+        msgButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        msgButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+        
+        msgButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        msgButton.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 5)
+        msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_left_bubble"), forState: UIControlState.Normal)
+        
+        msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_left_bubble_highlighted"), forState: UIControlState.Highlighted)
+
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -76,49 +90,25 @@ class MessageDetailView: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.width = self.superview!.width
-        self.height = self.superview!.height
-
-        let font = DreamFont()
-
-        if showTime! {
-            
-            timeLabel.font = font.DreamStatusOrginalNameFont
-            let boundingSize = CGSizeMake(self.frame.size.width, CGFloat.max)
-            var attr = NSMutableDictionary()
-            attr[NSFontAttributeName] = font.DreamStatusOrginalNameFont
-            
-            let theName:NSString = timeLabel.text!
-            let nameSize = theName.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
-            timeLabel.size = nameSize.size
-            timeLabel.centerX = self.width / 2
-            timeLabel.y = 5
-            
-            
+        if msgFrame == nil {
+            return
         }
         
-        userImage.x = 10
-        userImage.y = CGRectGetMaxY(timeLabel.frame)
-        userImage.width = 30
-        userImage.height = userImage.width
+        let font = DreamFont()
+
+        self.frame = msgFrame!.frame
+
+        timeLabel.frame = msgFrame!.timeFrame
+        timeLabel.font = font.DreamSimpleTimeFont
+        userImage.frame = msgFrame!.imageFrame
         
-        let showMessage = message.text
-        msgButton.titleLabel?.font = font.DreamStatusOrginalNameFont
-        let boundingSize = CGSizeMake(200, CGFloat.max)
-        var attr = NSMutableDictionary()
-        attr[NSFontAttributeName] = font.DreamStatusOrginalNameFont
-        let text:NSString = showMessage
-        let textSize = text.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr as [NSObject : AnyObject], context: nil)
-        msgButton.x = CGRectGetMaxX(userImage.frame)
-        msgButton.y = userImage.y
-        msgButton.width = textSize.width + 10
-        msgButton.height = textSize.height + 5
-        msgButton.setTitle(message.text, forState: UIControlState.Normal)
-        msgButton.setTitle(message.text, forState: UIControlState.Highlighted)
-        msgButton.titleLabel?.textColor = UIColor.blackColor()
-        msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_left_bubble"), forState: UIControlState.Normal)
         
-        msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_left_bubble_highlighted"), forState: UIControlState.Highlighted)
+        msgButton.titleLabel?.font = font.DreamStatusOrginalTimeFont
+
+        
+        msgButton.frame = msgFrame!.msgButtonFrame
+        
+
 
         
     }

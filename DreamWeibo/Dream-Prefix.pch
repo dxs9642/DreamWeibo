@@ -27,6 +27,8 @@
 #define DreamSimpleNameFont [UIFont systemFontOfSize:12]
 // 原创微博时间字体
 #define DreamStatusOrginalTimeFont [UIFont systemFontOfSize:12]
+
+#define DreamStatusSimpleTimeFont [UIFont systemFontOfSize:12]
 // 原创微博来源字体
 #define DreamStatusOrginalSourceFont DreamStatusOrginalTimeFont
 // 原创微博正文字体
