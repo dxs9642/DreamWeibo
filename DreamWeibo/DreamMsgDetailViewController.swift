@@ -33,7 +33,7 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
                 var frame = MessageDetailViewFrame()
                 
                 var showTime = true
-                if num - 1 > 0 {
+                if num > 0 {
                     let nextMessage = messages![num - 1] as! DreamMessage
                     showTime = TimeTool.showTime(message.created_at, anotherTime: nextMessage.created_at)
                 }
