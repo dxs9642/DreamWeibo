@@ -20,5 +20,6 @@
 
 @property (nonatomic,copy) NSString *text;
 
+@property (nonatomic,assign) BOOL isRight;
 
 @end

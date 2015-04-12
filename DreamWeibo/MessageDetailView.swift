@@ -19,6 +19,19 @@ class MessageDetailView: UIImageView {
                 timeLabel.text = TimeTool.dealwithTime(msgFrame!.message.created_at)
             }
             
+            if msgFrame!.message.isRight {
+                msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_right_bubble"), forState: UIControlState.Normal)
+                msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_right_bubble_highlighted"), forState: UIControlState.Highlighted)
+                msgButton.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10)
+
+                
+            }else{
+                msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_left_bubble"), forState: UIControlState.Normal)
+                msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_left_bubble_highlighted"), forState: UIControlState.Highlighted)
+                msgButton.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 5)
+
+            }
+            
             msgButton.setTitle(msgFrame!.message.text, forState: UIControlState.Normal)
             msgButton.setTitle(msgFrame!.message.text, forState: UIControlState.Highlighted)
             
@@ -73,10 +86,6 @@ class MessageDetailView: UIImageView {
         msgButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
         
         msgButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-        msgButton.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 5)
-        msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_left_bubble"), forState: UIControlState.Normal)
-        
-        msgButton.setBackgroundImage(UIImage.resizeparticularImage("messages_left_bubble_highlighted"), forState: UIControlState.Highlighted)
 
     }
     

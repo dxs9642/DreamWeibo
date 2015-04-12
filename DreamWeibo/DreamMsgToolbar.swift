@@ -194,5 +194,14 @@ class DreamMsgToolbar: UIImageView,UITextViewDelegate {
         
     }
     
+    func finishChange(){
+        self.textHeight = 0
+        self.textChange = false
+        self.height = 40
+        self.textContent.height = self.height - 8
+        self.textContent.text = ""
+        self.y = self.superview!.height - self.height
+    }
+    
     
 }

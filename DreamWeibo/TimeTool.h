@@ -16,5 +16,6 @@
 
 + (NSComparisonResult)ifOneAboveTwo:(NSString *)timeOne anotherTime:(NSString *)timeTwo;
 
++ (NSString *)createCurrentTime;
 
 @end

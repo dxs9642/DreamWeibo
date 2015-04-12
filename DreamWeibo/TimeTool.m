@@ -50,6 +50,20 @@
     
 }
 
++ (NSString *)createCurrentTime{
+    
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    
+    [fmt setDateFormat:@"EEE MMM dd HH:mm:ss z yyyy"];
+    [fmt setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    
+
+    NSDate *date = [NSDate date];
+    return [fmt stringFromDate:date];
+
+    
+}
+
 + (BOOL)showTime:(NSString *)timeOne anotherTime:(NSString *)timeTwo{
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     

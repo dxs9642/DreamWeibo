@@ -14,6 +14,8 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     var index = 0
     var user:DreamUser?
     var keyboardH:CGFloat = 0
+    var firstLoadding = true
+    var reloading = false
     var messages:NSArray?{
         didSet{
             
@@ -50,7 +52,7 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     var toolbar:DreamMsgToolbar!
     var isChangingKeyboard = false
     var keyboard = DreamEmotionKeyboard()
-
+    var progressView:UCZProgressView!
 
     
     override func viewDidLoad() {
@@ -62,6 +64,8 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
         
         
         setupToolbar()
+        
+        setupProgressView()
         keyboard.height = 216
         keyboard.width = UIScreen.mainScreen().bounds.width
         
@@ -125,6 +129,38 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: "UIKeyboardWillHideNotification", object: nil)
     }
     
+    func setupProgressView(){
+        
+        progressView = UCZProgressView()
+        progressView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        progressView.frame = self.view.frame
+        progressView.indeterminate = true
+        progressView.blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
+        progressView.hidden = true
+        self.view.addSubview(progressView)
+        
+        let anim = CATransition()
+        anim.duration = 1
+        anim.type = "reveal"
+        progressView.layer.addAnimation(anim, forKey: nil)
+        progressView.hidden = false
+        
+        if firstLoadding{
+            finishLoading(0.7)
+            firstLoadding = false
+        }
+    }
+    
+    func finishLoading(time:Float){
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( time * Float(NSEC_PER_SEC) )) , dispatch_get_main_queue()) { () -> Void in
+            
+            self.progressView.setProgress(1.1, animated: true)
+            
+        }
+
+        
+    }
     
     func keyBoardWillShow(note:NSNotification){
         
@@ -156,7 +192,6 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     }
     
     func keyboardWillHide(note:NSNotification){
-        
         if isChangingKeyboard {
             return
         }
@@ -195,9 +230,7 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
         let messageFrame = messagesFrame![indexPath.row] as! MessageDetailViewFrame
 
         cell?.setupDetailContent(messageFrame,senderImageFilePath: self.user!.avatar_large)
-        if messages != nil && indexPath.row == messages!.count - 1{
-            gotoEndTableViewCell()
-        }
+
         return cell!
     }
     
@@ -213,13 +246,18 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     
     func gotoEndTableViewCell(){
         
+
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Float(NSEC_PER_SEC) )) , dispatch_get_main_queue()) { () -> Void in
             
             let lastRow = NSIndexPath(forRow: self.messages!.count - 1 , inSection: 0)
-            self.tableView.scrollToRowAtIndexPath(lastRow, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            self.tableView.scrollToRowAtIndexPath(lastRow, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
         
-
+        if reloading {
+            reloading = false
+            finishLoading(0.5)
+        }
 
     }
     
@@ -279,7 +317,33 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     func sendMessage() {
         self.view.endEditing(true)
         self.keyboardH = 0
+        setupProgressView()
+        dealWithNewItem()
+        reloading = true
+        tableView.reloadData()
+        gotoEndTableViewCell()
 
+    }
+    
+    func dealWithNewItem(){
+        
+        let newMsg = DreamMessage()
+        
+        newMsg.msg_id = -1;
+        newMsg.receiver_id = (messages![0] as! DreamMessage).sender_id
+        newMsg.sender_id = Account.getUid()
+        newMsg.created_at = TimeTool.createCurrentTime()
+        newMsg.text = self.toolbar.textContent.text
+        newMsg.isRight = true
+        
+        self.toolbar.finishChange()
+        
+        let arr = NSMutableArray()
+        arr.addObjectsFromArray(messages! as [AnyObject])
+        arr.addObject(newMsg)
+        
+        self.messages = arr
+        
     }
 
 }

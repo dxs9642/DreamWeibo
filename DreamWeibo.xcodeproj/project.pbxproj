@@ -105,6 +105,7 @@
 		D2A0B1EF1A7704F300041E22 /* DreamEmotionToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0B1EE1A7704F300041E22 /* DreamEmotionToolbar.swift */; };
 		D2A0B3B61A7715D600041E22 /* DreamEmotion.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A0B3B51A7715D600041E22 /* DreamEmotion.m */; };
 		D2AAE5F11AD1754A00BEB819 /* DreamMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AAE5F01AD1754A00BEB819 /* DreamMessage.m */; };
+		D2ABABEF1AD9F3360054FF21 /* UCZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2ABABEE1AD9F3360054FF21 /* UCZProgressView.m */; };
 		D2B54B411AAF3BD900A52669 /* DreamUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B54B401AAF3BD900A52669 /* DreamUserViewController.swift */; };
 		D2B54B441AAF3E4400A52669 /* UserTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B54B431AAF3E4400A52669 /* UserTopView.swift */; };
 		D2BAFE381A6CE7520081C4D5 /* DreamTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BAFE361A6CE7520081C4D5 /* DreamTextView.swift */; };
@@ -397,6 +398,8 @@
 		D2A0B3B51A7715D600041E22 /* DreamEmotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamEmotion.m; sourceTree = "<group>"; };
 		D2AAE5EF1AD1754900BEB819 /* DreamMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamMessage.h; sourceTree = "<group>"; };
 		D2AAE5F01AD1754A00BEB819 /* DreamMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamMessage.m; sourceTree = "<group>"; };
+		D2ABABED1AD9F3360054FF21 /* UCZProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCZProgressView.h; sourceTree = "<group>"; };
+		D2ABABEE1AD9F3360054FF21 /* UCZProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCZProgressView.m; sourceTree = "<group>"; };
 		D2B54B401AAF3BD900A52669 /* DreamUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamUserViewController.swift; sourceTree = "<group>"; };
 		D2B54B431AAF3E4400A52669 /* UserTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTopView.swift; sourceTree = "<group>"; };
 		D2BAFE361A6CE7520081C4D5 /* DreamTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DreamTextView.swift; sourceTree = "<group>"; };
@@ -1128,6 +1131,15 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		D2ABABEC1AD9F3190054FF21 /* UCZProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				D2ABABED1AD9F3360054FF21 /* UCZProgressView.h */,
+				D2ABABEE1AD9F3360054FF21 /* UCZProgressView.m */,
+			);
+			name = UCZProgressView;
+			sourceTree = "<group>";
+		};
 		D2B54B421AAF3E2200A52669 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -1280,6 +1292,7 @@
 		D2FE74611A6A880800A13FFF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				D2ABABEC1AD9F3190054FF21 /* UCZProgressView */,
 				D23C750D1A808292002B2067 /* Dependent lib */,
 				D23C74CA1A80802D002B2067 /* BMK */,
 				D286983F1A7E4525002E9BE7 /* fmdb */,
@@ -1533,6 +1546,7 @@
 				D20BA5161A68C99600EFBE4A /* UIImage+Extension.swift in Sources */,
 				D2154BC91A67C4840043CD8A /* DiscoverViewController.swift in Sources */,
 				D2FE75901A6B981300A13FFF /* MJIvar.m in Sources */,
+				D2ABABEF1AD9F3360054FF21 /* UCZProgressView.m in Sources */,
 				D2DB1F811ACD8BC800AA3C35 /* MessageSimpleView.swift in Sources */,
 				D2432B371A7A168600FD7CFC /* UIView+Extension.m in Sources */,
 				D23A4A1A1AC77C1500DE8C76 /* DreamSimpleCell.swift in Sources */,

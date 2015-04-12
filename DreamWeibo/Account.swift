@@ -61,6 +61,11 @@ class Account: NSObject , NSCoding {
         return defaults.valueForKey("userInfo") as? String
     }
     
+    class func getUid() -> String?{
+        var defaults = NSUserDefaults()
+        return defaults.valueForKey("uid") as? String
+    }
+    
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(access_token, forKey: "access_token")
         aCoder.encodeObject(expires_in, forKey: "expires_in")
