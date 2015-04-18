@@ -184,7 +184,10 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
         
         })
 
-
+        if self.messages == nil {
+            return
+        }
+        
         let lastRow = NSIndexPath(forRow: self.messages!.count - 1 , inSection: 0)
         self.tableView.scrollToRowAtIndexPath(lastRow, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         
@@ -249,6 +252,10 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
 
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.5 * Float(NSEC_PER_SEC) )) , dispatch_get_main_queue()) { () -> Void in
+            
+            if self.messages == nil {
+                return
+            }
             
             let lastRow = NSIndexPath(forRow: self.messages!.count - 1 , inSection: 0)
             self.tableView.scrollToRowAtIndexPath(lastRow, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
@@ -327,22 +334,28 @@ class DreamMsgDetailViewController: UIViewController ,UITableViewDataSource,UITa
     
     func dealWithNewItem(){
         
-        let newMsg = DreamMessage()
+        if messages != nil {
         
-        newMsg.msg_id = -1;
-        newMsg.receiver_id = (messages![0] as! DreamMessage).sender_id
-        newMsg.sender_id = Account.getUid()
-        newMsg.created_at = TimeTool.createCurrentTime()
-        newMsg.text = self.toolbar.textContent.text
-        newMsg.isRight = true
-        
+            let newMsg = DreamMessage()
+            
+            newMsg.msg_id = -1;
+            newMsg.receiver_id = (messages![0] as! DreamMessage).sender_id
+            newMsg.sender_id = Account.getUid()
+            newMsg.created_at = TimeTool.createCurrentTime()
+            newMsg.attrText = self.toolbar.textContent.attributedText
+            newMsg.isRight = true
+            
+            
+            let arr = NSMutableArray()
+            arr.addObjectsFromArray(messages! as [AnyObject])
+            arr.addObject(newMsg)
+            
+            self.messages = arr
+
+            
+        }
         self.toolbar.finishChange()
         
-        let arr = NSMutableArray()
-        arr.addObjectsFromArray(messages! as [AnyObject])
-        arr.addObject(newMsg)
-        
-        self.messages = arr
         
     }
 

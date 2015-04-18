@@ -31,10 +31,11 @@ class MessageDetailView: UIImageView {
                 msgButton.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 5)
 
             }
-            
-            msgButton.setTitle(msgFrame!.message.text, forState: UIControlState.Normal)
-            msgButton.setTitle(msgFrame!.message.text, forState: UIControlState.Highlighted)
-            
+//          msgButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+            msgButton.setAttributedTitle(msgFrame!.message.attrText, forState: UIControlState.Normal)
+            msgButton.setAttributedTitle(msgFrame!.message.attrText, forState: UIControlState.Highlighted)
+        
+
         }
     }
     let timeLabel = UILabel()

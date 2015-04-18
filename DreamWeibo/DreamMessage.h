@@ -18,6 +18,8 @@
 
 @property (nonatomic,copy) NSString *created_at;
 
+@property (nonatomic,copy) NSAttributedString *attrText;
+
 @property (nonatomic,copy) NSString *text;
 
 @property (nonatomic,assign) BOOL isRight;

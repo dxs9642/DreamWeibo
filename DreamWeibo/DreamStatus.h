@@ -1,5 +1,6 @@
 
 #import <Foundation/Foundation.h>
+#import "DreamEmotion.h"
 
 @class DreamUser;
 
@@ -41,5 +42,6 @@
 /** 这个数据表示是否是加载的retweet的内容，如果是要去掉@后面的内容*/
 @property (nonatomic, assign) BOOL isFromRetweeted;
 
++ (DreamEmotion *)emotionWithDesc:(NSString *)desc;
 
 @end

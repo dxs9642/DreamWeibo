@@ -149,8 +149,6 @@ class MessageViewController: UITableViewController {
                 }) { () -> Void in
                     
             }
-
-            
             
         }
         

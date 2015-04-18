@@ -64,7 +64,8 @@ class MessageSimpleCell: UITableViewCell {
         self.user = user
         self.message = msg
         self.userSimple.user = self.user
-        self.userSimple.lastMessage = DreamStringTool.removeSpaceChar((self.message?.lastObject as! DreamMessage).text)
+        let lastStr = DreamStringTool.realText((self.message?.lastObject as! DreamMessage).attrText)
+        self.userSimple.lastMessage = DreamStringTool.removeSpaceChar(lastStr)
         self.userSimple.lastTime = (self.message?.lastObject as! DreamMessage).created_at
         self.userSimple.badgView.badgeValue = "\(self.message!.count)"
         self.userSimple.setupFromURL()

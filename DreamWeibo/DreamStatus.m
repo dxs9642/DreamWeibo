@@ -14,7 +14,6 @@
 #import "RegexKitLite.h"
 #import "DreamEmotionAttachment.h"
 #import "DreamWeibo-Swift.h"
-#import "DreamEmotion.h"
 #import "DreamUser.h"
 
 

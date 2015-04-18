@@ -44,10 +44,10 @@
         CGFloat msgY = self.imageFrame.origin.y;
         
         CGSize boundingSize = CGSizeMake(200, CGFLOAT_MAX);
-        NSMutableDictionary *attr = [[NSMutableDictionary alloc] init];
-        attr[NSFontAttributeName] = DreamSimpleNameFont;
-        NSString *str = self.message.text;
-        CGRect msgTextFrame = [str boundingRectWithSize:boundingSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attr context:nil];
+        NSAttributedString *str = self.message.attrText;
+        
+        CGRect msgTextFrame = [str boundingRectWithSize:boundingSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        
         
         CGFloat msgHeight = msgTextFrame.size.height + 25;
         if (msgHeight < self.imageFrame.size.height) {
@@ -69,10 +69,9 @@
         CGFloat msgY = self.imageFrame.origin.y;
         
         CGSize boundingSize = CGSizeMake(200, CGFLOAT_MAX);
-        NSMutableDictionary *attr = [[NSMutableDictionary alloc] init];
-        attr[NSFontAttributeName] = DreamSimpleNameFont;
-        NSString *str = self.message.text;
-        CGRect msgTextFrame = [str boundingRectWithSize:boundingSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attr context:nil];
+        NSAttributedString *str = self.message.attrText;
+        CGRect msgTextFrame = [str boundingRectWithSize:boundingSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        
         
         CGFloat msgHeight = msgTextFrame.size.height + 25;
         if (msgHeight < self.imageFrame.size.height) {

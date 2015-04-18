@@ -12,5 +12,6 @@
 
 + (NSString *)removeSpaceChar:(NSString *)orgString;
 
++ (NSString *)realText:(NSAttributedString *)attr;
 
 @end
