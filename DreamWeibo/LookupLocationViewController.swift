@@ -17,10 +17,9 @@ class LookupLocationViewController: UIViewController,BMKMapViewDelegate,BMKLocat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
-        self.title = "位置查询"
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "退出", style: UIBarButtonItemStyle.Done, target: self, action: "exit")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确定", style: UIBarButtonItemStyle.Done, target: self, action: "done")
+        setupNavigationItem()
+
         
         setupLocationRequireService()
         
@@ -39,9 +38,22 @@ class LookupLocationViewController: UIViewController,BMKMapViewDelegate,BMKLocat
     }
 
     
+    func setupNavigationItem(){
+        self.title = "位置查询"
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "退出", style: UIBarButtonItemStyle.Done, target: self, action: "exit")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "确定", style: UIBarButtonItemStyle.Done, target: self, action: "done")
+        
+        var textAttrs = NSMutableDictionary()
+        textAttrs[NSForegroundColorAttributeName] = UIColor.orangeColor()
+        textAttrs[NSFontAttributeName] = UIFont.systemFontOfSize(14)
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes(textAttrs as [NSObject : AnyObject], forState: UIControlState.Normal)
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(textAttrs as [NSObject : AnyObject], forState: UIControlState.Normal)
+    }
+    
 
     func exit(){
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func done(){
