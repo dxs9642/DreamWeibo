@@ -13,6 +13,8 @@ class LookupLocationViewController: UIViewController,BMKMapViewDelegate,BMKLocat
 
     var mapView:BMKMapView!
     var locationService:BMKLocationService!
+    var location:CLLocation?
+    var composeViewController:ComposeViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +59,8 @@ class LookupLocationViewController: UIViewController,BMKMapViewDelegate,BMKLocat
     }
     
     func done(){
-        
+        self.composeViewController.location = self.location
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func setupLocationRequireService(){
@@ -82,7 +85,8 @@ class LookupLocationViewController: UIViewController,BMKMapViewDelegate,BMKLocat
     
     func didUpdateUserHeading(userLocation: BMKUserLocation!) {
         mapView.updateLocationData(userLocation)
-        NSLog("heading is %@",userLocation.heading)
+        self.location = userLocation.location
+        NSLog("location is %@",userLocation.location.altitude)
     }
     
     func didStopLocatingUser() {

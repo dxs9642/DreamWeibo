@@ -20,6 +20,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     var isCompose = true
     var isComment = false
     var isRetweet = false
+    var location:CLLocation?
     var status:DreamStatus?
     var retweetAttr:NSAttributedString?
     
@@ -120,6 +121,7 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
     func openMap(){
         
         let lookupLocation = LookupLocationViewController()
+        lookupLocation.composeViewController = self
         let nvc = DreamNavigationViewController(rootViewController: lookupLocation)
 
         self.presentViewController(nvc, animated: true) { () -> Void in
@@ -388,6 +390,12 @@ class ComposeViewController: UIViewController,UITextViewDelegate,DreamComposeToo
         params["access_token"] = account!.access_token
         
         params["status"] = textView!.realText()
+        
+        if location != nil {
+            params["lat"] = location!.coordinate.latitude
+            params["long"] = location!.coordinate.longitude
+
+        }
         
         DreamHttpTool.post("https://api.weibo.com/2/statuses/update.json", params: params, success: { (obj:AnyObject!) -> Void in
             MBProgressHUD.showSuccess("发送成功")
